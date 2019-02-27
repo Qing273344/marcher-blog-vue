@@ -1,19 +1,16 @@
 <template>
-  <p>BlogFooter</p>
+  <router-view/>
 </template>
+
 
 <script lang="ts">
   import {Component, Prop, Vue} from "vue-property-decorator";
 
-  @Component({
-    components: {
-
-    }
-  })
-  export default class Footer extends Vue {
-
+  @Component
+  export default class BlogMain extends Vue {
   }
 </script>
+
 
 <style scoped>
 

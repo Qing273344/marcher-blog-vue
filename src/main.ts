@@ -5,7 +5,7 @@ import Element from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 
 import App from './App.vue';
-import router from './routers/modules/router';
+import router from './routers/router';
 import store from './store/store';
 import './registerServiceWorker';
 

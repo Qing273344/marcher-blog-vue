@@ -22,7 +22,9 @@
           <el-menu-item index="2-4-3">选项3</el-menu-item>
         </el-submenu>
       </el-submenu>
-      <el-menu-item index="3">消息中心</el-menu-item>
+      <el-menu-item index="3">
+        <router-link :to="{name:'aboutLink'}">关于</router-link>
+      </el-menu-item>
       <el-menu-item index="4">
         <router-link :to="{name:'loginLink'}">Login</router-link>
       </el-menu-item>
@@ -36,7 +38,9 @@
   import ElHeader from 'element-ui/packages/header/src/main.vue';
 
   @Component({
-    components: {ElHeader}
+    components: {
+      ElHeader
+    }
   })
   export default class BlogHead extends Vue {
     data() {
