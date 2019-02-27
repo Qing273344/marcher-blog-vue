@@ -1,0 +1,10 @@
+import {Vue} from 'vue-property-decorator';
+import {ResponseBean} from '@/bean/common/ResponseBean';
+
+/**
+ * BaseBean
+ * @author marcher
+ */
+export class BaseBean extends Vue {
+  public responseBean = new ResponseBean();
+}

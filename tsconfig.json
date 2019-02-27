@@ -1,4 +1,5 @@
 {
+  // 编译选项
   "compilerOptions": {
     "target": "esnext",
     "module": "esnext",
@@ -6,8 +7,10 @@
     "jsx": "preserve",
     "importHelpers": true,
     "moduleResolution": "node",
+    // 启用装饰器 vue-class-component 及 vuex-class 需要开启此选项
     "experimentalDecorators": true,
     "esModuleInterop": true,
+    // 允许从没有设置默认导出的模块中默认导入
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
     "baseUrl": ".",
