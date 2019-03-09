@@ -1,17 +1,22 @@
 <template>
   <div id="app">
-    <div class="ll">
-      <router-view/>
-    </div>
+    <router-view/>
   </div>
 </template>
 
 
 <script lang="ts">
-  import {Vue, Component} from "vue-property-decorator";
+  import { Component, Vue } from "vue-property-decorator";
+  import { UserModule } from '@/store/modules/user';
 
   @Component
   export default class App extends Vue {
+
+    // 初始化storeModule
+    create() {
+      UserModule;
+    }
+
   }
 
 </script>

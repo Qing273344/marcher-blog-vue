@@ -1,33 +1,37 @@
 <template>
 
-  <div class="login">
-    <div class="login-content">
-      <div class="login-bg"></div>
-      <div class="login-content-main">
+  <div class="blog-register">
+    <div class="register-content">
+      <div class="register-bg"></div>
+      <div class="register-content-main">
 
-        <div class="login-form">
-          <div class="login-form-main">
-            <div class="login-form-main-head">账号登录</div>
+        <div class="register-form">
+          <div class="register-form-main">
+            <div class="register-form-main-head">账号注册</div>
             <!-- 登录 -->
-            <el-form abel-width="80px" :model="loginForm" :rules="loginRules" ref="loginForm">
-              <el-form-item class="login-form-main-input" prop="username">
-                <el-input v-model="loginForm.username" placeholder="用户名"/>
+            <el-form abel-width="80px" :model="registerForm" :rules="registerRules" ref="registerForm">
+              <el-form-item class="register-form-main-input" prop="username">
+                <el-input v-model.trim="registerForm.username" placeholder="用户名"/>
               </el-form-item>
-              <el-form-item class="login-form-main-input" prop="password">
-                <el-input v-model="loginForm.password" :type="passwordType" placeholder="密码"></el-input>
+              <el-form-item class="register-form-main-input" prop="password">
+                <el-input v-model.trim="registerForm.password" :type="passwordType" placeholder="密码"/>
                 <span class="show-pwd" @click="showPwd()">
                   <i class="el-icon-view"></i>
                 </span>
               </el-form-item>
-              <div class="login-form-main-input">
-                <el-button @click="handleLogin()" size="small" type="primary">登录</el-button>
+              <el-form-item class="register-form-main-input" prop="confirmPassword">
+                <el-input v-model.trim="registerForm.confirmPassword" :type="passwordType" placeholder="确认密码"/>
+              </el-form-item>
+
+              <div class="register-form-main-input">
+                <el-button @click="handleRegister()" size="small" type="primary">注册</el-button>
               </div>
             </el-form>
           </div>
 
-          <div class="login-form-footer">
-            <i> 左转 ------------------------------------> </i>
-            <router-link class="go-register" :to="{name:'registerLink'}">注册</router-link>
+          <div class="register-form-footer">
+            <i> 右转 ------------------------------------> </i>
+            <router-link class="go-register" :to="{name:'loginLink'}">登录</router-link>
           </div>
         </div>
 
@@ -37,24 +41,20 @@
 </template>
 
 <script lang="ts">
-
   import { Component, Vue } from "vue-property-decorator";
-  import { UserModule } from "@/store/modules/user";
-  import { userInfo } from "@/api/login";
-  import { UserInfoBean } from "@/bean/UserInfoBean";
-  import { Action } from "vuex-class";
-  import ValidateUtil from '@/utils/validateUtil';
-  import { ElForm } from 'element-ui/types/form';
+  import { register } from "@/api/register";
+  import { ElForm } from "element-ui/types/form";
+  import ValidateUtil from "@/utils/validateUtil";
 
-  @Component
-  export default class Login extends Vue {
-    @Action private UserInfo!: (userInfoBean: UserInfoBean) => void;
+  @Component({
+    components: {}
+  })
+  export default class Register extends Vue {
 
-    public userInfoBean: UserInfoBean = new UserInfoBean();
-
-    private loginForm = {
+    public registerForm = {
       username: "",
       password: "",
+      confirmPassword: "",
     };
     private passwordType = "password";
 
@@ -67,29 +67,19 @@
       }
     }
 
-    // 登录
-    handleLogin() {
-      (this.$refs.loginForm as ElForm).validate((valid: boolean) => {
+    // 注册
+    handleRegister() {
+      // 校验
+      (this.$refs.registerForm as ElForm).validate((valid: boolean) => {
         if (valid) {
-          UserModule.Login(this.loginForm).then(() => {
-            // 登录成功获取用户信息
-            this.getUserInfo();
-          }).catch(() => { });
+          console.log("22222");
+          // register(this.registerForm).then((response) => {
+          //   // 跳转到登录页
+          //   this.$router.push({name: 'loginLink'});
+          // })
         } else {
           return false;
         }
-      })
-    }
-
-    // 用户信息
-    private getUserInfo() {
-      userInfo(null).then((response) => {
-        const userInfoBean = this.userInfoBean = response.info;
-        this.UserInfo(userInfoBean);
-        // this.$store.dispatch('UserInfo', userInfoBean);
-        // 登录成功返回上一页
-        this.$router.go(-1);
-      }).catch(() => {
       });
     }
 
@@ -98,8 +88,6 @@
     public validateUsername = (rule: any, value: string, callback: any) => {
       if (!value) {
         callback(new Error("请填写用户名"));
-      } else {
-        callback();
       }
     };
 
@@ -110,18 +98,30 @@
       }
       if (!ValidateUtil.validatePassword(value)) {
         callback(new Error("密码不符规范"));
-      } else {
-        callback();
       }
     };
 
-    public loginRules = {
+    // 确认密码
+    public validateConfirmPwd = (rule: any, value: string, callback: any) => {
+      if (!value) {
+        callback(new Error("请输入密码"));
+      }
+      if (!ValidateUtil.validatePassword(value)) {
+        callback(new Error("密码不符规范"));
+      }
+      if (value !== this.registerForm.password) {
+        callback(new Error("两次输入的密码不匹配"));
+      }
+    };
+
+    public registerRules = {
       username: [{required: true, trigger: "blur", validator: this.validateUsername}],
       password: [{required: true, trigger: "blur", validator: this.validatePwd}],
-    }
-
+      confirmPassword: [{required: true, trigger: "blur", validator: this.validateConfirmPwd}],
+    };
   }
 </script>
+
 
 <style rel="stylesheet/scss" lang="scss" scoped>
   $dark_gray: #1721a4;
@@ -136,12 +136,12 @@
     user-select: none;
   }
 
-  .login-content {
+  .register-content {
     width: 100%;
     height: 100%;
   }
 
-  .login-bg {
+  .register-bg {
     height: 100%;
     width: 100%;
     left: 0;
@@ -154,14 +154,14 @@
     z-index: -1;
   }
 
-  .login-content-main {
+  .register-content-main {
     height: 700px;
     width: 1200px;
     margin: 0 auto;
     position: relative;
   }
 
-  .login-form {
+  .register-form {
     width: 400px;
     height: 460px;
     /*background-color: #FFFFFF;*/
@@ -173,7 +173,7 @@
     top: 25%;
   }
 
-  .login-form-footer {
+  .register-form-footer {
     width: 400px;
     height: 65px;
     line-height: 65px;
@@ -182,12 +182,12 @@
     /*background-color: #f0f0f0;*/
   }
 
-  .login-form-footer i {
+  .register-form-footer i {
     margin-left: 30px;
     color: #00FFFF;
   }
 
-  .login-form-footer .go-register {
+  .register-form-footer .go-register {
     height: 40px;
     width: 100px;
     text-align: center;
@@ -202,7 +202,7 @@
     border-radius: 3px;
   }
 
-  .login-form-main {
+  .register-form-main {
     width: 100%;
     height: 395px;
     box-sizing: border-box;
@@ -210,7 +210,7 @@
     padding: 0 30px;
   }
 
-  .login-form-main-head {
+  .register-form-main-head {
     width: 100%;
     font-size: 16px;
     font-weight: 600;
@@ -218,13 +218,13 @@
     padding-top: 40px;
   }
 
-  .login-form-main-input {
+  .register-form-main-input {
     height: 48px;
     width: 100%;
     margin-top: 30px;
   }
 
-  .login-form-main-input input {
+  .register-form-main-input input {
     height: 100%;
     width: 100%;
     border: 1px solid #e1e1e1;
@@ -236,7 +236,7 @@
     -webkit-box-shadow: 0 0 0px 1000px #FFFFFF inset;
   }
 
-  .login-form-main-input button {
+  .register-form-main-input button {
     height: 100%;
     width: 100%;
     font-size: 16px;

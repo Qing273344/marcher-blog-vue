@@ -1,16 +1,11 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import { IUserState } from '@/store/modules/user';
 
 Vue.use(Vuex);
 
-export default new Vuex.Store({
-  state: {
+export interface IRootState {
+  user: IUserState;
+}
 
-  },
-  mutations: {
-
-  },
-  actions: {
-
-  },
-});
+export default new Vuex.Store<IRootState>({});

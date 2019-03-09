@@ -1,12 +1,24 @@
 <template>
-  <p>BlogFooter</p>
+  <div class="blog-footer">
+
+    <el-footer height="100px">
+
+      <hr>
+      <p>BlogFooter</p>
+
+    </el-footer>
+
+  </div>
+
 </template>
 
 <script lang="ts">
-  import {Component, Prop, Vue} from "vue-property-decorator";
+  import { Component, Vue } from "vue-property-decorator";
+  import ElFooter from 'element-ui/packages/footer/src/main.vue';
 
   @Component({
     components: {
+      ElFooter
 
     }
   })
@@ -15,6 +27,13 @@
   }
 </script>
 
-<style scoped>
+<style rel="stylesheet/scss" lang="scss" scoped>
+  .blog-footer {
+    height: 100px;
+    width: 100%;
+  }
 
+  .el-footer {
+    height: 100px;
+  }
 </style>

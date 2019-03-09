@@ -49,19 +49,19 @@ module.exports = {
         open: true, //配置自动启动浏览器
         disableHostCheck: true,
         // proxy: 'http://localhost:4000' // 配置跨域处理,只有一个代理
-        proxy: {
-            '/api': {
-                target: '<url>',
-                ws: true,
-                changeOrigin: true
-            },
-            '/foo': {
-                target: '<url>',    // 接口域名
-                changeOrigin: true, //是否跨域
-                pathRewrite: {
-                    '^/foo': '/'
-                }
-            }
-        },  // 配置多个代理
+        // proxy: {
+        //     '/api': {
+        //         target: '<url>',
+        //         ws: true,
+        //         changeOrigin: true
+        //     },
+        //     '/foo': {
+        //         target: '<url>',    // 接口域名
+        //         changeOrigin: true, //是否跨域
+        //         pathRewrite: {
+        //             '^/foo': '/'
+        //         }
+        //     }
+        // },  // 配置多个代理
     }
 }

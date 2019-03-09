@@ -2,8 +2,8 @@
  * Home首页路由
  */
 
-const Home = (r: any) => (require as any).ensure([], () => r(require('@/views/Home'), 'Home'));
-const About = (r: any) => (require as any).ensure([], () => r(require('@/views/About'), 'About'));
+const Home = (r: any) => (require as any).ensure([], () => r(require('@/views/home/Home'), 'Home'));
+const About = (r: any) => (require as any).ensure([], () => r(require('@/views/about/About'), 'About'));
 
 
 const homeRouter = [{

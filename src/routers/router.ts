@@ -21,11 +21,11 @@ export default new Router({
   mode: 'history',
   routes: [
     /**
-     * 全局route
+     * 全局router
      */
     ...globalRouter,
     /**
-     * home主页route
+     * home主页router
      */
     ...homeRouter,
 

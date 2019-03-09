@@ -1,4 +1,4 @@
-import {_get, _post, _delete} from '@/utils/request';
+import { _get, _post } from '@/utils/request';
 
 // 登录
 export const login = (data: any) => {

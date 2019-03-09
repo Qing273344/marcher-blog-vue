@@ -9,7 +9,6 @@ import router from './routers/router';
 import store from './store/store';
 import './registerServiceWorker';
 
-
 Vue.use(Element);
 
 Vue.config.productionTip = false;
