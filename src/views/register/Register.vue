@@ -73,10 +73,10 @@
       (this.$refs.registerForm as ElForm).validate((valid: boolean) => {
         if (valid) {
           console.log("22222");
-          // register(this.registerForm).then((response) => {
-          //   // 跳转到登录页
-          //   this.$router.push({name: 'loginLink'});
-          // })
+          register(this.registerForm).then((response) => {
+            // 跳转到登录页
+            this.$router.push({name: 'loginLink'});
+          })
         } else {
           return false;
         }

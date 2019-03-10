@@ -43,4 +43,10 @@
       }
     }
   }
+
+  // 去除body默认边距
+  body {
+    margin: 0;
+    padding: 0;
+  }
 </style>

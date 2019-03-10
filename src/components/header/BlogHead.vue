@@ -84,6 +84,7 @@
 <style lang="scss" scoped>
   .blog-head, .el-header {
     height: 40px;
+    padding: 0;
   }
 
   .el-menu, .el-menu-item {

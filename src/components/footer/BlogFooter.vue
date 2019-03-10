@@ -19,7 +19,6 @@
   @Component({
     components: {
       ElFooter
-
     }
   })
   export default class Footer extends Vue {
@@ -28,12 +27,14 @@
 </script>
 
 <style rel="stylesheet/scss" lang="scss" scoped>
-  .blog-footer {
+  .blog-footer, .el-footer {
     height: 100px;
     width: 100%;
+    padding: 0;
   }
 
-  .el-footer {
-    height: 100px;
-  }
+  /*.el-footer {*/
+    /*height: 100px;*/
+    /**/
+  /*}*/
 </style>
