@@ -1,6 +1,6 @@
 import { VuexModule, Module, MutationAction, Mutation, Action, getModule } from 'vuex-module-decorators';
 
-import { login } from '@/api/login';
+import LoginApi from '@/api/login';
 import store from '@/store/store';
 import { UserInfoBean } from '@/bean/UserInfoBean';
 
@@ -18,7 +18,7 @@ export class User extends VuexModule implements IUserState {
 
   @Action
   public async Login(loginForm: { username: string, password: string }) {
-    return await login(loginForm);
+    return await LoginApi.login(loginForm);
   }
 
   @Action

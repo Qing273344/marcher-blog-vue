@@ -7,6 +7,8 @@ const BlogMain = (r: any) => (require as any).ensure([], () => r(require('@/comp
 const BlogFooter = (r: any) => (require as any).ensure([], () => r(require('@/components/footer/BlogFooter'), 'BlogFooter'));
 const Login = (r: any) => (require as any).ensure([], () => r(require('@/views/login/Login'), 'Login'));
 const Register = (r: any) => (require as any).ensure([], () => r(require('@/views/register/Register'), 'Register'));
+
+const PublishMd = (r: any) => (require as any).ensure([], () => r(require('@/views/adminArticlePublish/PublishMd'), 'PublishMd'));
 const NotFound = (r: any) => (require as any).ensure([], () => r(require('@/views/common/404'), 'NotFound'));
 
 
@@ -25,6 +27,9 @@ const globalRouter = [
   },
   {
     path: '/register', name: 'registerLink', component: Register, meta: {title: '注册'},
+  },
+  {
+    path: '/publishMd', name: 'publishMdLink', component: PublishMd, meta: {title: '发布文字(md编辑器)'},
   },
   {
     path: '/404', name: 'notFoundLink', component: NotFound, meta: {title: '404'},

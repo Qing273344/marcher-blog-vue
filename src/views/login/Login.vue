@@ -40,7 +40,7 @@
 
   import { Component, Vue } from "vue-property-decorator";
   import { UserModule } from "@/store/modules/user";
-  import { userInfo } from "@/api/login";
+  import LoginApi from "@/api/login";
   import { UserInfoBean } from "@/bean/UserInfoBean";
   import { Action } from "vuex-class";
   import ValidateUtil from '@/utils/validateUtil';
@@ -58,7 +58,9 @@
     };
     private passwordType = "password";
 
-    // 显示密码
+    /**
+     * 显示密码
+     */
     showPwd() {
       if (this.passwordType === "password") {
         this.passwordType = "";
@@ -67,7 +69,9 @@
       }
     }
 
-    // 登录
+    /**
+     * 登录
+     */
     handleLogin() {
       (this.$refs.loginForm as ElForm).validate((valid: boolean) => {
         if (valid) {
@@ -81,9 +85,11 @@
       })
     }
 
-    // 用户信息
+    /**
+     * 用户信息
+     */
     private getUserInfo() {
-      userInfo(null).then((response) => {
+      LoginApi.userInfo().then((response) => {
         const userInfoBean = this.userInfoBean = response.info;
         this.UserInfo(userInfoBean);
         // this.$store.dispatch('UserInfo', userInfoBean);
@@ -94,7 +100,9 @@
     }
 
 
-    // 校验用户名
+    /**
+     * 校验用户名
+     */
     public validateUsername = (rule: any, value: string, callback: any) => {
       if (!value) {
         callback(new Error("请填写用户名"));
@@ -103,7 +111,9 @@
       }
     };
 
-    // 校验密码
+    /**
+     * 校验密码
+     */
     public validatePwd = (rule: any, value: string, callback: any) => {
       if (!value) {
         callback(new Error("请输入密码"));
@@ -164,7 +174,6 @@
   .login-form {
     width: 400px;
     height: 460px;
-    /*background-color: #FFFFFF;*/
     box-shadow: 0 0 20px rgba(0, 0, 0, .1);
     -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, .1);
     position: absolute;
@@ -179,7 +188,6 @@
     line-height: 65px;
     position: absolute;
     bottom: 0;
-    /*background-color: #f0f0f0;*/
   }
 
   .login-form-footer i {

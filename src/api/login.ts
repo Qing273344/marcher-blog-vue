@@ -1,19 +1,20 @@
-import { _get, _post } from '@/utils/request';
+import BaseApi from '@/api/baseApi';
 
-// 登录
-export const login = (data: any) => {
-  const req = {
-    data,
-    url: 'blog/passport/login',
-  };
-  return _post(req);
-};
+export default class LoginApi extends BaseApi {
 
-// 获取用户信息
-export const userInfo = (data: any) => {
-  const req = {
-    data,
-    url: 'blog/user/info',
-  };
-  return _get(req);
-};
+  /**
+   * 登录
+   */
+  public static login(data: any) {
+    const url = 'blog/passport/login';
+    return super.post(data, url);
+  }
+
+  /**
+   * 用户信息
+   */
+  public static userInfo() {
+    const url = 'blog/user/info';
+    return super.get(null, url);
+  }
+}

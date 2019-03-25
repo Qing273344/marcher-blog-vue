@@ -1,5 +1,6 @@
 /**
  * 服务端响应的数据结构
+ *
  * @author marcher
  */
 export class ResponseBean {

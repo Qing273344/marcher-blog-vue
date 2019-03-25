@@ -31,10 +31,8 @@
     height: 100px;
     width: 100%;
     padding: 0;
+    position: absolute;
+    bottom: 0;
   }
 
-  /*.el-footer {*/
-    /*height: 100px;*/
-    /**/
-  /*}*/
 </style>

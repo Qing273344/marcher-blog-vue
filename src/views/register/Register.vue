@@ -42,7 +42,7 @@
 
 <script lang="ts">
   import { Component, Vue } from "vue-property-decorator";
-  import { register } from "@/api/register";
+  import RegisterApi from "@/api/register";
   import { ElForm } from "element-ui/types/form";
   import ValidateUtil from "@/utils/validateUtil";
 
@@ -72,8 +72,7 @@
       // 校验
       (this.$refs.registerForm as ElForm).validate((valid: boolean) => {
         if (valid) {
-          console.log("22222");
-          register(this.registerForm).then((response) => {
+          RegisterApi.register(this.registerForm).then((response) => {
             // 跳转到登录页
             this.$router.push({name: 'loginLink'});
           })

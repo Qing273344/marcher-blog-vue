@@ -7,11 +7,10 @@
 
 import Vue from 'vue';
 import Router from 'vue-router';
-
-Vue.use(Router);
-
 import homeRouter from '@/routers/modules/homeRouter';
 import globalRouter from '@/routers/modules/globalRouter';
+
+Vue.use(Router);
 
 /**
  * 路由模块化后在此处引入
