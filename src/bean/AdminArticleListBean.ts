@@ -1,11 +1,10 @@
 /**
- * 博客文章列表
+ * 博客文章列表 - 后台管理
  *
  * @author marcher
  */
-export class ArticleListBean {
+export class AdminArticleListBean {
   public articleId = null;
   public title = '';
   public timeStr = '';
-  private top = 0;
 }

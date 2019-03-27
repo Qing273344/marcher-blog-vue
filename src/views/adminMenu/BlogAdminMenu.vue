@@ -42,7 +42,6 @@
     position: absolute;
     top: 0;
     bottom: 0;
-    border: 1px solid #E6E9ED;
   }
 
   .el-menu {

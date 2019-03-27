@@ -10,6 +10,7 @@
           <el-button class="el-button-search" type="primary" icon="el-icon-search" @click="query()"></el-button>
           <el-button class="el-button-refresh" type="primary" icon="el-icon-refresh" @click="refresh()"></el-button>
         </div>
+
         <div class="blog-admin-table-main">
           <el-table :data="articleTagBeanList" stripe @selection-change="handleSelectionChange">
             <el-table-column type="selection" width="55"></el-table-column>
