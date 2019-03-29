@@ -6,14 +6,6 @@ import BaseApi from '@/api/baseApi';
 export default class ArticleApi extends BaseApi {
 
   /**
-   * 发布文字 - md编辑器
-   */
-  public static publishMd(data: any) {
-    const url = 'blog/article/publish';
-    return super.post(data, url);
-  }
-
-  /**
    * query 文章列表
    */
   public static query(data: any) {

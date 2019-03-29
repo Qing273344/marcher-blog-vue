@@ -62,20 +62,6 @@
       window.open(routeUrl.href, "_blank");
     }
 
-    getSites() {
-      return [
-        { title: '文章标题1', content: '文章信息1' },
-        { title: '文章标题2', content: '文章信息2' },
-        { title: '文章标题3', content: '文章信息3' },
-        { title: '文章标题4', content: '文章信息4' },
-        { title: '文章标题5', content: '文章信息5' },
-        { title: '文章标题6', content: '文章信息6' },
-        { title: '文章标题7', content: '文章信息7' },
-        { title: '文章标题8', content: '文章信息8' }
-      ]
-    }
-
-
   }
 </script>
 

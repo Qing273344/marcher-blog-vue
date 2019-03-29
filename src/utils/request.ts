@@ -56,6 +56,7 @@ function responseSuccess(response: AxiosResponse) {
   responseBean = response.data;
   // 数据正确
   if (responseBean.status.code === 0) {
+
     // 若没有分页则返回data
     if (!responseBean.page) {
       return responseBean.data;
@@ -118,7 +119,8 @@ function requestFail(error: AxiosError) {
  */
 function responseHint(responseBean: ResponseBean) {
   Message({message: responseBean.status.msg, type: 'warning', duration: 2 * 1000});
-  return Promise.resolve(responseBean.status.msg);
+  throw new Error();
+  // return Promise.resolve(responseBean.status.msg);
 }
 
 

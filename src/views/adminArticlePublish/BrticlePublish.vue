@@ -37,8 +37,8 @@
   import { ArticlePublishFrom } from '@/from/ArticlePublishFrom';
   import { ArticleTypeBean } from '@/bean/articleTypeBean';
   import AdminTypeAPi from '@/api/adminType';
-  import ArticleApi from '@/api/article';
   import { Message } from 'element-ui';
+  import AdminArticleApi from '@/api/adminArticle';
 
   @Component({
     components: {}
@@ -62,6 +62,9 @@
       }
     }
 
+    /**
+     * 监控弹窗
+     */
     @Watch('articlePublishDialog')
     initAttribute() {
       if (this.articlePublishDialog) {
@@ -81,7 +84,6 @@
      * 存为草稿
      */
     handleDraft() {
-
       this.closeDialog();
     }
 
@@ -102,7 +104,7 @@
         return;
       }
 
-      ArticleApi.publishMd(this.articlePublishFrom).then(() => {
+      AdminArticleApi.publishMd(this.articlePublishFrom).then(() => {
         // 发布成功, 跳转到首页
         this.$router.push({name: 'homeLink'});
       });

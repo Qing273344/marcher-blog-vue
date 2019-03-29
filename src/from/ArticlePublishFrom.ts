@@ -7,5 +7,5 @@ export class ArticlePublishFrom {
   public title = '';
   public articleContent = '';
   public typeId = null;
-  public tagIdList = [];
+  public tagIdList: string[] = [];
 }

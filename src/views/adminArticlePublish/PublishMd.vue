@@ -41,6 +41,7 @@
   import ArticlePublish from '@/views/adminArticlePublish/BrticlePublish.vue';
   import { ArticlePublishFrom } from '@/from/ArticlePublishFrom';
   import { Message } from 'element-ui';
+  import AdminArticleApi from '@/api/adminArticle';
 
   @Component({
     components: {
@@ -50,7 +51,22 @@
   })
   export default class PublishMd extends Vue {
     private articlePublishDialog = false;
-    public articlePublishFrom: ArticlePublishFrom = new ArticlePublishFrom();
+    private articlePublishFrom: ArticlePublishFrom = new ArticlePublishFrom();
+    private articleId = null;
+
+    created() {
+      this.articleId = this.$route.query.articleId;
+      if (this.articleId) {
+        this.init(this.articleId);
+      }
+      console.log(this.articleId);
+    }
+
+    init(articleId) {
+      AdminArticleApi.getAsEdit({id: articleId}).then((response) => {
+        this.articlePublishFrom = response.info;
+      })
+    }
 
     /**
      * 点击发布打开博客属性弹窗

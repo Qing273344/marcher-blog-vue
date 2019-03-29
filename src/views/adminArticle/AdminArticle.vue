@@ -14,20 +14,23 @@
         <div class="blog-admin-table-main">
           <el-table :data="adminArticleListBeanList" stripe @selection-change="handleSelectionChange">
             <el-table-column prop="title" label="标题" width="260px"></el-table-column>
-            <el-table-column prop="title" label="评论"></el-table-column>
+            <el-table-column label="评论">
+              <template slot-scope="scope">
+                <el-switch v-model="scope.row.isComment === 1" active-color="#13ce66" @change="changeComment(scope.row)"></el-switch>
+              </template>
+            </el-table-column>
             <el-table-column label="置顶">
               <template slot-scope="scope">
-                <el-switch v-model="scope.row.top === 1" active-color="#13ce66" @change="changeTop(scope.row)">
-                </el-switch>
+                <el-switch v-model="scope.row.isTop === 1" active-color="#13ce66" @change="changeTop(scope.row)"></el-switch>
               </template>
             </el-table-column>
             <el-table-column prop="description" label="浏览"></el-table-column>
             <el-table-column prop="description" label="评论"></el-table-column>
             <el-table-column prop="description" label="喜欢"></el-table-column>
-            <el-table-column prop="description" label="发布时间"></el-table-column>
+            <el-table-column prop="timeStr" label="发布时间" width="160"></el-table-column>
             <el-table-column label="操作" width="220">
               <template slot-scope="scope">
-                <el-button class="table-operation-button" type="primary" icon="el-icon-edit" @click="">编辑</el-button>
+                <el-button class="table-operation-button" type="primary" icon="el-icon-edit" @click="handleEdit(scope.row.articleId)">编辑</el-button>
                 <el-button class="table-operation-button" type="danger" icon="el-icon-delete" @click="handleDelete(scope.row.articleId)">删除</el-button>
               </template>
             </el-table-column>
@@ -90,11 +93,25 @@
 
     }
 
-    changeTop(row) {
-      if (row.top == 1) {
-        row.top = 0;
+    handleEdit(articleId) {
+      let routeUrl = this.$router.resolve({name: "publishMdLink", query:{articleId: articleId}});
+      window.open(routeUrl.href, "_blank");
+    }
+
+    changeComment(row) {
+      if (row.isComment == 1) {
+        row.isComment = 0;
       } else {
-        row.top = 1
+        row.isComment = 1
+      }
+      console.log(row)
+    }
+
+    changeTop(row) {
+      if (row.isTop == 1) {
+        row.isTop = 0;
+      } else {
+        row.isTop = 1
       }
       console.log(row)
     }
