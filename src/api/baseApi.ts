@@ -1,20 +1,9 @@
-import { _get, _post, _put, _delete} from '@/utils/request';
+import { _get, _post, _put, _delete, _fromPost } from '@/utils/request';
 
 /**
  * base api
  */
 export default class BaseApi {
-
-  /**
-   * post 请求
-   *
-   * @param data  data
-   * @param url   url
-   */
-  protected static post(data: any, url: string) {
-    const req = this.reqFrom(data, url);
-    return _post(req);
-  }
 
   /**
    * get 请求
@@ -25,6 +14,28 @@ export default class BaseApi {
   protected static get(data: any, url: string) {
     const req = this.reqFrom(data, url);
     return _get(req);
+  }
+
+  /**
+   * post 请求
+   *
+   * @param data  data
+   * @param url   url
+   */
+  protected static fromPost(data: any, url: string) {
+    const req = this.reqFrom(data, url);
+    return _fromPost(req);
+  }
+
+  /**
+   * post 请求
+   *
+   * @param data  data
+   * @param url   url
+   */
+  protected static post(data: any, url: string) {
+    const req = this.reqFrom(data, url);
+    return _post(req);
   }
 
   /**

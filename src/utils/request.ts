@@ -1,5 +1,6 @@
 import * as Axios from 'axios';
 import { AxiosError, AxiosResponse } from 'axios';
+import qs from 'qs';
 
 import config from '@/config/envConfig';
 import { ResponseBean } from '@/bean/common/ResponseBean';
@@ -14,7 +15,7 @@ let responseBean = new ResponseBean();
 // api请求的baseURL
 const baseURL = config.url.basicUrl;
 // json格式请求
-const axios = Axios.default.create({
+const jsonAxios = Axios.default.create({
   baseURL,
   timeout: 0,
   withCredentials: true, // 允许跨域 cookie
@@ -25,10 +26,21 @@ const axios = Axios.default.create({
 });
 
 // key-value格式请求
-const kyAxios = Axios.default.create({
+const getAxios = Axios.default.create({
   baseURL,
   timeout: 0,
   withCredentials: true, // 允许跨域 cookie
+  maxContentLength: 2000,
+});
+
+const formAxios = Axios.default.create({
+  baseURL,
+  timeout: 0,
+  withCredentials: true, // 允许跨域 cookie
+  headers: {
+    // 'Content-Type': '.application/x-www-form-urlencoded; charset=UTF-8',
+    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+  },
   maxContentLength: 2000,
 });
 
@@ -36,13 +48,19 @@ const kyAxios = Axios.default.create({
 /**
  * -------------------------------------------------------------------------------------------------------------------- 响应拦截器
  */
-axios.interceptors.response.use((response: AxiosResponse): any => {
+jsonAxios.interceptors.response.use((response: AxiosResponse): any => {
   return responseSuccess(response);
 }, (error: AxiosError): any => {
   return requestFail(error);
 });
 
-kyAxios.interceptors.response.use((response: AxiosResponse): any => {
+getAxios.interceptors.response.use((response: AxiosResponse): any => {
+  return responseSuccess(response);
+}, (error: AxiosError): any => {
+  return requestFail(error);
+});
+
+formAxios.interceptors.response.use((response: AxiosResponse): any => {
   return responseSuccess(response);
 }, (error: AxiosError): any => {
   return requestFail(error);
@@ -128,17 +146,22 @@ function responseHint(responseBean: ResponseBean) {
  * -------------------------------------------------------------------------------------------------------------------- 请求
  */
 export const _get = (req: any) => {
-  return kyAxios.get(req.url, {params: req.data});
+  return getAxios.get(req.url, {params: req.data});
 };
 
+export const _fromPost = (req: any) => {
+  const fromData = qs.stringify(req.data);
+  return formAxios({method: 'post', url: `/${req.url}`, data: fromData});
+}
+
 export const _post = (req: any) => {
-  return axios({method: 'post', url: `/${req.url}`, data: req.data});
+  return jsonAxios({method: 'post', url: `/${req.url}`, data: req.data});
 };
 
 export const _put = (req: any) => {
-  return axios({method: 'put', url: `/${req.url}`, data: req.data});
+  return jsonAxios({method: 'put', url: `/${req.url}`, data: req.data});
 };
 
 export const _delete = (req: any) => {
-  return axios({method: 'delete', url: `/${req.url}`, data: req.data});
+  return jsonAxios({method: 'delete', url: `/${req.url}`, data: req.data});
 };

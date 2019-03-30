@@ -4,7 +4,6 @@
       <div class="blog-admin-article-content">
         <div class="blog-admin-table-head">
           <el-button type="primary" icon="el-icon-circle-plus-outline" @click="publishMdLink()">写文章</el-button>
-          <el-button type="primary" icon="el-icon-delete" @click="handleBatchDeleted()">批量删除</el-button>
 
           <el-input class="el-input-search" placeholder="搜索..." v-model="queryData.keyword"></el-input>
           <el-button class="el-button-search" type="primary" icon="el-icon-search" @click="query()"></el-button>
@@ -12,7 +11,7 @@
         </div>
 
         <div class="blog-admin-table-main">
-          <el-table :data="adminArticleListBeanList" stripe @selection-change="handleSelectionChange">
+          <el-table :data="adminArticleListBeanList" stripe>
             <el-table-column prop="title" label="标题" width="260px"></el-table-column>
             <el-table-column label="评论">
               <template slot-scope="scope">
@@ -46,14 +45,14 @@
 
 <script lang="ts">
   import { Component, Vue } from "vue-property-decorator";
-  import QueryPage from '@/utils/queryPage';
-  import QueryData from '@/utils/queryData';
-  import Query from '@/utils/query';
-  import PageUtil from '@/utils/pageUtil';
-  import { AdminArticleListBean } from '@/bean/AdminArticleListBean';
-  import Pagination from '@/components/pagination/pagination.vue';
-  import AdminArticleApi from '@/api/adminArticle';
-  import { ResponseBean } from '@/bean/common/ResponseBean';
+  import QueryPage from "@/utils/queryPage";
+  import QueryData from "@/utils/queryData";
+  import Query from "@/utils/query";
+  import PageUtil from "@/utils/pageUtil";
+  import { AdminArticleListBean } from "@/bean/AdminArticleListBean";
+  import Pagination from "@/components/pagination/pagination.vue";
+  import AdminArticleApi from "@/api/adminArticle";
+  import { ResponseBean } from "@/bean/common/ResponseBean";
 
   @Component({
     components: {
@@ -64,13 +63,11 @@
     private articleId: string = null;
     private pageUtil: PageUtil = new PageUtil;
 
-    private isTop: boolean = true;
     private responseBean: ResponseBean = new ResponseBean();
 
     private queryPage: QueryPage = new QueryPage(this.pageUtil.curPage, this.pageUtil.pageSize);
     private queryData: QueryData = new QueryData();
     private queryArgs: Query<QueryData> = new Query(this.queryData, this.queryPage);
-    private ids: number[] = [];
     private adminArticleListBeanList: AdminArticleListBean[] = new Array<AdminArticleListBean>();
 
     created() {
@@ -85,46 +82,49 @@
       window.open(routeUrl.href, "_blank");
     }
 
-    handleSelectionChange(rows) {
-      this.ids = [];
-    }
-
+    /**
+     * 分页
+     */
     changePage(pageUtil) {
-
+      this.pageUtil = pageUtil;
+      this.queryPage = new QueryPage(this.pageUtil.curPage, this.pageUtil.pageSize);
+      this.query();
     }
 
+    /**
+     * 编辑文章
+     */
     handleEdit(articleId) {
-      let routeUrl = this.$router.resolve({name: "publishMdLink", query:{articleId: articleId}});
+      let routeUrl = this.$router.resolve({name: "publishMdLink", query: {articleId: articleId}});
       window.open(routeUrl.href, "_blank");
     }
 
+    /**
+     * 评论设置
+     */
     changeComment(row) {
-      if (row.isComment == 1) {
-        row.isComment = 0;
-      } else {
-        row.isComment = 1
-      }
-      console.log(row)
+      AdminArticleApi.comment({id: row.articleId}).then(() => {
+        this.query();
+      });
     }
 
+    /**
+     * 置顶设置
+     */
     changeTop(row) {
-      if (row.isTop == 1) {
-        row.isTop = 0;
-      } else {
-        row.isTop = 1
-      }
-      console.log(row)
+      AdminArticleApi.top({id: row.articleId}).then(() => {
+        this.query();
+      });
     }
 
     /**
      * 删除指定数据
-     * @param id 数据Id
+     * @param articleId 文章id
      */
-    handleDelete(id: number) {
+    handleDelete(articleId: number) {
       this.$confirm("是否删除该文章?", "提示", {confirmButtonText: "确定", cancelButtonText: "取消", type: "warning"})
         .then(() => {
-          this.ids[0] = id;
-          AdminArticleApi.remove(this.ids).then(() => {
+          AdminArticleApi.remove({id: articleId}).then(() => {
             this.query();
             this.$message({
               type: "success", message: "删除成功!"
@@ -144,8 +144,18 @@
         this.responseBean = response.data;
         this.adminArticleListBeanList = this.responseBean.data.list;
         this.pageUtil = this.responseBean.page;
-      })
+      });
     }
+
+    /**
+     * 刷新查询
+     */
+    private refresh() {
+      this.queryData = new QueryData();
+      this.queryPage = QueryPage.init();
+      this.query();
+    }
+
   }
 </script>
 

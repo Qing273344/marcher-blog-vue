@@ -32,13 +32,13 @@
 
 <script lang="ts">
   import { Component, Emit, Prop, Vue, Watch } from "vue-property-decorator";
-  import AdminTagApi from '@/api/adminTag';
-  import { ArticleTagBean } from '@/bean/ArticleTagBean';
-  import { ArticlePublishFrom } from '@/from/ArticlePublishFrom';
-  import { ArticleTypeBean } from '@/bean/articleTypeBean';
-  import AdminTypeAPi from '@/api/adminType';
-  import { Message } from 'element-ui';
-  import AdminArticleApi from '@/api/adminArticle';
+  import AdminTagApi from "@/api/adminTag";
+  import { ArticleTagBean } from "@/bean/ArticleTagBean";
+  import { ArticlePublishFrom } from "@/from/ArticlePublishFrom";
+  import { ArticleTypeBean } from "@/bean/articleTypeBean";
+  import AdminTypeAPi from "@/api/adminType";
+  import { Message } from "element-ui";
+  import AdminArticleApi from "@/api/adminArticle";
 
   @Component({
     components: {}
@@ -49,6 +49,7 @@
 
     private articleStatus: boolean = true;
     private articleStatusRemark: string = '公开';
+    private articleId = null;
 
     public articleTagBeanList: ArticleTagBean[] = new Array<ArticleTagBean>();
     public articleTypeBeanList: ArticleTypeBean[] = new Array<ArticleTypeBean>();
@@ -77,6 +78,12 @@
         AdminTypeAPi.listAll(null).then((response) => {
           this.articleTypeBeanList = response.list;
         });
+
+        // 是否编辑
+        this.articleId = this.$route.query.articleId;
+        if (this.articleId) {
+
+        }
       }
     }
 
@@ -84,13 +91,36 @@
      * 存为草稿
      */
     handleDraft() {
-      this.closeDialog();
+      // 校验参数
+      this.checkFrom();
+
+      this.articlePublishFrom.status = this.articleStatus ? 1 : 0;
+
+      AdminArticleApi.publishMd(this.articlePublishFrom).then(() => {
+        // 保存成功, 跳转到首页
+        this.$router.push({name: 'homeLink'});
+      });
     }
 
     /**
      * 确定发布
      */
     handlePublish() {
+      // 校验参数
+      this.checkFrom();
+
+      this.articlePublishFrom.status = this.articleStatus ? 1 : 0;
+
+      AdminArticleApi.publishMd(this.articlePublishFrom).then(() => {
+        // 发布成功, 跳转到首页
+        this.$router.push({name: 'homeLink'});
+      });
+    }
+
+    /**
+     * 校验表单
+     */
+    private checkFrom() {
       if (!this.articlePublishFrom.typeId) {
         Message({message: '请选择博客类型', type: 'warning', duration: 2 * 1000});
         return;
@@ -103,11 +133,6 @@
         Message({message: '请选择博客状态', type: 'warning', duration: 2 * 1000});
         return;
       }
-
-      AdminArticleApi.publishMd(this.articlePublishFrom).then(() => {
-        // 发布成功, 跳转到首页
-        this.$router.push({name: 'homeLink'});
-      });
     }
 
     /**

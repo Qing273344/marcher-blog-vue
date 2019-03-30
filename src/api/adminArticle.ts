@@ -45,6 +45,22 @@ export default class AdminArticleApi extends BaseApi {
    */
   public static remove(data: any) {
     const url = 'admin/article/remove';
-    return super.post(data, url);
+    return super.fromPost(data, url);
+  }
+
+  /**
+   * update 评论设置
+   */
+  public static comment(data: any) {
+    const url = 'admin/article/comment';
+    return super.fromPost(data, url);
+  }
+
+  /**
+   * update 置顶设置
+   */
+  public static top(data: any) {
+    const url = 'admin/article/top';
+    return super.fromPost(data, url);
   }
 }

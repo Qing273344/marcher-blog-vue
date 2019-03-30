@@ -59,7 +59,6 @@
       if (this.articleId) {
         this.init(this.articleId);
       }
-      console.log(this.articleId);
     }
 
     init(articleId) {

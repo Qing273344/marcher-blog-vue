@@ -8,4 +8,5 @@ export class ArticlePublishFrom {
   public articleContent = '';
   public typeId = null;
   public tagIdList: string[] = [];
+  public status = 0;
 }
