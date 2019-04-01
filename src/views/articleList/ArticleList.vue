@@ -20,7 +20,7 @@
 </template>
 
 <script lang="ts">
-  import { Component, Vue } from 'vue-property-decorator';
+  import { Component, Prop, Vue, Watch } from "vue-property-decorator";
   import { ArticleListBean } from '@/bean/ArticleListBean';
   import QueryPage from '@/utils/queryPage';
   import QueryData from '@/utils/queryData';
@@ -28,11 +28,16 @@
   import Query from '@/utils/query';
   import ArticleApi from '@/api/article';
   import { ResponseBean } from '@/bean/common/ResponseBean';
+  import { State } from 'vuex-class';
+  import { IMainQueryState } from '@/store/modules/mainQuery';
 
   @Component({
     components: {}
   })
   export default class ArticleList extends Vue {
+    @State private mainQuery!: IMainQueryState;
+
+    private articleKeyword: string = '';
 
     private pageUtil: PageUtil = new PageUtil;
     private queryPage: QueryPage = new QueryPage(this.pageUtil.curPage, this.pageUtil.pageSize);
@@ -40,10 +45,15 @@
     private queryArgs: Query<QueryData> = new Query(this.queryData, this.queryPage);
     private responseBean: ResponseBean = new ResponseBean();
 
-    private articleListBean: ArticleListBean = new ArticleListBean();
     private articleListBeanList: ArticleListBean[] = new Array<ArticleListBean>();
 
+    @Watch("articleKeyword")
+    queryByKeyword() {
+      console.log(111);
+    }
+
     created() {
+      console.log(this.articleKeyword);
       this.query();
     }
 

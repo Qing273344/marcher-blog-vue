@@ -49,7 +49,6 @@
 
     private articleStatus: boolean = true;
     private articleStatusRemark: string = '公开';
-    private articleId = null;
 
     public articleTagBeanList: ArticleTagBean[] = new Array<ArticleTagBean>();
     public articleTypeBeanList: ArticleTypeBean[] = new Array<ArticleTypeBean>();
@@ -78,12 +77,6 @@
         AdminTypeAPi.listAll(null).then((response) => {
           this.articleTypeBeanList = response.list;
         });
-
-        // 是否编辑
-        this.articleId = this.$route.query.articleId;
-        if (this.articleId) {
-
-        }
       }
     }
 
