@@ -12,7 +12,7 @@
 
 
 <script lang="ts">
-  import { Component, Vue } from "vue-property-decorator";
+  import { Component, Vue } from 'vue-property-decorator';
   import ElMain from 'element-ui/packages/main/src/main.vue';
 
   @Component({

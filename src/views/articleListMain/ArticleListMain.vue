@@ -16,7 +16,7 @@
       ArticleList, Side,
     }
   })
-  export default class Ar{
+  export default class ArticleListMain extends Vue {
 
   }
 </script>

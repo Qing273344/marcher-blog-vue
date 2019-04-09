@@ -5,6 +5,11 @@ import BaseApi from '@/api/baseApi';
 
 export default class AdminArticleApi extends BaseApi {
 
+  public static putImg(data: any) {
+    const url = 'admin/upload/uploadFile';
+    return super.filePost(data, url);
+  }
+
   /**
    * 发布文字 - md编辑器
    */

@@ -3,10 +3,10 @@
  */
 import adminRouter from '@/routers/modules/adminRouter';
 
-const Home = (r: any) => (require as any).ensure([], () => r(require('@/views/home/Home'), 'Home'));
+const Home = (r: any) => (require as any).ensure([], () => r(require('@/views/home/Home.vue'), 'Home'));
 
-const ArticleListMain = (r: any) => (require as any).ensure([], () => r(require('@/views/articleListMain/ArticleListMain'), 'ArticleListMain'));
-const ArticleContentMain = (r: any) => (require as any).ensure([], () => r(require('@/views/articleContentMain/ArticleContentMain'), 'ArticleContentMain'));
+const ArticleListMain = (r: any) => (require as any).ensure([], () => r(require('@/views/articleListMain/ArticleListMain.vue'), 'ArticleListMain'));
+const ArticleContentMain = (r: any) => (require as any).ensure([], () => r(require('@/views/articleContentMain/ArticleContentMain.vue'), 'ArticleContentMain'));
 
 const homeRouter = [{
   path: '/',

@@ -9,7 +9,7 @@ export default class AdminTypeAPi extends BaseApi {
    * get
    */
   public static get(data: any) {
-    const url = 'blog/type/get';
+    const url = 'admin/type/get';
     return super.get(data, url);
   }
 
@@ -17,7 +17,7 @@ export default class AdminTypeAPi extends BaseApi {
    * listAll
    */
   public static listAll(data: any) {
-    const url = 'blog/type/listAll';
+    const url = 'admin/type/listAll';
     return super.get(data, url);
   }
 
@@ -25,7 +25,7 @@ export default class AdminTypeAPi extends BaseApi {
    * query
    */
   public static query(data: any) {
-    const url = 'blog/type/query';
+    const url = 'admin/type/query';
     return super.post(data, url);
   }
 
@@ -34,7 +34,7 @@ export default class AdminTypeAPi extends BaseApi {
    * add
    */
   public static add(data: any) {
-    const url = 'blog/type/save';
+    const url = 'admin/type/save';
     return super.post(data, url);
   }
 
@@ -42,7 +42,7 @@ export default class AdminTypeAPi extends BaseApi {
    * update
    */
   public static update(data: any) {
-    const url = 'blog/type/update';
+    const url = 'admin/type/update';
     return super.post(data, url);
   }
 
@@ -50,7 +50,7 @@ export default class AdminTypeAPi extends BaseApi {
    * remove
    */
   public static remove(data: any) {
-    const url = 'blog/type/remove';
+    const url = 'admin/type/remove';
     return super.post(data, url);
   }
 }

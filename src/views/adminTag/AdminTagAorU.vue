@@ -28,8 +28,8 @@
     components: {}
   })
   export default class AdminTagAorU extends Vue {
-    @Prop() aORuTagDialog: boolean;
-    @Prop() tagId: string;
+    @Prop() aORuTagDialog: boolean = false;
+    @Prop() tagId: string = '';
 
     public articleTagBean: ArticleTagBean = new ArticleTagBean();
 
@@ -58,7 +58,7 @@
     @Watch('tagId')
     getTagInfo() {
       if (this.tagId) {
-        AdminTagApi.get({id: this.tagId}).then((response) => {
+        AdminTagApi.get({id: this.tagId}).then((response: any) => {
           this.articleTagBean = response.info;
         });
       }

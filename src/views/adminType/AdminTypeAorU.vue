@@ -20,7 +20,7 @@
 </template>
 
 <script lang="ts">
-  import { Component, Vue, Prop, Emit, Watch } from "vue-property-decorator";
+  import { Component, Vue, Prop, Emit, Watch } from 'vue-property-decorator';
   import { ArticleTypeBean } from '@/bean/articleTypeBean';
   import AdminTypeAPi from '@/api/adminType';
 
@@ -28,8 +28,8 @@
     components: {}
   })
   export default class AdminTypeAorU extends Vue {
-    @Prop() aORuTypeDialog: boolean;
-    @Prop() typeId: string;
+    @Prop() aORuTypeDialog: boolean = false;
+    @Prop() typeId: string = '';
 
     public articleTypeBean: ArticleTypeBean = new ArticleTypeBean();
 
@@ -58,7 +58,7 @@
     @Watch('typeId')
     getTypeInfo() {
       if (this.typeId) {
-        AdminTypeAPi.get({id: this.typeId}).then((response) => {
+        AdminTypeAPi.get({id: this.typeId}).then((response: any) => {
           this.articleTypeBean = response.info;
         });
       }

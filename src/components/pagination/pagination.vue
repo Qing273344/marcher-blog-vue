@@ -14,20 +14,20 @@
 </template>
 
 <script lang="ts">
-  import { Component, Emit, Prop, Vue } from "vue-property-decorator";
-  import PageUtil from "@/utils/pageUtil";
+  import { Component, Emit, Prop, Vue } from 'vue-property-decorator';
+  import PageUtil from '@/utils/pageUtil';
 
   @Component({
     components: {}
   })
   export default class Pagination extends Vue {
-    @Prop() private pageUtil: PageUtil;
+    @Prop() private pageUtil: PageUtil = new PageUtil();
 
     /**
      * 每页条数
      */
     @Emit("changePage")
-    sizeChangeHandle(pageSize) {
+    sizeChangeHandle(pageSize: number) {
       this.pageUtil.pageSize = pageSize;
       return this.pageUtil;
       // this.$emit("changePage", this.pageUtil);
@@ -37,7 +37,7 @@
      * 翻页
      */
     @Emit("changePage")
-    currentChangeHandle(curPage) {
+    currentChangeHandle(curPage: number) {
       this.pageUtil.curPage = curPage;
       return this.pageUtil;
       // this.$emit("", this.pageUtil);

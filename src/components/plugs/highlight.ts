@@ -4,11 +4,11 @@
  *
   * @param markdown高亮插件
  */
-import Vue from 'vue'
+import Vue from 'vue';
 import Hljs from 'highlight.js';
 import 'highlight.js/styles/googlecode.css';
 
-Vue.directive('highlight', function (el: HTMLElement) {
+const highlight: any = Vue.directive('highlight', function (el: HTMLElement) {
   const blocks = el.querySelectorAll('pre code');
   blocks.forEach((block) => {
     Hljs.highlightBlock(block);
@@ -26,4 +26,4 @@ Vue.directive('highlight', function (el: HTMLElement) {
 //   }
 // };
 //
-// export default highlight;
+export default highlight;

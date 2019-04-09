@@ -10,12 +10,7 @@
         <span>上上签</span>
       </div>
       <div class="blog-tag-list">
-        <el-tag>标签一一一一一一</el-tag>
-        <el-tag>标签二</el-tag>
-        <el-tag>标签三</el-tag>
-        <el-tag>标签四</el-tag>
-        <el-tag>标签五</el-tag>
-        <el-tag>标签六</el-tag>
+        <el-tag v-for="tagName in tags">{{ tagName }}</el-tag>
       </div>
     </div>
   </div>
@@ -23,11 +18,24 @@
 
 <script lang="ts">
   import { Component, Vue } from 'vue-property-decorator';
+  import SideApi from '@/api/side';
 
-  @Component({
-    components: {}
-  })
+  @Component
   export default class Side extends Vue {
+    private tags: string[] = [];
+
+    private created() {
+      this.getHotTag();
+    }
+
+    /**
+     * get 热门标签
+     */
+    private getHotTag() {
+      SideApi.getHotTag(null).then((response: any) => {
+        this.tags = response.list;
+      });
+    }
 
   }
 </script>

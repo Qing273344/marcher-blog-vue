@@ -20,7 +20,7 @@
 </template>
 
 <script lang="ts">
-  import { Component, Prop, Vue, Watch } from "vue-property-decorator";
+  import { Component, Prop, Vue, Watch } from 'vue-property-decorator';
   import { ArticleListBean } from '@/bean/ArticleListBean';
   import QueryPage from '@/utils/queryPage';
   import QueryData from '@/utils/queryData';
@@ -28,16 +28,17 @@
   import Query from '@/utils/query';
   import ArticleApi from '@/api/article';
   import { ResponseBean } from '@/bean/common/ResponseBean';
-  import { State } from 'vuex-class';
-  import { IMainQueryState } from '@/store/modules/mainQuery';
+  import { Getter, State } from 'vuex-class';
+  import { IMainQueryState, MainQueryModule } from '@/store/modules/mainQuery';
 
   @Component({
-    components: {}
+    components: {
+      MainQueryModule,
+    }
   })
   export default class ArticleList extends Vue {
     @State private mainQuery!: IMainQueryState;
-
-    private articleKeyword: string = '';
+    @Getter private GET_KEYWORD: any;
 
     private pageUtil: PageUtil = new PageUtil;
     private queryPage: QueryPage = new QueryPage(this.pageUtil.curPage, this.pageUtil.pageSize);
@@ -47,13 +48,13 @@
 
     private articleListBeanList: ArticleListBean[] = new Array<ArticleListBean>();
 
-    @Watch("articleKeyword")
+    @Watch("GET_KEYWORD")
     queryByKeyword() {
-      console.log(111);
+      this.queryData.keyword = this.mainQuery.keyword;
+      this.query();
     }
 
     created() {
-      console.log(this.articleKeyword);
       this.query();
     }
 
@@ -61,15 +62,15 @@
       // 更新query参数
       this.queryArgs = new Query(this.queryData, this.queryPage);
 
-      ArticleApi.query(this.queryArgs).then((response) => {
+      ArticleApi.query(this.queryArgs).then((response: any) => {
         this.responseBean = response.data;
         this.articleListBeanList = this.responseBean.data.list;
       })
     }
 
-    handleDetails(articleId) {
-      let routeUrl = this.$router.resolve({name: "articleContentMainLink", query:{articleId: articleId}});
-      window.open(routeUrl.href, "_blank");
+    handleDetails(articleId: string) {
+      let routeUrl = this.$router.resolve({name: 'articleContentMainLink', query:{articleId: articleId}});
+      window.open(routeUrl.href, '_blank');
     }
 
   }

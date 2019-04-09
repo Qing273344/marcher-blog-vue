@@ -17,20 +17,23 @@
 </template>
 
 <script lang="ts">
-  import { Component, Vue } from "vue-property-decorator";
+  import { Component, Vue } from 'vue-property-decorator';
 
   @Component({
     components: {}
   })
   export default class BlogAdminMenu extends Vue {
-    adminArticleLink() {
-      this.$router.push({name:'adminArticleLink'})
+
+
+
+   public adminArticleLink() {
+      this.$router.push({name:'adminArticleLink'});
     }
-    adminTypeLink() {
-      this.$router.push({name:'adminTypeLink'})
+    public adminTypeLink() {
+      this.$router.push({name:'adminTypeLink'});
     }
-    adminTagLink() {
-      this.$router.push({name:'adminTagLink'})
+    public adminTagLink() {
+      this.$router.push({name:'adminTagLink'});
     }
   }
 </script>

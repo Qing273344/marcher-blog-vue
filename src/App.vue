@@ -4,12 +4,13 @@
   </div>
 </template>
 
-
 <script lang="ts">
   import { Component, Vue } from "vue-property-decorator";
   import { UserModule } from '@/store/modules/user';
 
-  @Component
+  @Component ({
+
+  })
   export default class App extends Vue {
 
     // 初始化storeModule

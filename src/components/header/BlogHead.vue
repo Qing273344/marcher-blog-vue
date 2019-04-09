@@ -14,6 +14,7 @@
         <el-menu-item index="2" >专栏一</el-menu-item>
         <el-menu-item index="3">专栏二</el-menu-item>
         <el-menu-item index="4">专栏三</el-menu-item>
+        <el-menu-item index="10"  class="info-local" @click="adminMainLink()">管理主页</el-menu-item>
 
         <div class="blog-head-info">
           <input class="blog-search" placeholder="找呀找..." v-model="articleKeyword"/>
@@ -39,11 +40,10 @@
 </template>
 
 <script lang="ts">
-  import { Component, Emit, Vue } from "vue-property-decorator";
-  // import { Action, State } from "vuex-class";
-  import { IUserState } from "@/store/modules/user";
-  import ElHeader from "element-ui/packages/header/src/main.vue";
-  import { Action, State } from "vuex-class";
+  import { Component, Emit, Vue } from 'vue-property-decorator';
+  import { IUserState } from '@/store/modules/user';
+  import ElHeader from 'element-ui/packages/header/src/main.vue';
+  import { Action, State } from 'vuex-class';
 
   @Component({
     components: {
@@ -54,34 +54,33 @@
     @Action private QueryKeyword!: (keyword: string) => void;
     @State private user!: IUserState;
 
-    private articleKeyword: string = null;
+    private articleKeyword: string = '';
 
-    private activeIndex = "1";
+    private activeIndex = '1';
 
     private query() {
-      console.log(this.articleKeyword);
       this.QueryKeyword(this.articleKeyword);
     }
 
-    homeLink() {
+    public homeLink() {
       this.$router.push({name: "homeLink"});
     }
     /**
      * 新窗口打开写博客页面
      */
-    publishMdLink() {
+    public publishMdLink() {
       let routeUrl = this.$router.resolve({name: "publishMdLink"});
       window.open(routeUrl.href, "_blank");
     }
 
-    adminMainLink() {
+    public adminMainLink() {
       this.$router.push({name: "adminMainLink"});
     }
 
-    loginLink() {
+    public loginLink() {
       this.$router.push({name: "loginLink"});
     }
-    registerLink() {
+    public registerLink() {
       this.$router.push({name: "registerLink"});
     }
 

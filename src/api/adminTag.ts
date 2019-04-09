@@ -9,7 +9,7 @@ export default class AdminTagApi extends BaseApi {
    * get
    */
   public static get(data: any) {
-    const url = 'blog/tag/get';
+    const url = 'admin/tag/get';
     return super.get(data, url);
   }
 
@@ -17,7 +17,7 @@ export default class AdminTagApi extends BaseApi {
    * listAll
    */
   public static listAll(data: any) {
-    const url = 'blog/tag/listAll';
+    const url = 'admin/tag/listAll';
     return super.get(data, url);
   }
 
@@ -25,7 +25,7 @@ export default class AdminTagApi extends BaseApi {
    * query
    */
   public static query(data: any) {
-    const url = 'blog/tag/query';
+    const url = 'admin/tag/query';
     return super.post(data, url);
   }
 
@@ -34,7 +34,7 @@ export default class AdminTagApi extends BaseApi {
    * add
    */
   public static add(data: any) {
-    const url = 'blog/tag/save';
+    const url = 'admin/tag/save';
     return super.post(data, url);
   }
 
@@ -42,7 +42,7 @@ export default class AdminTagApi extends BaseApi {
    * update
    */
   public static update(data: any) {
-    const url = 'blog/tag/update';
+    const url = 'admin/tag/update';
     return super.post(data, url);
   }
 
@@ -50,7 +50,7 @@ export default class AdminTagApi extends BaseApi {
    * remove
    */
   public static remove(data: any) {
-    const url = 'blog/tag/remove';
+    const url = 'admin/tag/remove';
     return super.post(data, url);
   }
 }

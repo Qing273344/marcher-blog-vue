@@ -36,16 +36,16 @@
 </template>
 
 <script lang="ts">
-  import { Component, Vue } from "vue-property-decorator";
-  import AdminTagAorU from "@/views/adminTag/AdminTagAorU.vue";
-  import { ArticleTagBean } from "@/bean/ArticleTagBean";
-  import AdminTagApi from "@/api/adminTag";
-  import Query from "@/utils/query";
-  import Pagination from "@/components/pagination/pagination.vue";
-  import PageUtil from "@/utils/pageUtil";
-  import { ResponseBean } from "@/bean/common/ResponseBean";
-  import QueryData from "@/utils/queryData";
-  import QueryPage from "@/utils/queryPage";
+  import { Component, Vue } from 'vue-property-decorator';
+  import AdminTagAorU from '@/views/adminTag/AdminTagAorU.vue';
+  import { ArticleTagBean } from '@/bean/ArticleTagBean';
+  import AdminTagApi from '@/api/adminTag';
+  import Query from '@/utils/query';
+  import Pagination from '@/components/pagination/pagination.vue';
+  import PageUtil from '@/utils/pageUtil';
+  import { ResponseBean } from '@/bean/common/ResponseBean';
+  import QueryData from '@/utils/queryData';
+  import QueryPage from '@/utils/queryPage';
 
   @Component({
     components: {
@@ -54,7 +54,7 @@
   })
   export default class AdminTag extends Vue {
     private aORuTagDialog = false;
-    private tagId: string = null;
+    private tagId: string = '';
     private pageUtil: PageUtil = new PageUtil;
 
     private responseBean: ResponseBean = new ResponseBean();
@@ -62,11 +62,11 @@
     private queryPage: QueryPage = new QueryPage(this.pageUtil.curPage, this.pageUtil.pageSize);
     private queryData: QueryData = new QueryData();
     private queryArgs: Query<QueryData> = new Query(this.queryData, this.queryPage);
-    private ids: number[] = [];
+    private ids: string[] = [];
     private selectTagBeanList: ArticleTagBean[] = new Array<ArticleTagBean>();
     private articleTagBeanList: ArticleTagBean[] = new Array<ArticleTagBean>();
 
-    handleSelectionChange(rows) {
+    handleSelectionChange(rows: any) {
       this.ids = [];
       this.selectTagBeanList = rows;
       for (let i = 0; i < this.selectTagBeanList.length; i++) {
@@ -78,18 +78,18 @@
       this.query();
     }
 
-    changePage(pageUtil) {
+    changePage(pageUtil: PageUtil) {
       this.pageUtil = pageUtil;
       this.queryPage = new QueryPage(this.pageUtil.curPage, this.pageUtil.pageSize);
       this.query();
     }
 
     openAddDialog() {
-      this.tagId = null;
+      this.tagId = '';
       this.aORuTagDialog = true;
     }
 
-    openEditDialog(row) {
+    openEditDialog(row: any) {
       this.tagId = row.tagId;
       this.aORuTagDialog = true;
     }
@@ -98,7 +98,7 @@
      * 删除指定数据
      * @param id 数据Id
      */
-    handleDelete(id) {
+    handleDelete(id: string) {
       this.$confirm("是否删除该标签?", "提示", {confirmButtonText: "确定", cancelButtonText: "取消", type: "warning"})
         .then(() => {
           this.ids[0] = id;
@@ -127,7 +127,7 @@
 
     closeShowDialog() {
       this.aORuTagDialog = false;
-      this.tagId = null;
+      this.tagId = '';
       this.query();
     }
 

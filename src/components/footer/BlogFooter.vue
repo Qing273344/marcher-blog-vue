@@ -3,8 +3,11 @@
 
     <el-footer height="100px">
 
-      <hr>
-      <p>BlogFooter</p>
+      <p>
+        Github:
+        <a href="https://github.com/Qing273344/marcher-blog-vue" target="_blank">https://github.com/Qing273344/marcher-blog-vue</a>
+      </p>
+
 
     </el-footer>
 
@@ -13,7 +16,7 @@
 </template>
 
 <script lang="ts">
-  import { Component, Vue } from "vue-property-decorator";
+  import { Component, Vue } from 'vue-property-decorator';
   import ElFooter from 'element-ui/packages/footer/src/main.vue';
 
   @Component({

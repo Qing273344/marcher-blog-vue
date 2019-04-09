@@ -2,14 +2,14 @@
  * 全局路由(无需嵌套布局)
  */
 
-const BlogHead = (r: any) => (require as any).ensure([], () => r(require('@/components/header/BlogHead'), 'BlogHead'));
-const BlogMain = (r: any) => (require as any).ensure([], () => r(require('@/components/main/BlogMain'), 'BlogMain'));
-const BlogFooter = (r: any) => (require as any).ensure([], () => r(require('@/components/footer/BlogFooter'), 'BlogFooter'));
-const Login = (r: any) => (require as any).ensure([], () => r(require('@/views/login/Login'), 'Login'));
-const Register = (r: any) => (require as any).ensure([], () => r(require('@/views/register/Register'), 'Register'));
+const BlogHead = (r: any) => (require as any).ensure([], () => r(require('@/components/header/BlogHead.vue'), 'BlogHead'));
+const BlogMain = (r: any) => (require as any).ensure([], () => r(require('@/components/main/BlogMain.vue'), 'BlogMain'));
+const BlogFooter = (r: any) => (require as any).ensure([], () => r(require('@/components/footer/BlogFooter.vue'), 'BlogFooter'));
+const Login = (r: any) => (require as any).ensure([], () => r(require('@/views/login/Login.vue'), 'Login'));
+const Register = (r: any) => (require as any).ensure([], () => r(require('@/views/register/Register.vue'), 'Register'));
 
-const PublishMd = (r: any) => (require as any).ensure([], () => r(require('@/views/adminArticlePublish/PublishMd'), 'PublishMd'));
-const NotFound = (r: any) => (require as any).ensure([], () => r(require('@/views/common/404'), 'NotFound'));
+const PublishMd = (r: any) => (require as any).ensure([], () => r(require('@/views/adminArticlePublish/PublishMd.vue'), 'PublishMd'));
+const NotFound = (r: any) => (require as any).ensure([], () => r(require('@/views/common/404.vue'), 'NotFound'));
 
 
 const globalRouter = [

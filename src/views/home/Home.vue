@@ -11,11 +11,11 @@
 </template>
 
 <script lang="ts">
-  import { Component, Vue } from "vue-property-decorator";
-  import BlogHead from "@/components/header/BlogHead";
-  import BlogMain from "@/components/main/BlogMain";
-  import Footer from "@/components/footer/BlogFooter";
-  import ElContainer from "element-ui/packages/container/src/main.vue";
+  import { Component, Vue } from 'vue-property-decorator';
+  import BlogHead from "@/components/header/BlogHead.vue";
+  import BlogMain from '@/components/main/BlogMain.vue';
+  import Footer from '@/components/footer/BlogFooter.vue';
+  import ElContainer from 'element-ui/packages/container/src/main.vue';
 
   @Component({
     components: {

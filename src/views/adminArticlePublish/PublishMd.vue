@@ -25,7 +25,10 @@
     </div>
 
     <div class="article-editor">
-      <mavon-editor class="article-editor-content" v-model="articlePublishFrom.articleContent" placeholder="请开始你的表演..."></mavon-editor>
+      <mavon-editor ref=mavon class="article-editor-content"
+                    v-model="articlePublishFrom.articleContent"
+                    placeholder="请开始你的表演..."
+                    @imgAdd="$imgAdd" />
     </div>
 
     <ArticlePublish :articlePublishDialog="articlePublishDialog" :articlePublishFrom="articlePublishFrom"
@@ -34,10 +37,12 @@
   </div>
 </template>
 
+
 <script lang="ts">
-  import { Component, Vue } from "vue-property-decorator";
-  const mavonEditor = require("mavon-editor");
-  import "mavon-editor/dist/css/index.css";
+  import { Component, Vue } from 'vue-property-decorator';
+  // import mavonEditor from 'mavon-editor';
+  const mavonEditor = require('mavon-editor');
+  import 'mavon-editor/dist/css/index.css';
   import ArticlePublish from '@/views/adminArticlePublish/BrticlePublish.vue';
   import { ArticlePublishFrom } from '@/from/ArticlePublishFrom';
   import { Message } from 'element-ui';
@@ -45,14 +50,16 @@
 
   @Component({
     components: {
+      // mavonEditor,
       "mavonEditor": mavonEditor.mavonEditor,
       ArticlePublish,
     }
   })
   export default class PublishMd extends Vue {
+
     private articlePublishDialog = false;
     private articlePublishFrom: ArticlePublishFrom = new ArticlePublishFrom();
-    private articleId = null;
+    private articleId: any = '';
 
     created() {
       this.articleId = this.$route.query.articleId;
@@ -61,10 +68,25 @@
       }
     }
 
-    init(articleId) {
-      AdminArticleApi.getAsEdit({id: articleId}).then((response) => {
+    init(articleId: string) {
+      AdminArticleApi.getAsEdit({id: articleId}).then((response: any) => {
         this.articlePublishFrom = response.info;
       })
+    }
+
+    /**
+     * 文章图片上传
+     */
+    private $imgAdd(pos: any, $file: any) {
+      // 图片
+      const formData = new FormData();
+      formData.append('file', $file);
+      AdminArticleApi.putImg(formData).then((response: any) => {
+        const fileUrl = response.info;
+        // 替换url
+        console.log(this.$refs.mavon);
+        (this.$refs.mavon as any).$img2Url(pos, fileUrl);
+      });
     }
 
     /**
@@ -90,7 +112,7 @@
      * 下拉菜单路由跳转
      * @param link  点击的下拉菜单项
      */
-    handleLink(link) {
+    handleLink(link: string) {
       this.$router.push({name: link});
     }
   }
@@ -164,4 +186,5 @@
       height: 100%;
     }
   }
+
 </style>

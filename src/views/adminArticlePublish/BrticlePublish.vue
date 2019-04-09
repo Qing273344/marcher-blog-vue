@@ -31,21 +31,21 @@
 </template>
 
 <script lang="ts">
-  import { Component, Emit, Prop, Vue, Watch } from "vue-property-decorator";
-  import AdminTagApi from "@/api/adminTag";
-  import { ArticleTagBean } from "@/bean/ArticleTagBean";
-  import { ArticlePublishFrom } from "@/from/ArticlePublishFrom";
-  import { ArticleTypeBean } from "@/bean/articleTypeBean";
-  import AdminTypeAPi from "@/api/adminType";
-  import { Message } from "element-ui";
-  import AdminArticleApi from "@/api/adminArticle";
+  import { Component, Emit, Prop, Vue, Watch } from 'vue-property-decorator';
+  import AdminTagApi from '@/api/adminTag';
+  import { ArticleTagBean } from '@/bean/ArticleTagBean';
+  import { ArticlePublishFrom } from '@/from/ArticlePublishFrom';
+  import { ArticleTypeBean } from '@/bean/articleTypeBean';
+  import AdminTypeAPi from '@/api/adminType';
+  import { Message } from 'element-ui';
+  import AdminArticleApi from '@/api/adminArticle';
 
   @Component({
     components: {}
   })
   export default class ArticlePublish extends Vue {
-    @Prop() articlePublishDialog: boolean;
-    @Prop() articlePublishFrom: ArticlePublishFrom;
+    @Prop() articlePublishDialog: boolean = false;
+    @Prop() articlePublishFrom: ArticlePublishFrom = new ArticlePublishFrom();
 
     private articleStatus: boolean = true;
     private articleStatusRemark: string = '公开';
@@ -69,12 +69,12 @@
     initAttribute() {
       if (this.articlePublishDialog) {
         // 获取博客标签
-        AdminTagApi.listAll(null).then((response) => {
+        AdminTagApi.listAll(null).then((response: any) => {
           this.articleTagBeanList = response.list;
         });
 
         // 获取博客类型
-        AdminTypeAPi.listAll(null).then((response) => {
+        AdminTypeAPi.listAll(null).then((response: any) => {
           this.articleTypeBeanList = response.list;
         });
       }

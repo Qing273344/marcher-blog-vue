@@ -4,7 +4,7 @@
  * @author marcher
  */
 export class ArticleTypeBean {
-  public typeId = null;
+  public typeId = '';
   public name = '';
   public description = '';
 }

@@ -4,7 +4,7 @@
  * @author marcher
  */
 export class ArticleTagBean {
-  public tagId = null;
+  public tagId = '';
   public name = '';
   public description = '';
 }

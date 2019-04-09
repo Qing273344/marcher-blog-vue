@@ -41,29 +41,31 @@
 </template>
 
 <script lang="ts">
-  import { Component, Vue } from "vue-property-decorator";
-  import RegisterApi from "@/api/register";
-  import { ElForm } from "element-ui/types/form";
-  import ValidateUtil from "@/utils/validateUtil";
+  import { Component, Vue } from 'vue-property-decorator';
+  import RegisterApi from '@/api/register';
+  import { ElForm } from 'element-ui/types/form';
+  import ValidateUtil from '@/utils/validateUtil';
 
   @Component({
-    components: {}
+    components: {
+
+    },
   })
   export default class Register extends Vue {
 
     public registerForm = {
-      username: "",
-      password: "",
-      confirmPassword: "",
+      username: '',
+      password: '',
+      confirmPassword: '',
     };
-    private passwordType = "password";
+    private passwordType = 'password';
 
     // 显示密码
-    showPwd() {
-      if (this.passwordType === "password") {
-        this.passwordType = "";
+    private showPwd() {
+      if (this.passwordType === 'password') {
+        this.passwordType = '';
       } else {
-        this.passwordType = "password";
+        this.passwordType = 'password';
       }
     }
 
@@ -71,11 +73,13 @@
     handleRegister() {
       // 校验
       (this.$refs.registerForm as ElForm).validate((valid: boolean) => {
+        console.log(2);
         if (valid) {
+          console.log(1);
           RegisterApi.register(this.registerForm).then((response) => {
             // 跳转到登录页
             this.$router.push({name: 'loginLink'});
-          })
+          });
         } else {
           return false;
         }
@@ -84,39 +88,42 @@
 
 
     // 校验用户名
-    public validateUsername = (rule: any, value: string, callback: any) => {
+    private validateUsername = (rule: any, value: string, callback: any) => {
       if (!value) {
-        callback(new Error("请填写用户名"));
+        callback(new Error('请填写用户名'));
       }
-    };
+      callback();
+    }
 
     // 校验密码
-    public validatePwd = (rule: any, value: string, callback: any) => {
+    private validatePwd = (rule: any, value: string, callback: any) => {
       if (!value) {
-        callback(new Error("请输入密码"));
+        callback(new Error('请输入密码'));
       }
       if (!ValidateUtil.validatePassword(value)) {
-        callback(new Error("密码不符规范"));
+        callback(new Error('密码不符规范'));
       }
-    };
+      callback();
+    }
 
     // 确认密码
     public validateConfirmPwd = (rule: any, value: string, callback: any) => {
       if (!value) {
-        callback(new Error("请输入密码"));
+        callback(new Error('请输入密码'));
       }
       if (!ValidateUtil.validatePassword(value)) {
-        callback(new Error("密码不符规范"));
+        callback(new Error('密码不符规范'));
       }
       if (value !== this.registerForm.password) {
-        callback(new Error("两次输入的密码不匹配"));
+        callback(new Error('两次输入的密码不匹配'));
       }
-    };
+      callback();
+    }
 
     public registerRules = {
-      username: [{required: true, trigger: "blur", validator: this.validateUsername}],
-      password: [{required: true, trigger: "blur", validator: this.validatePwd}],
-      confirmPassword: [{required: true, trigger: "blur", validator: this.validateConfirmPwd}],
+      username: [{required: true, trigger: 'blur', validator: this.validateUsername}],
+      password: [{required: true, trigger: 'blur', validator: this.validatePwd}],
+      confirmPassword: [{required: true, trigger: 'blur', validator: this.validateConfirmPwd}],
     };
   }
 </script>

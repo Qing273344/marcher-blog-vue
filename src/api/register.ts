@@ -9,7 +9,7 @@ export default class RegisterApi extends BaseApi {
    * 注册
    */
   public static register(data: any) {
-    const url = '/blog/passport/register';
+    const url = 'blog/passport/register';
     return super.post(data, url);
   }
 }

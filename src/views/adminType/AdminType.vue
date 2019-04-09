@@ -35,8 +35,9 @@
   </div>
 </template>
 
+
 <script lang="ts">
-  import { Component, Vue } from "vue-property-decorator";
+  import { Component, Vue } from 'vue-property-decorator';
   import AdminTypeAorU from '@/views/adminType/AdminTypeAorU.vue';
   import Pagination from '@/components/pagination/pagination.vue';
   import PageUtil from '@/utils/pageUtil';
@@ -54,7 +55,7 @@
   })
   export default class AdminType extends Vue {
     private aORuTypeDialog = false;
-    private typeId: string = null;
+    private typeId: string = '';
     private pageUtil: PageUtil = new PageUtil;
 
     private responseBean: ResponseBean = new ResponseBean();
@@ -62,35 +63,34 @@
     private queryPage: QueryPage = new QueryPage(this.pageUtil.curPage, this.pageUtil.pageSize);
     private queryData: QueryData = new QueryData();
     private queryArgs: Query<QueryData> = new Query(this.queryData, this.queryPage);
-    private ids: number[] = [];
+    private ids: string[] = [];
     private selectTypeBeanList: ArticleTypeBean[] = new Array<ArticleTypeBean>();
     private articleTypeBeanList: ArticleTypeBean[] = new Array<ArticleTypeBean>();
 
-    handleSelectionChange(rows) {
+    handleSelectionChange(rows: any) {
       this.ids = [];
       this.selectTypeBeanList = rows;
       for (let i = 0; i < this.selectTypeBeanList.length; i++) {
         this.ids[i] = this.selectTypeBeanList[i].typeId;
       }
-      console.log(this.ids);
     }
 
     created() {
       this.query();
     }
 
-    changePage(pageUtil) {
+    changePage(pageUtil: PageUtil) {
       this.pageUtil = pageUtil;
       this.queryPage = new QueryPage(this.pageUtil.curPage, this.pageUtil.pageSize);
       this.query();
     }
 
     openAddDialog() {
-      this.typeId = null;
+      this.typeId = '';
       this.aORuTypeDialog = true;
     }
 
-    openEditDialog(row) {
+    openEditDialog(row: any) {
       this.typeId = row.typeId;
       this.aORuTypeDialog = true;
     }
@@ -99,7 +99,7 @@
      * 删除指定数据
      * @param id 数据Id
      */
-    handleDelete(id) {
+    handleDelete(id: string) {
       this.$confirm("是否删除该类型?", "提示", {confirmButtonText: "确定", cancelButtonText: "取消", type: "warning"})
         .then(() => {
           this.ids[0] = id;
@@ -128,7 +128,7 @@
 
     closeShowDialog() {
       this.aORuTypeDialog = false;
-      this.typeId = null;
+      this.typeId = '';
       this.query();
     }
 
@@ -137,7 +137,7 @@
       this.queryArgs = new Query(this.queryData, this.queryPage);
 
       /// query
-      AdminTypeAPi.query(this.queryArgs).then((response) => {
+      AdminTypeAPi.query(this.queryArgs).then((response: any) => {
         this.responseBean = response.data;
         this.articleTypeBeanList = this.responseBean.data.list;
         this.pageUtil = this.responseBean.page;

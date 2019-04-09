@@ -9,25 +9,26 @@
   import { Component, Vue } from 'vue-property-decorator';
   import ArticleApi from '@/api/article';
   import marked from 'marked';
-  import "mavon-editor/dist/markdown/github-markdown.min.css";
-  import "mavon-editor/src/lib/css/md.css";
+  import markedPlug from '@/components/plugs/markedPlug.ts';
+  import 'mavon-editor/dist/markdown/github-markdown.min.css';
+  import 'mavon-editor/src/lib/css/md.css';
 
-  import highlight from '@/components/plugs/highlight'          // markdown高亮插件
-  import 'highlight.js/styles/googlecode.css'                   //样式文件
-
+  import highlight from '@/components/plugs/highlight.ts';          // markdown高亮插件
+  import 'highlight.js/styles/googlecode.css';                   //样式文件
 
   @Component({
     components: {
-      marked,
+      // marked,
+      markedPlug,
       highlight,
-    }
+    },
   })
   export default class ArticleContent extends Vue {
 
     private articleContentMd = '';
     private articleContentHtml = '';
 
-    private articleId = null;
+    private articleId: any = '';
 
     created() {
       this.articleId = this.$route.query.articleId;
@@ -35,7 +36,7 @@
     }
 
     getArticleContent() {
-      ArticleApi.details({id: this.articleId}).then((response) => {
+      ArticleApi.details({id: this.articleId}).then((response: any) => {
         this.articleContentMd = response.details;
         this.articleContentHtml = marked(this.articleContentMd);
       })
@@ -47,7 +48,7 @@
 <style lang="scss" scoped>
   .article-content {
     width: calc(100vw - 280px);
-    height: 100%;
+    min-height: 100%;
     background-color: #fff;
   }
 

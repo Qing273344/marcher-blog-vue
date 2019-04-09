@@ -44,15 +44,15 @@
 </template>
 
 <script lang="ts">
-  import { Component, Vue } from "vue-property-decorator";
-  import QueryPage from "@/utils/queryPage";
-  import QueryData from "@/utils/queryData";
-  import Query from "@/utils/query";
-  import PageUtil from "@/utils/pageUtil";
-  import { AdminArticleListBean } from "@/bean/AdminArticleListBean";
-  import Pagination from "@/components/pagination/pagination.vue";
-  import AdminArticleApi from "@/api/adminArticle";
-  import { ResponseBean } from "@/bean/common/ResponseBean";
+  import { Component, Vue } from 'vue-property-decorator';
+  import QueryPage from '@/utils/queryPage';
+  import QueryData from '@/utils/queryData';
+  import Query from '@/utils/query';
+  import PageUtil from '@/utils/pageUtil';
+  import { AdminArticleListBean } from '@/bean/AdminArticleListBean';
+  import Pagination from '@/components/pagination/pagination.vue';
+  import AdminArticleApi from '@/api/adminArticle';
+  import { ResponseBean } from '@/bean/common/ResponseBean';
 
   @Component({
     components: {
@@ -60,7 +60,7 @@
     }
   })
   export default class AdminArticle extends Vue {
-    private articleId: string = null;
+    private articleId: string = '';
     private pageUtil: PageUtil = new PageUtil;
 
     private responseBean: ResponseBean = new ResponseBean();
@@ -85,7 +85,7 @@
     /**
      * 分页
      */
-    changePage(pageUtil) {
+    changePage(pageUtil: PageUtil) {
       this.pageUtil = pageUtil;
       this.queryPage = new QueryPage(this.pageUtil.curPage, this.pageUtil.pageSize);
       this.query();
@@ -94,7 +94,7 @@
     /**
      * 编辑文章
      */
-    handleEdit(articleId) {
+    handleEdit(articleId: string) {
       let routeUrl = this.$router.resolve({name: "publishMdLink", query: {articleId: articleId}});
       window.open(routeUrl.href, "_blank");
     }
@@ -102,7 +102,7 @@
     /**
      * 评论设置
      */
-    changeComment(row) {
+    changeComment(row: any) {
       AdminArticleApi.comment({id: row.articleId}).then(() => {
         this.query();
       });
@@ -111,7 +111,7 @@
     /**
      * 置顶设置
      */
-    changeTop(row) {
+    changeTop(row: any) {
       AdminArticleApi.top({id: row.articleId}).then(() => {
         this.query();
       });
@@ -121,7 +121,7 @@
      * 删除指定数据
      * @param articleId 文章id
      */
-    handleDelete(articleId: number) {
+    handleDelete(articleId: string) {
       this.$confirm("是否删除该文章?", "提示", {confirmButtonText: "确定", cancelButtonText: "取消", type: "warning"})
         .then(() => {
           AdminArticleApi.remove({id: articleId}).then(() => {

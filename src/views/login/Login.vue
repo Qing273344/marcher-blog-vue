@@ -14,7 +14,7 @@
                 <el-input v-model="loginForm.username" placeholder="用户名"/>
               </el-form-item>
               <el-form-item class="login-form-main-input" prop="password">
-                <el-input v-model="loginForm.password" :type="passwordType" placeholder="密码"></el-input>
+                <el-input v-model="loginForm.password" :type="passwordType" placeholder="密码" @keypress.enter.native="handleLogin()"></el-input>
                 <span class="show-pwd" @click="showPwd()">
                   <i class="el-icon-view"></i>
                 </span>
@@ -37,11 +37,11 @@
 </template>
 
 <script lang="ts">
-  import { Component, Vue } from "vue-property-decorator";
-  import { UserModule } from "@/store/modules/user";
-  import LoginApi from "@/api/login";
-  import { UserInfoBean } from "@/bean/UserInfoBean";
-  import { Action } from "vuex-class";
+  import { Component, Vue } from 'vue-property-decorator';
+  import { UserModule } from '@/store/modules/user';
+  import LoginApi from '@/api/login';
+  import { UserInfoBean } from '@/bean/UserInfoBean';
+  import { Action } from 'vuex-class';
   import ValidateUtil from '@/utils/validateUtil';
   import { ElForm } from 'element-ui/types/form';
 
@@ -52,19 +52,19 @@
     public userInfoBean: UserInfoBean = new UserInfoBean();
 
     private loginForm = {
-      username: "",
-      password: "",
+      username: '',
+      password: '',
     };
-    private passwordType = "password";
+    private passwordType = 'password';
 
     /**
      * 显示密码
      */
     showPwd() {
-      if (this.passwordType === "password") {
-        this.passwordType = "";
+      if (this.passwordType === 'password') {
+        this.passwordType = '';
       } else {
-        this.passwordType = "password";
+        this.passwordType = 'password';
       }
     }
 
@@ -81,14 +81,14 @@
         } else {
           return false;
         }
-      })
+      });
     }
 
     /**
      * 用户信息
      */
     private getUserInfo() {
-      LoginApi.userInfo().then((response) => {
+      LoginApi.userInfo().then((response: any) => {
         const userInfoBean = this.userInfoBean = response.info;
         this.UserInfo(userInfoBean);
         // this.$store.dispatch('UserInfo', userInfoBean);
@@ -104,30 +104,30 @@
      */
     public validateUsername = (rule: any, value: string, callback: any) => {
       if (!value) {
-        callback(new Error("请填写用户名"));
+        callback(new Error('请填写用户名'));
       } else {
         callback();
       }
-    };
+    }
 
     /**
      * 校验密码
      */
     public validatePwd = (rule: any, value: string, callback: any) => {
       if (!value) {
-        callback(new Error("请输入密码"));
+        callback(new Error('请输入密码'));
       }
       if (!ValidateUtil.validatePassword(value)) {
-        callback(new Error("密码不符规范"));
+        callback(new Error('密码不符规范'));
       } else {
         callback();
       }
-    };
+    }
 
     public loginRules = {
-      username: [{required: true, trigger: "blur", validator: this.validateUsername}],
-      password: [{required: true, trigger: "blur", validator: this.validatePwd}],
-    }
+      username: [{required: true, trigger: 'blur', validator: this.validateUsername}],
+      password: [{required: true, trigger: 'blur', validator: this.validatePwd}],
+    };
 
   }
 </script>
