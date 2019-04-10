@@ -23,10 +23,11 @@
 
 <style lang="scss" scoped>
   .article-content-main {
-    width: 85%;
+    /*width: 85%;*/
+   	width: 1080px;
     height: 100%;
     margin: 0 auto;
-    display: flex;
+    display: flex;    
   }
 
   .blog-side {

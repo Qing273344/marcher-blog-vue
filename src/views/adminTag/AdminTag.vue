@@ -166,6 +166,7 @@
     left: 20px;
     padding: 10px 20px;
     overflow: hidden;
+    background-color: #fff;
   }
 
   .blog-admin-tag-content {

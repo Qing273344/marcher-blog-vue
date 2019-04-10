@@ -4,7 +4,7 @@
 
       <BlogHead></BlogHead>
       <BlogMain></BlogMain>
-      <Footer></Footer>
+      <!--<Footer></Footer>-->
 
     </el-container>
   </div>
@@ -32,7 +32,9 @@
 
 <style lang="scss" scoped>
   .blog-home, .el-container {
-    height: 100%;
+    height: calc(100vh);
     width: 100%;
+    overflow: auto;
+    background-color: #f4f5f5;
   }
 </style>

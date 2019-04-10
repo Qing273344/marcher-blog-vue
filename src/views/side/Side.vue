@@ -2,7 +2,8 @@
 <template>
   <div class="blog-side">
     <div class="side-auth">
-        随便说点什么吧
+        <div class="title">marcher博客</div>
+        <div  class="slogan">一个帮助开发者成长的社区</div>
     </div>
 
     <div class="blog-tag">
@@ -42,20 +43,34 @@
 
 <style lang="scss" scoped>
   .blog-side {
-    width: 260px;
+    width: 240px;
     height: 100%;
     margin-left: 20px;
   }
 
   .side-auth {
-    width: 260px;
+    width: 240px;
     height: 200px;
     margin-bottom: 15px;
+    padding: 15px;
+    box-sizing: border-box;
     background-color: #fff;
+    text-align: left;
+    .title{
+	    margin-bottom: 5px;
+	    font-size: 14px;
+	    color: #2e3135;
+	    font-weight: 600;
+    }
+    .slogan{
+	    margin-bottom: 5px;
+	    font-size: 14px;
+	    color: #2e3135;
+    }
   }
 
   .blog-tag {
-    width: 260px;
+    width: 240px;
     height: 200px;
     margin-bottom: 15px;
     background-color: #fff;
@@ -69,7 +84,7 @@
       border-bottom: 1px solid #E6E9ED;
     }
     .blog-tag-list {
-      width: 260px;
+      width: 240px;
       height: 160px;
       box-sizing: border-box;
       padding: 15px 15px;

@@ -9,7 +9,6 @@
         mode="horizontal">
 
         <el-menu-item index="null" class="blog-logo" @click="homeLink()">marcher博客</el-menu-item>
-
         <el-menu-item index="1" @click="homeLink()">首页</el-menu-item>
         <el-menu-item index="2" >专栏一</el-menu-item>
         <el-menu-item index="3">专栏二</el-menu-item>
@@ -18,7 +17,7 @@
 
         <div class="blog-head-info">
           <input class="blog-search" placeholder="找呀找..." v-model="articleKeyword"/>
-          <el-button class="el-button-search info-local" type="primary" icon="el-icon-search" @click="query()"></el-button>
+          <el-button class="el-button-search info-local" type="primary" icon="el-icon-search"  @click="query()"></el-button>
 
           <!--<el-menu-item class="info-local" index="5" @click="publishMdLink()">写博客</el-menu-item>-->
           <!--<el-menu-item class="info-local" index="6" @click="adminMainLink()">管理主页</el-menu-item>-->
@@ -92,6 +91,12 @@
   .blog-head, .el-header {
     height: 40px;
     padding: 0;
+    position: fixed;
+    top: 0;
+   	right: 0;
+   	left: 0;
+   	background-color: #FFFFFF;
+   	box-shadow: 0 1px 2px 0 rgba(0,0,0,.05);
   }
 
   .el-menu, .el-menu-item {
