@@ -8,8 +8,7 @@
         active-text-color="#8B0000"
         mode="horizontal">
 
-        <!--<el-menu-item index="null" class="blog-logo" @click="homeLink()">marcher博客</el-menu-item>-->
-				<el-menu-item index="null" class="blog-logo" @click="homeLink()">钱大妈</el-menu-item>
+        <el-menu-item index="null" class="blog-logo" @click="homeLink()">marcher博客</el-menu-item>
         <el-menu-item index="1" @click="homeLink()">首页</el-menu-item>
         <el-menu-item index="2" >专栏一</el-menu-item>
         <el-menu-item index="3">专栏二</el-menu-item>
