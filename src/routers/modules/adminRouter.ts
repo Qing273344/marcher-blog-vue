@@ -2,10 +2,9 @@
  * admin Main 管理主页
  */
 const AdminMain = (r: any) => (require as any).ensure([], () => r(require('@/views/adminMain/BlogAdminMain.vue'), 'AdminMain'));
-const AdminArticle = (resolve: any) => (require as any).ensure([], () => resolve(require('@/views/adminArticle/AdminArticle.vue'), 'AdminArticle'));
+const AdminArticle = (r: any) => (require as any).ensure([], () => r(require('@/views/adminArticle/AdminArticle.vue'), 'AdminArticle'));
 const AdminType = (r: any) => (require as any).ensure([], () => r(require('@/views/adminType/AdminType.vue'), 'AdminType'));
 const AdminTag = (r: any) => (require as any).ensure([], () => r(require('@/views/adminTag/AdminTag.vue'), 'AdminTag'));
-
 
 const adminRouter = [{
   path: '/adminMain',

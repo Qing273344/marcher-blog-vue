@@ -13,8 +13,10 @@
   import 'mavon-editor/dist/markdown/github-markdown.min.css';
   import 'mavon-editor/src/lib/css/md.css';
 
-  import highlight from '@/components/plugs/highlight.ts';          // markdown高亮插件
+  // import highlight from '@/components/plugs/highlight.ts';          // markdown高亮插件
   import 'highlight.js/styles/googlecode.css';                   //样式文件
+
+  const highlight = require('@/components/plugs/highlight.ts');
 
   @Component({
     components: {

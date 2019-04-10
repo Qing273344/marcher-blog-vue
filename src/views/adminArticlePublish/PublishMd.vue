@@ -40,7 +40,6 @@
 
 <script lang="ts">
   import { Component, Vue } from 'vue-property-decorator';
-  // import mavonEditor from 'mavon-editor';
   const mavonEditor = require('mavon-editor');
   import 'mavon-editor/dist/css/index.css';
   import ArticlePublish from '@/views/adminArticlePublish/BrticlePublish.vue';
