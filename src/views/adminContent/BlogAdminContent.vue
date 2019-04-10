@@ -19,7 +19,7 @@
   .blog-admin-content {
     position: absolute;
     left: 200px;
-    top: 0;
+    top: 0px;
     right: 0;
     bottom: 0;
   }
