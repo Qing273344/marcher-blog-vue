@@ -61,25 +61,25 @@
       this.QueryKeyword(this.articleKeyword);
     }
 
-    public homeLink() {
+    homeLink() {
       this.$router.push({name: "homeLink"});
     }
     /**
      * 新窗口打开写博客页面
      */
-    public publishMdLink() {
+    publishMdLink() {
       let routeUrl = this.$router.resolve({name: "publishMdLink"});
       window.open(routeUrl.href, "_blank");
     }
 
-    public adminMainLink() {
+    adminMainLink() {
       this.$router.push({name: "adminMainLink"});
     }
 
-    public loginLink() {
+    loginLink() {
       this.$router.push({name: "loginLink"});
     }
-    public registerLink() {
+    registerLink() {
       this.$router.push({name: "registerLink"});
     }
 
