@@ -33,9 +33,12 @@
   .blog-footer, .el-footer {
     height: 100px;
     width: 100%;
-    padding: 0;
+    /*padding: 0;
     position: absolute;
-    bottom: 0;
+    bottom: 0;*/
+   background-color: #FFFFFF;
+   /*position: fixed;
+   bottom: 0;*/
   }
 
 </style>

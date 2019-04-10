@@ -27,5 +27,6 @@
     height: 100%;
     margin: 0 auto;
     display: flex;
+    align-items: flex-start;
   }
 </style>
