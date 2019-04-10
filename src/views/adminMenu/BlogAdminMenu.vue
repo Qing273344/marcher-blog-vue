@@ -1,7 +1,7 @@
 <template>
   <div class="blog-admin-menu">
 
-    <el-menu default-active="2">
+    <el-menu  default-active="2-1">
 
       <el-menu-item index="1">首页</el-menu-item>
       <el-submenu index="2">
@@ -10,7 +10,6 @@
         <el-menu-item index="2-2" @click="adminTypeLink()">类型</el-menu-item>
         <el-menu-item index="2-3" @click="adminTagLink()">标签</el-menu-item>
       </el-submenu>
-
     </el-menu>
 
   </div>
@@ -23,7 +22,7 @@
     components: {}
   })
   export default class BlogAdminMenu extends Vue {
-
+	private navIndex = '1';
 
 
    public adminArticleLink() {
@@ -49,7 +48,7 @@
 
   .el-menu {
     width: 200px;
-    margin-top: 100px;
+    /*margin-top: 100px;*/
   }
 
   .el-submenu {

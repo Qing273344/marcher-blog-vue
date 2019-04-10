@@ -170,7 +170,7 @@
     min-height: 200px;
     border: 1px solid #E6E9ED;
     position: absolute;
-    top: 50px;
+    top: 0;
     right: 20px;
     left: 20px;
     padding: 10px 20px;

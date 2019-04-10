@@ -27,7 +27,8 @@
     width: 100%;
     height: 100%;
     position: absolute;
-    top: 0;
+    top: 50px;
     bottom: 0;
   }
+
 </style>
