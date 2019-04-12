@@ -5,6 +5,7 @@ import qs from 'qs';
 import config from '@/config/envConfig';
 import { ResponseBean } from '@/bean/common/ResponseBean';
 import { Message } from 'element-ui';
+import LocalStorageUtil from '@/utils/localStorageUtil';
 
 let responseBean = new ResponseBean();
 
@@ -97,7 +98,7 @@ function responseSuccess(response: AxiosResponse) {
     return response;
   }
   response.status = responseBean.status.code;
-  return responseHint(responseBean);
+  responseHint(responseBean);
 }
 
 /**
@@ -151,9 +152,13 @@ function requestFail(error: AxiosError) {
  * @param responseBean  返回的数据, 其中code!=0
  */
 function responseHint(responseBean: ResponseBean) {
+  // 未登录
+  if (responseBean.status.code === 10 || responseBean.status.code === 401) {
+    LocalStorageUtil.removeItem(LocalStorageUtil.USER_INFO);
+  }
+
   Message({message: responseBean.status.msg, type: 'warning', duration: 2 * 1000});
   throw new Error();
-  // return Promise.resolve(responseBean.status.msg);
 }
 
 

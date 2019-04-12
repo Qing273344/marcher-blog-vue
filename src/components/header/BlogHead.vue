@@ -10,26 +10,27 @@
 
         <el-menu-item index="null" class="blog-logo" @click="homeLink()">marcher博客</el-menu-item>
         <el-menu-item index="1" @click="homeLink()">首页</el-menu-item>
-        <el-menu-item index="2" >专栏一</el-menu-item>
+        <el-menu-item index="2">专栏一</el-menu-item>
         <el-menu-item index="3">专栏二</el-menu-item>
         <el-menu-item index="4">专栏三</el-menu-item>
-        <el-menu-item index="10"  class="info-local" @click="adminMainLink()">管理主页</el-menu-item>
+        <el-menu-item index="5">专栏四</el-menu-item>
 
         <div class="blog-head-info">
           <input class="blog-search" placeholder="找呀找..." v-model="articleKeyword"/>
           <el-button class="el-button-search info-local" type="primary" icon="el-icon-search"  @click="query()"></el-button>
 
-          <!--<el-menu-item class="info-local" index="5" @click="publishMdLink()">写博客</el-menu-item>-->
-          <!--<el-menu-item class="info-local" index="6" @click="adminMainLink()">管理主页</el-menu-item>-->
-
           <!-- 未登录 -->
-          <el-menu-item class="head-login-register info-local" index="7" v-if="!user.isLogin" @click="loginLink()">登录</el-menu-item>
-          <el-menu-item class="head-login-register info-local" index="8" v-if="!user.isLogin" @click="registerLink()">注册</el-menu-item>
+          <div class="blog-head-login" v-if="!isLogin">
+          <el-menu-item class="head-login-register info-local" index="7" @click="loginLink()">登录</el-menu-item>
+          <el-menu-item class="head-login-register info-local" index="8" @click="registerLink()">注册</el-menu-item>
+          </div>
 
           <!-- 登录成功 -->
-          <el-menu-item index="9" class="write-blog info-local el-icon-document" v-if="user.isLogin" @click="publishMdLink()">写博客</el-menu-item>
-          <el-menu-item index="10"  class="info-local"  v-if="user.isLogin" @click="adminMainLink()">管理主页</el-menu-item>
-          <el-menu-item index="11" class="head-personal-info info-local" v-if="user.isLogin" @click="registerLink()">{{ user.username }}</el-menu-item>
+          <div class="blog-head-login" v-if="isLogin">
+            <el-menu-item index="9" class="write-blog info-local el-icon-document" @click="publishMdLink()">写博客</el-menu-item>
+            <el-menu-item index="10" class="info-local"  @click="adminMainLink()">管理主页</el-menu-item>
+            <el-menu-item index="11" class="head-personal-info info-local" @click="registerLink()">{{ user.username }}</el-menu-item>
+          </div>
         </div>
 
       </el-menu>
@@ -39,10 +40,10 @@
 </template>
 
 <script lang="ts">
-  import { Component, Emit, Vue } from 'vue-property-decorator';
-  import { IUserState } from '@/store/modules/user';
+  import { Component, Emit, Vue, Watch } from "vue-property-decorator";
+  import { IUserState, User } from "@/store/modules/user";
   import ElHeader from 'element-ui/packages/header/src/main.vue';
-  import { Action, State } from 'vuex-class';
+  import { Action, State } from "vuex-class";
 
   @Component({
     components: {
@@ -50,12 +51,26 @@
     }
   })
   export default class BlogHead extends Vue {
+    @Action private LoadUserInfo!: () => void;
     @Action private QueryKeyword!: (keyword: string) => void;
     @State private user!: IUserState;
 
     private articleKeyword: string = '';
-
     private activeIndex = '1';
+
+    /**
+     * get计算属性 登录状态
+     */
+    get isLogin() {
+      // 若vux中的状态因刷新初始化了, 则重新加载回来
+      if (!this.user.username) {
+        this.LoadUserInfo();
+      }
+      return this.user.isLogin;
+    }
+
+    // get isAdmin() {
+    // }
 
     private query() {
       this.QueryKeyword(this.articleKeyword);
@@ -122,6 +137,10 @@
     height: 40px;
     float: right;
     right: 0;
+  }
+
+  .blog-head-login {
+    box-sizing: border-box;
   }
 
   .blog-search {

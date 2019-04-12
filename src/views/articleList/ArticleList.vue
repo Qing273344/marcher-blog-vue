@@ -15,17 +15,17 @@
 				</div>
 				<div class="_article-action">
 					<ul class="_action-list">
-						<li class="item">
-							<a href="javascript:void(0)" class="title-box">
-								<img data-v-276cc20d="" src="https://b-gold-cdn.xitu.io/v3/static/img/zan.e9d7698.svg" class="icon">
-								<span data-v-276cc20d="" class="count">34</span>
-							</a>
+						<li class="item title-box" @click.stop="handleAssemble()">
+							<div class="title-box">
+								<img src="https://b-gold-cdn.xitu.io/v3/static/img/zan.e9d7698.svg" class="icon">
+								<span class="count">34</span>
+							</div>
 						</li>
-						<li data-v-276cc20d="" st:name="commentBtn" class="item comment clickable">
-							<a href="javascript:void(0)" class="title-box">
-								<img  src="https://b-gold-cdn.xitu.io/v3/static/img/comment.4d5744f.svg" class="icon">
-								<span  class="count">11</span>
-							</a>
+						<li class="item comment clickable">
+							<div class="title-box" @click.stop="handleAssemble()">
+								<img src="https://b-gold-cdn.xitu.io/v3/static/img/comment.4d5744f.svg" class="icon">
+								<span class="count">11</span>
+							</div>
 						</li>
 					</ul>
 				</div>
@@ -72,6 +72,10 @@
 
 		created() {
 			this.query();
+		}
+
+		handleAssemble() {
+			console.log(111);
 		}
 
 		query() {

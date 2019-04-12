@@ -3,6 +3,7 @@ import { VuexModule, Module, MutationAction, Mutation, Action, getModule } from 
 import LoginApi from '@/api/login';
 import store from '@/store/store';
 import { UserInfoBean } from '@/bean/UserInfoBean';
+import LocalStorageUtil from '@/utils/localStorageUtil';
 
 export interface IUserState {
   username: string;
@@ -23,14 +24,36 @@ export class User extends VuexModule implements IUserState {
 
   @Action
   public async UserInfo(userInfoBean: UserInfoBean) {
+    userInfoBean.isLogin = true;
     this.SET_USER_INFO(userInfoBean);
+
+    LocalStorageUtil.setItem(LocalStorageUtil.USER_INFO, JSON.stringify(userInfoBean));
+  }
+
+  @Action
+  public async LoadUserInfo() {
+    let userInfo: UserInfoBean = new UserInfoBean();
+    const userInfoStr: any = LocalStorageUtil.getItem(LocalStorageUtil.USER_INFO);
+    if (userInfoStr) {
+      userInfo = JSON.parse(userInfoStr);
+    } else {
+      this.INIT_USER_INFO();
+    }
+    this.SET_USER_INFO(userInfo);
+  }
+
+  @Mutation
+  public async INIT_USER_INFO() {
+    this.username = '';
+    this.userType = 0;
+    this.isLogin = false;
   }
 
   @Mutation
   private SET_USER_INFO(userInfoBean: UserInfoBean) {
-    this.userType = userInfoBean.userType;
     this.username = userInfoBean.username;
-    this.isLogin = true;
+    this.userType = userInfoBean.userType;
+    this.isLogin = userInfoBean.isLogin;
   }
 
 }

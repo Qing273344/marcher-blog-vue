@@ -45,7 +45,7 @@
   })
   export default class ArticlePublish extends Vue {
     @Prop() articlePublishDialog: boolean = false;
-    @Prop() articlePublishFrom: ArticlePublishFrom = new ArticlePublishFrom();
+    @Prop() articlePublishFrom!: ArticlePublishFrom;
 
     private articleStatus: boolean = true;
     private articleStatusRemark: string = '公开';

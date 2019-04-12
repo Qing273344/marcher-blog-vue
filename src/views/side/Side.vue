@@ -3,7 +3,7 @@
   <div class="blog-side">
     <div class="side-auth">
         <div class="title">marcher博客</div>
-        <div  class="slogan">一个帮助开发者成长的社区</div>
+        <div class="slogan">自娱自乐自嗨</div>
     </div>
 
     <div class="blog-tag">

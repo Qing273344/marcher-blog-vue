@@ -10,4 +10,5 @@ export interface IRootState {
   mainQuery: IMainQueryState;
 }
 
-export default new Vuex.Store<IRootState>({});
+export default new Vuex.Store<IRootState>({
+});

@@ -21,7 +21,7 @@
     components: {}
   })
   export default class Pagination extends Vue {
-    @Prop() private pageUtil: PageUtil = new PageUtil();
+    @Prop() private pageUtil!: PageUtil;
 
     /**
      * 每页条数
