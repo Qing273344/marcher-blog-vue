@@ -90,7 +90,6 @@ function responseSuccess(response: AxiosResponse) {
   responseBean = response.data;
   // 数据正确
   if (responseBean.status.code === 0) {
-    // return responseBean;
     // 若没有分页则返回data
     if (!responseBean.page) {
       return responseBean.data;

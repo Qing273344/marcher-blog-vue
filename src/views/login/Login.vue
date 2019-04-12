@@ -94,7 +94,6 @@
         // this.$store.dispatch('UserInfo', userInfoBean);
         // 登录成功返回上一页
         this.$router.go(-1);
-      }).catch(() => {
       });
     }
 
@@ -158,7 +157,7 @@
     min-width: 1200px;
     position: absolute;
     margin: 0 auto;
-    background: url(../../assets/login.jpg) no-repeat center center; /*背景图*/
+    background: url("http://ppikh5m4w.bkt.clouddn.com/login.jpg") no-repeat center center;
     background-size: cover;
     z-index: -1;
   }
@@ -240,7 +239,7 @@
     padding-left: 14px;
     font-size: 14px;
     border-radius: 3px;
-    -webkit-box-shadow: 0 0 0px 1000px #FFFFFF inset;
+    -webkit-box-shadow: 0 0 0 1000px #FFFFFF inset;
   }
 
   .login-form-main-input button {

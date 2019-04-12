@@ -155,7 +155,7 @@
     min-width: 1200px;
     position: absolute;
     margin: 0 auto;
-    background: url(../../assets/login.jpg) no-repeat center center; /*背景图*/
+    background: url("http://ppikh5m4w.bkt.clouddn.com/login.jpg") no-repeat center center;
     background-size: cover;
     z-index: -1;
   }

@@ -1,7 +1,9 @@
 <!-- 文章内容 -->
 <template>
   <div class="article-content">
-
+    <div class="article-head">
+      <h1>{{ articleDetails.title }}</h1>
+    </div>
     <div class="markdown-body" v-highlight v-html="articleContentHtml"></div>
   </div>
 </template>
@@ -15,20 +17,20 @@
   import 'mavon-editor/src/lib/css/md.css';
 
   // import highlight from '@/components/plugs/highlight.ts';          // markdown高亮插件
-  import 'highlight.js/styles/googlecode.css';                   //样式文件
+  import 'highlight.js/styles/googlecode.css';
+  import { ArticleDetailsBean } from '@/bean/ArticleDetailsBean';                   //样式文件
 
   const highlight = require('@/components/plugs/highlight.ts');
 
   @Component({
     components: {
-      // marked,
       markedPlug,
       highlight,
     },
   })
   export default class ArticleContent extends Vue {
 
-    private articleContentMd = '';
+    private articleDetails: ArticleDetailsBean = new ArticleDetailsBean();
     private articleContentHtml = '';
 
     private articleId: any = '';
@@ -40,8 +42,8 @@
 
     getArticleContent() {
       ArticleApi.details({id: this.articleId}).then((response: any) => {
-        this.articleContentMd = response.details;
-        this.articleContentHtml = marked(this.articleContentMd);
+        this.articleDetails = response.info;
+        this.articleContentHtml = marked(this.articleDetails.articleContentMd);
       })
     }
 
@@ -55,11 +57,20 @@
     background-color: #fff;
   }
 
+  .article-head {
+    height: 50px;
+    width: 100%;
+    padding: 0 10px;
+    text-align: left;
+    box-sizing: border-box;
+    color: lightslategrey;
+    border-bottom: 1px solid #E6E9ED;
+  }
+
   .markdown-body {
     box-sizing: border-box;
     margin: 0 auto;
     padding: 10px;
-    /*float: left;*/
     text-align: left;
   }
 

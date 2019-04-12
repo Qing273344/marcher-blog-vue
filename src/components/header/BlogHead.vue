@@ -27,9 +27,19 @@
 
           <!-- 登录成功 -->
           <div class="blog-head-login" v-if="isLogin">
-            <el-menu-item index="9" class="write-blog info-local el-icon-document" @click="publishMdLink()">写博客</el-menu-item>
-            <el-menu-item index="10" class="info-local"  @click="adminMainLink()">管理主页</el-menu-item>
-            <el-menu-item index="11" class="head-personal-info info-local" @click="registerLink()">{{ user.username }}</el-menu-item>
+            <el-menu-item index="9" class="write-blog info-local el-icon-document" v-if="isAdmin" @click="publishMdLink()">写博客</el-menu-item>
+            <el-menu-item index="10" class="info-local" v-if="isAdmin" @click="adminMainLink()">管理主页</el-menu-item>
+
+            <!-- 头像 -->
+            <div class="head-personal-info info-local">
+              <el-dropdown trigger="click">
+                <img :src="avatar" class="el-dropdown-link"/>
+                <el-dropdown-menu slot="dropdown">
+                  <el-dropdown-item>个人中心</el-dropdown-item>
+                  <el-dropdown-item>登出</el-dropdown-item>
+                </el-dropdown-menu>
+              </el-dropdown>
+            </div>
           </div>
         </div>
 
@@ -40,9 +50,9 @@
 </template>
 
 <script lang="ts">
-  import { Component, Emit, Vue, Watch } from "vue-property-decorator";
-  import { IUserState, User } from "@/store/modules/user";
-  import ElHeader from 'element-ui/packages/header/src/main.vue';
+  import { Component, Vue } from "vue-property-decorator";
+  import { IUserState } from "@/store/modules/user";
+  import ElHeader from "element-ui/packages/header/src/main.vue";
   import { Action, State } from "vuex-class";
 
   @Component({
@@ -54,6 +64,8 @@
     @Action private LoadUserInfo!: () => void;
     @Action private QueryKeyword!: (keyword: string) => void;
     @State private user!: IUserState;
+
+    private avatar = 'http://ppikh5m4w.bkt.clouddn.com/touxiang.jpg';
 
     private articleKeyword: string = '';
     private activeIndex = '1';
@@ -69,8 +81,12 @@
       return this.user.isLogin;
     }
 
-    // get isAdmin() {
-    // }
+    /**
+     * 是否博主
+     */
+    get isAdmin() {
+      return this.user.userType === 1;
+    }
 
     private query() {
       this.QueryKeyword(this.articleKeyword);
@@ -140,6 +156,7 @@
   }
 
   .blog-head-login {
+    float: left;
     box-sizing: border-box;
   }
 
@@ -181,6 +198,36 @@
   .info-local {
     float: left;
     position: relative;
+  }
+
+  .head-personal-info {
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    /* 圆形头像 */
+    border-radius: 100px;
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    border: 2px solid #fff;
+    box-shadow: 0 0 4px #ccc;
+    display: inline-block;
+    overflow: hidden;
+    margin: 2px 20px;
+  }
+
+  .head-personal-info img {
+    width: 32px;
+    height: 32px;
+  }
+
+  .el-dropdown-link {
+    cursor: pointer;
+    color: #409EFF;
+  }
+
+  .el-dropdown-menu {
+    margin: 0;
+    width: 100px;
   }
 
 </style>

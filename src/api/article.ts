@@ -17,7 +17,7 @@ export default class ArticleApi extends BaseApi {
    * 文章详情
    */
   public static details(data: any) {
-    const url = 'blog/article/get';
+    const url = 'blog/article/details';
     return super.get(data, url);
   }
 }
