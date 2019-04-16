@@ -36,7 +36,7 @@
                 <img :src="avatar" class="el-dropdown-link"/>
                 <el-dropdown-menu slot="dropdown">
                   <!--<el-dropdown-item>个人中心</el-dropdown-item>-->
-                  <el-dropdown-item @click.native="handleLogout()">登出</el-dropdown-item>
+                  <el-dropdown-item @click.native="handleLogout">登出</el-dropdown-item>
                 </el-dropdown-menu>
               </el-dropdown>
             </div>
@@ -93,7 +93,7 @@
       this.QueryKeyword(this.articleKeyword);
     }
 
-    static handleLogout() {
+    handleLogout() {
       Logout.logout(null);
       // 初始化用户信息
       UserModule.INIT_USER_INFO();

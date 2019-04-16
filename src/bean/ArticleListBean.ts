@@ -7,5 +7,5 @@ export class ArticleListBean {
   public articleId = null;
   public title = '';
   public timeStr = '';
-
+  public likedCount = 1;
 }

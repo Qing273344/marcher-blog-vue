@@ -20,4 +20,12 @@ export default class ArticleApi extends BaseApi {
     const url = 'blog/article/details';
     return super.get(data, url);
   }
+
+  /**
+   * 文章点赞
+   */
+  public static liked(data: any) {
+    const url = 'blog/article/liked';
+    return super.fromPost(data, url);
+  }
 }

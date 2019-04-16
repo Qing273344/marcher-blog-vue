@@ -9,4 +9,5 @@ export class ArticlePublishFrom {
   public typeId = null;
   public tagIdList: string[] = [];
   public status = 0;
+  public isComment = 0;
 }

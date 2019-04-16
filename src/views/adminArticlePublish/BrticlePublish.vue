@@ -11,12 +11,15 @@
           </el-select>
         </el-form-item>
         <el-form-item label="标签:">
-          <el-checkbox-group class="tag-checkbox" v-model="articlePublishFrom.tagIdList" :min="1" :max="3">
+          <el-checkbox-group class="tag-checkbox" v-model="articlePublishFrom.tagIdList" :min="0" :max="3">
             <el-checkbox v-for="tag in articleTagBeanList" :key="tag.tagId" :label="tag.tagId">{{tag.name}}</el-checkbox>
           </el-checkbox-group>
         </el-form-item>
-        <el-form-item label="公开文章">
-          <el-switch v-model="articleStatus" active-color="#13ce66" :active-text="articleStatusRemark"></el-switch>
+        <el-form-item label="公开文章:">
+          <el-switch v-model="articleStatus" @change="checkArticleStatusRemark()" active-color="#13ce66" :active-text="articleStatusRemark"></el-switch>
+        </el-form-item>
+        <el-form-item label="开启评论:">
+          <el-switch v-model="articleComment" @change="checkArticleCommentRemark()" active-color="#13ce66" :active-text="articleCommentRemark"></el-switch>
         </el-form-item>
       </el-form>
 
@@ -49,16 +52,25 @@
 
     private articleStatus: boolean = true;
     private articleStatusRemark: string = '公开';
+    private articleComment: boolean = true;
+    private articleCommentRemark: string = '开启';
 
     public articleTagBeanList: ArticleTagBean[] = new Array<ArticleTagBean>();
     public articleTypeBeanList: ArticleTypeBean[] = new Array<ArticleTypeBean>();
 
-    @Watch("articleStatus")
     checkArticleStatusRemark() {
-      if (this.articleStatus) {
+      if (!this.articleStatus) {
         this.articleStatusRemark = '不公开';
       } else {
         this.articleStatusRemark = '公开';
+      }
+    }
+
+    checkArticleCommentRemark() {
+      if (!this.articleComment) {
+        this.articleCommentRemark = '不开启';
+      } else {
+        this.articleCommentRemark = '开启';
       }
     }
 
@@ -88,6 +100,7 @@
       this.checkFrom();
 
       this.articlePublishFrom.status = this.articleStatus ? 1 : 0;
+      this.articlePublishFrom.isComment = this.articleComment ? 1 : 0;
 
       AdminArticleApi.publishMd(this.articlePublishFrom).then(() => {
         // 保存成功, 跳转到首页
@@ -103,6 +116,7 @@
       this.checkFrom();
 
       this.articlePublishFrom.status = this.articleStatus ? 1 : 0;
+      this.articlePublishFrom.isComment = this.articleComment ? 1 : 0;
 
       AdminArticleApi.publishMd(this.articlePublishFrom).then(() => {
         // 发布成功, 跳转到首页
@@ -141,11 +155,17 @@
   .type-select {
     position: absolute;
     left: 50px;
+    background-color: #fafafa;
   }
 
   .tag-checkbox {
-    position: absolute;
-    left: 50px;
+    width: 500px;
+    position: relative;
+    margin-left: 50px;
+    padding-left: 5px;
+    text-align: left;
+    background-color: #fafafa;
+    box-sizing: border-box;
   }
 
   .el-checkbox {

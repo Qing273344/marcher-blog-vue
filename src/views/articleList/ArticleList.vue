@@ -2,31 +2,33 @@
 <template>
 	<div class="article-list">
 
-		<div class="article-list-content" v-for="site in articleListBeanList">
-			<div class="article-details-link" @click="handleDetails(site.articleId)">
+		<div class="article-list-content" v-for="article in articleListBeanList">
+			<div class="article-details-link" @click="handleDetails(article.articleId)">
 				<div class="article-title-info">
 					<span>发布时间：</span>
-					<i class="el-icon-date"></i> {{ site.timeStr }}
+					<i class="el-icon-date"></i> {{ article.timeStr }}
 				</div>
 				<div class="article-title">
 					<span>
-	          {{ site.title }}
+	          {{ article.title }}
 	        </span>
 				</div>
 				<div class="_article-action">
 					<ul class="_action-list">
-						<li class="item title-box" @click.stop="handleAssemble()">
+						<!-- 点赞 -->
+						<li class="item title-box" @click.stop="handleLiked(article)">
 							<div class="title-box">
 								<img src="https://b-gold-cdn.xitu.io/v3/static/img/zan.e9d7698.svg" class="icon">
-								<span class="count">34</span>
+								<span class="count">{{ article.likedCount }}</span>
 							</div>
 						</li>
-						<li class="item comment clickable">
-							<div class="title-box" @click.stop="handleAssemble()">
-								<img src="https://b-gold-cdn.xitu.io/v3/static/img/comment.4d5744f.svg" class="icon">
-								<span class="count">11</span>
-							</div>
-						</li>
+						<!-- 评论 -->
+						<!--<li class="item comment clickable">-->
+							<!--<div class="title-box" @click.stop="handleComment()">-->
+								<!--<img src="https://b-gold-cdn.xitu.io/v3/static/img/comment.4d5744f.svg" class="icon">-->
+								<!--<span class="count">11</span>-->
+							<!--</div>-->
+						<!--</li>-->
 					</ul>
 				</div>
 			</div>
@@ -36,16 +38,16 @@
 </template>
 
 <script lang="ts">
-	import { Component, Prop, Vue, Watch } from 'vue-property-decorator';
-	import { ArticleListBean } from '@/bean/ArticleListBean';
-	import QueryPage from '@/utils/queryPage';
-	import QueryData from '@/utils/queryData';
-	import PageUtil from '@/utils/pageUtil';
-	import Query from '@/utils/query';
-	import ArticleApi from '@/api/article';
-	import { ResponseBean } from '@/bean/common/ResponseBean';
-	import { Getter, State } from 'vuex-class';
-	import { IMainQueryState, MainQueryModule } from '@/store/modules/mainQuery';
+	import { Component, Vue, Watch } from "vue-property-decorator";
+	import { ArticleListBean } from "@/bean/ArticleListBean";
+	import QueryPage from "@/utils/queryPage";
+	import QueryData from "@/utils/queryData";
+	import PageUtil from "@/utils/pageUtil";
+	import Query from "@/utils/query";
+	import ArticleApi from "@/api/article";
+	import { ResponseBean } from "@/bean/common/ResponseBean";
+	import { Getter, State } from "vuex-class";
+	import { IMainQueryState, MainQueryModule } from "@/store/modules/mainQuery";
 
 	@Component({
 		components: {
@@ -72,6 +74,16 @@
 
 		created() {
 			this.query();
+		}
+
+		/**
+		 * 点赞
+		 */
+		handleLiked(article: ArticleListBean) {
+			const articleId = article.articleId;
+			ArticleApi.liked({id: articleId}).then((response: any) => {
+				article.likedCount = response.likedCount;
+			});
 		}
 
 		handleAssemble() {
