@@ -78,8 +78,8 @@
      * 新窗口打开写文章页面
      */
     publishMdLink() {
-      let routeUrl = this.$router.resolve({name: "publishMdLink"});
-      window.open(routeUrl.href, "_blank");
+      let routeUrl = this.$router.resolve({name: 'publishMdLink'});
+      window.open(routeUrl.href, '_blank');
     }
 
     /**
@@ -95,8 +95,8 @@
      * 编辑文章
      */
     handleEdit(articleId: string) {
-      let routeUrl = this.$router.resolve({name: "publishMdLink", query: {articleId: articleId}});
-      window.open(routeUrl.href, "_blank");
+      let routeUrl = this.$router.resolve({name: 'publishMdLink', query: {articleId: articleId}});
+      window.open(routeUrl.href, '_blank');
     }
 
     /**
@@ -122,12 +122,12 @@
      * @param articleId 文章id
      */
     handleDelete(articleId: string) {
-      this.$confirm("是否删除该文章?", "提示", {confirmButtonText: "确定", cancelButtonText: "取消", type: "warning"})
+      this.$confirm('是否删除该文章?', '提示', {confirmButtonText: '确定', cancelButtonText: '取消', type: 'warning'})
         .then(() => {
           AdminArticleApi.remove({id: articleId}).then(() => {
             this.query();
             this.$message({
-              type: "success", message: "删除成功!"
+              type: 'success', message: '删除成功!'
             });
           });
         });

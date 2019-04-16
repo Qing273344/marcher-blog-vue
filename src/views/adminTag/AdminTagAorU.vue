@@ -20,7 +20,7 @@
 </template>
 
 <script lang="ts">
-  import { Component, Vue, Prop, Emit, Watch } from "vue-property-decorator";
+  import { Component, Vue, Prop, Emit, Watch } from 'vue-property-decorator';
   import { ArticleTagBean } from '@/bean/ArticleTagBean';
   import AdminTagApi from "@/api/adminTag";
 

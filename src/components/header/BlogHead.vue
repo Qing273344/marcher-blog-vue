@@ -35,8 +35,8 @@
               <el-dropdown trigger="click">
                 <img :src="avatar" class="el-dropdown-link"/>
                 <el-dropdown-menu slot="dropdown">
-                  <el-dropdown-item>个人中心</el-dropdown-item>
-                  <el-dropdown-item>登出</el-dropdown-item>
+                  <!--<el-dropdown-item>个人中心</el-dropdown-item>-->
+                  <el-dropdown-item @click.native="handleLogout()">登出</el-dropdown-item>
                 </el-dropdown-menu>
               </el-dropdown>
             </div>
@@ -50,10 +50,11 @@
 </template>
 
 <script lang="ts">
-  import { Component, Vue } from "vue-property-decorator";
-  import { IUserState } from "@/store/modules/user";
+  import { Component, Vue } from 'vue-property-decorator';
+  import { IUserState, UserModule } from "@/store/modules/user";
   import ElHeader from "element-ui/packages/header/src/main.vue";
   import { Action, State } from "vuex-class";
+  import Logout from '@/api/logout';
 
   @Component({
     components: {
@@ -92,26 +93,32 @@
       this.QueryKeyword(this.articleKeyword);
     }
 
+    static handleLogout() {
+      Logout.logout(null);
+      // 初始化用户信息
+      UserModule.INIT_USER_INFO();
+    }
+
     homeLink() {
-      this.$router.push({name: "homeLink"});
+      this.$router.push({name: 'homeLink'});
     }
     /**
      * 新窗口打开写博客页面
      */
     publishMdLink() {
-      let routeUrl = this.$router.resolve({name: "publishMdLink"});
-      window.open(routeUrl.href, "_blank");
+      let routeUrl = this.$router.resolve({name: 'publishMdLink'});
+      window.open(routeUrl.href, '_blank');
     }
 
     adminMainLink() {
-      this.$router.push({name: "adminMainLink"});
+      this.$router.push({name: 'adminMainLink'});
     }
 
     loginLink() {
-      this.$router.push({name: "loginLink"});
+      this.$router.push({name: 'loginLink'});
     }
     registerLink() {
-      this.$router.push({name: "registerLink"});
+      this.$router.push({name: 'registerLink'});
     }
 
   }

@@ -44,9 +44,10 @@ export class User extends VuexModule implements IUserState {
 
   @Mutation
   public async INIT_USER_INFO() {
-    this.username = '';
+    // this.username = '';
     this.userType = 0;
     this.isLogin = false;
+    LocalStorageUtil.removeItem(LocalStorageUtil.USER_INFO);
   }
 
   @Mutation

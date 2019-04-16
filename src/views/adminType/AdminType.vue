@@ -100,26 +100,26 @@
      * @param id 数据Id
      */
     handleDelete(id: string) {
-      this.$confirm("是否删除该类型?", "提示", {confirmButtonText: "确定", cancelButtonText: "取消", type: "warning"})
+      this.$confirm('是否删除该类型?', '提示', {confirmButtonText: '确定', cancelButtonText: '取消', type: 'warning'})
         .then(() => {
           this.ids[0] = id;
           AdminTypeAPi.remove(this.ids).then(() => {
             this.query();
             this.$message({
-              type: "success", message: "删除成功!"
+              type: 'success', message: '删除成功!'
             });
           });
         });
     }
 
     handleBatchDeleted() {
-      this.$confirm("是否删除类型?", "提示", {confirmButtonText: "确定", cancelButtonText: "取消", type: "warning"})
+      this.$confirm('是否删除类型?', '提示', {confirmButtonText: '确定', cancelButtonText: '取消', type: 'warning'})
         .then(() => {
           if (this.ids) {
             AdminTypeAPi.remove(this.ids).then(() => {
               this.query();
               this.$message({
-                type: "success", message: "删除成功!"
+                type: 'success', message: "'删除成功!"
               });
             });
           }

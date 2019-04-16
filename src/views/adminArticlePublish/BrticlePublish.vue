@@ -131,7 +131,7 @@
     /**
      * 通知父组件关闭弹窗
      */
-    @Emit("closeShowDialog")
+    @Emit('closeShowDialog')
     closeDialog() {
     }
   }

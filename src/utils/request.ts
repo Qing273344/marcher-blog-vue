@@ -6,6 +6,7 @@ import config from '@/config/envConfig';
 import { ResponseBean } from '@/bean/common/ResponseBean';
 import { Message } from 'element-ui';
 import LocalStorageUtil from '@/utils/localStorageUtil';
+import { UserModule } from '@/store/modules/user';
 
 let responseBean = new ResponseBean();
 
@@ -153,7 +154,8 @@ function requestFail(error: AxiosError) {
 function responseHint(responseBean: ResponseBean) {
   // 未登录
   if (responseBean.status.code === 10 || responseBean.status.code === 401) {
-    LocalStorageUtil.removeItem(LocalStorageUtil.USER_INFO);
+    // 未登录初始化用户信息
+    UserModule.INIT_USER_INFO();
   }
 
   Message({message: responseBean.status.msg, type: 'warning', duration: 2 * 1000});

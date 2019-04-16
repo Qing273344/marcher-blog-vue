@@ -5,6 +5,7 @@
       <h1>{{ articleDetails.title }}</h1>
     </div>
     <div class="markdown-body" v-highlight v-html="articleContentHtml"></div>
+
   </div>
 </template>
 
@@ -15,12 +16,9 @@
   import markedPlug from '@/components/plugs/markedPlug.ts';
   import 'mavon-editor/dist/markdown/github-markdown.min.css';
   import 'mavon-editor/src/lib/css/md.css';
-
-  // import highlight from '@/components/plugs/highlight.ts';          // markdown高亮插件
   import 'highlight.js/styles/googlecode.css';
-  import { ArticleDetailsBean } from '@/bean/ArticleDetailsBean';                   //样式文件
-
-  const highlight = require('@/components/plugs/highlight.ts');
+  import { ArticleDetailsBean } from '@/bean/ArticleDetailsBean'; //样式文件
+  const highlight = require('@/components/plugs/highlight.ts');   // markdown高亮插件
 
   @Component({
     components: {
@@ -72,6 +70,15 @@
     margin: 0 auto;
     padding: 10px;
     text-align: left;
+  }
+
+  .markdown-body img {
+    cursor: pointer;
+    transform: scale(1);
+    transition: all ease 0.2s;
+  }
+  .markdown-body img.hover {
+    transform: scale(1.5);
   }
 
 </style>

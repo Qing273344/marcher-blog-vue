@@ -26,7 +26,7 @@
     /**
      * 每页条数
      */
-    @Emit("changePage")
+    @Emit('changePage')
     sizeChangeHandle(pageSize: number) {
       this.pageUtil.pageSize = pageSize;
       return this.pageUtil;
@@ -36,7 +36,7 @@
     /**
      * 翻页
      */
-    @Emit("changePage")
+    @Emit('changePage')
     currentChangeHandle(curPage: number) {
       this.pageUtil.curPage = curPage;
       return this.pageUtil;

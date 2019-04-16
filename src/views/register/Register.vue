@@ -70,10 +70,9 @@
     }
 
     // 注册
-    handleRegister() {
+    private handleRegister() {
       // 校验
       (this.$refs.registerForm as ElForm).validate((valid: boolean) => {
-        console.log(2);
         if (valid) {
           console.log(1);
           RegisterApi.register(this.registerForm).then((response) => {
