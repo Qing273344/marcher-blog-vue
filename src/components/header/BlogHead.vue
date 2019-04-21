@@ -8,12 +8,12 @@
         active-text-color="#8B0000"
         mode="horizontal">
 
-        <el-menu-item index="null" class="blog-logo" @click="homeLink()">marcher博客</el-menu-item>
-        <el-menu-item index="1" @click="homeLink()">首页</el-menu-item>
-        <el-menu-item index="2">专栏一</el-menu-item>
-        <el-menu-item index="3">专栏二</el-menu-item>
-        <el-menu-item index="4">专栏三</el-menu-item>
-        <el-menu-item index="5">专栏四</el-menu-item>
+        <el-menu-item index="null" class="blog-logo" @click="homeLink()">悠悠的蛋疼</el-menu-item>
+        <!--<el-menu-item index="1" @click="homeLink()">首页</el-menu-item>-->
+        <!--<el-menu-item index="2">专栏一</el-menu-item>-->
+        <!--<el-menu-item index="3">专栏二</el-menu-item>-->
+        <!--<el-menu-item index="4">专栏三</el-menu-item>-->
+        <!--<el-menu-item index="5">专栏四</el-menu-item>-->
 
         <div class="blog-head-info">
           <input class="blog-search" placeholder="找呀找..." v-model="articleKeyword"/>

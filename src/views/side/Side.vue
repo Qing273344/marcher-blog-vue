@@ -2,8 +2,8 @@
 <template>
   <div class="blog-side">
     <div class="side-auth">
-        <div class="title">marcher博客</div>
-        <div class="slogan">自娱自乐自嗨</div>
+        <div class="title">marcher</div>
+        <div class="slogan">吃, 喝, 玩, 休闲...</div>
     </div>
 
     <div class="blog-tag">
@@ -55,10 +55,10 @@
     padding: 15px;
     box-sizing: border-box;
     background-color: #fff;
-    text-align: left;
+    /*text-align: left;*/
     .title{
 	    margin-bottom: 5px;
-	    font-size: 14px;
+	    font-size: 26px;
 	    color: #2e3135;
 	    font-weight: 600;
     }

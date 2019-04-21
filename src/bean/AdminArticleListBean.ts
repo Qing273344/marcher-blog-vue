@@ -9,5 +9,6 @@ export class AdminArticleListBean {
   public timeStr = '';
   public isTop = 0;
   public isComment = 0;
-
+  public likedCount = 1;
+  public viewsCount = 1;
 }

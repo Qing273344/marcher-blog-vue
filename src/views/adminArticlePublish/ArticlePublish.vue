@@ -42,6 +42,8 @@
   import AdminTypeAPi from '@/api/adminType';
   import { Message } from 'element-ui';
   import AdminArticleApi from '@/api/adminArticle';
+  import { ArticleStatusEnum } from '@/commons/enums/ArticleStatusEnum';
+  import { IsEnum } from '@/commons/enums/IsEnum';
 
   @Component({
     components: {}
@@ -57,6 +59,18 @@
 
     public articleTagBeanList: ArticleTagBean[] = new Array<ArticleTagBean>();
     public articleTypeBeanList: ArticleTypeBean[] = new Array<ArticleTypeBean>();
+
+    /**
+     * 初始化数据
+     */
+    init() {
+      if (this.articlePublishFrom.status != ArticleStatusEnum.ARTICLE_STATUS_PUBLISH) {
+        this.articleStatus = false;
+      }
+      if (this.articlePublishFrom.isComment != IsEnum.TURE) {
+        this.articleComment = false;
+      }
+    }
 
     checkArticleStatusRemark() {
       if (!this.articleStatus) {
@@ -98,8 +112,8 @@
     handleDraft() {
       // 校验参数
       this.checkFrom();
-
-      this.articlePublishFrom.status = this.articleStatus ? 1 : 0;
+      // 存为操作则不发布
+      this.articlePublishFrom.status = ArticleStatusEnum.ARTICLE_STATUS_DRAFT;
       this.articlePublishFrom.isComment = this.articleComment ? 1 : 0;
 
       AdminArticleApi.publishMd(this.articlePublishFrom).then(() => {
@@ -115,7 +129,7 @@
       // 校验参数
       this.checkFrom();
 
-      this.articlePublishFrom.status = this.articleStatus ? 1 : 0;
+      this.articlePublishFrom.status = this.articleStatus ? ArticleStatusEnum.ARTICLE_STATUS_PUBLISH : ArticleStatusEnum.ARTICLE_STATUS_DRAFT;
       this.articlePublishFrom.isComment = this.articleComment ? 1 : 0;
 
       AdminArticleApi.publishMd(this.articlePublishFrom).then(() => {

@@ -60,13 +60,16 @@
 
     private responseBean: ResponseBean = new ResponseBean();
 
-    private queryPage: QueryPage = new QueryPage(this.pageUtil.curPage, this.pageUtil.pageSize);
+    private queryPage: QueryPage = new QueryPage();
     private queryData: QueryData = new QueryData();
     private queryArgs: Query<QueryData> = new Query(this.queryData, this.queryPage);
     private ids: string[] = [];
     private selectTypeBeanList: ArticleTypeBean[] = new Array<ArticleTypeBean>();
     private articleTypeBeanList: ArticleTypeBean[] = new Array<ArticleTypeBean>();
 
+    /**
+     * 复选框选择
+     */
     handleSelectionChange(rows: any) {
       this.ids = [];
       this.selectTypeBeanList = rows;
@@ -79,17 +82,26 @@
       this.query();
     }
 
+    /**
+     *  分页
+     */
     changePage(pageUtil: PageUtil) {
       this.pageUtil = pageUtil;
-      this.queryPage = new QueryPage(this.pageUtil.curPage, this.pageUtil.pageSize);
+      this.queryPage = QueryPage.change(this.pageUtil);
       this.query();
     }
 
+    /**
+     * 打开新增弹框
+     */
     openAddDialog() {
       this.typeId = '';
       this.aORuTypeDialog = true;
     }
 
+    /**
+     * 打开编辑弹框
+     */
     openEditDialog(row: any) {
       this.typeId = row.typeId;
       this.aORuTypeDialog = true;
@@ -112,6 +124,9 @@
         });
     }
 
+    /**
+     * 批量删除
+     */
     handleBatchDeleted() {
       this.$confirm('是否删除类型?', '提示', {confirmButtonText: '确定', cancelButtonText: '取消', type: 'warning'})
         .then(() => {
@@ -126,12 +141,18 @@
         });
     }
 
+    /**
+     * 关闭显示的弹框
+     */
     closeShowDialog() {
       this.aORuTypeDialog = false;
       this.typeId = '';
       this.query();
     }
 
+    /**
+     * 查询
+     */
     query() {
       // 更新query参数
       this.queryArgs = new Query(this.queryData, this.queryPage);
@@ -144,6 +165,9 @@
       });
     }
 
+    /**
+     * 刷新
+     */
     refresh() {
       this.queryData = new QueryData();
       this.queryPage = QueryPage.init();

@@ -4,10 +4,10 @@
  * @author marcher
  */
 export class ArticlePublishFrom {
-  public title = '';
-  public articleContent = '';
+  public title: string = '';
+  public articleContent: string = '';
   public typeId = null;
   public tagIdList: string[] = [];
-  public status = 0;
-  public isComment = 0;
+  public status: number = 0;
+  public isComment: number = 0;
 }

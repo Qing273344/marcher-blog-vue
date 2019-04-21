@@ -5,7 +5,6 @@ import qs from 'qs';
 import config from '@/config/envConfig';
 import { ResponseBean } from '@/bean/common/ResponseBean';
 import { Message } from 'element-ui';
-import LocalStorageUtil from '@/utils/localStorageUtil';
 import { UserModule } from '@/store/modules/user';
 
 let responseBean = new ResponseBean();
@@ -106,21 +105,28 @@ function responseSuccess(response: AxiosResponse) {
  */
 function requestFail(error: AxiosError) {
   if (error && error.response) {
+    // 后端提示的异常
+    let msg = '';
+    if (error.response.data.status) {
+      msg = error.response.data.status.msg;
+    }
+
     switch (error.response.status) {
       case 400:
-        error.message = '请求错误(400)';
+        error.message = msg ? msg : '请求错误(400)';
         break;
       case 401:
-        error.message = '未授权, 请重新登录(401)';
+        // error.message = '未授权, 请重新登录(401)';
+        error.message = msg ? msg : '未授权, 请重新登录(401)';
         break;
       case 403:
-        error.message = '拒绝访问(403)';
+        error.message = '是想访问么? 让我想想...';
         break;
       case 404:
         error.message = '404';
         break;
       case 500:
-        error.message = '服务器出错(500)';
+        error.message = msg ? msg : '服务器出错(500)';
         break;
       case 501:
         error.message = '网络未实现(501)';
@@ -156,6 +162,7 @@ function responseHint(responseBean: ResponseBean) {
   if (responseBean.status.code === 10 || responseBean.status.code === 401) {
     // 未登录初始化用户信息
     UserModule.INIT_USER_INFO();
+    responseBean.status.msg = '登录后才可以悄悄的干坏事哟!';
   }
 
   Message({message: responseBean.status.msg, type: 'warning', duration: 2 * 1000});

@@ -24,7 +24,7 @@
 <style lang="scss" scoped>
   .article-content-main {
     /*width: 85%;*/
-   	width: 1080px;
+   	width: 1280px;
     height: 100%;
     margin: 0 auto;
     display: flex;    

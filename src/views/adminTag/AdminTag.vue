@@ -59,7 +59,7 @@
 
     private responseBean: ResponseBean = new ResponseBean();
 
-    private queryPage: QueryPage = new QueryPage(this.pageUtil.curPage, this.pageUtil.pageSize);
+    private queryPage: QueryPage = new QueryPage();
     private queryData: QueryData = new QueryData();
     private queryArgs: Query<QueryData> = new Query(this.queryData, this.queryPage);
     private ids: string[] = [];
@@ -80,7 +80,7 @@
 
     changePage(pageUtil: PageUtil) {
       this.pageUtil = pageUtil;
-      this.queryPage = new QueryPage(this.pageUtil.curPage, this.pageUtil.pageSize);
+      this.queryPage = QueryPage.change(this.pageUtil);
       this.query();
     }
 

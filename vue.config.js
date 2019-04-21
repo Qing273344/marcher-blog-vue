@@ -42,6 +42,17 @@ module.exports = {
     // devServer:{type:Object} 3个属性host,port,https
     // 它支持webPack-dev-server的所有选项
 
+    // 网页标题图标
+    pwa: {
+        iconPaths: {
+            favicon32: 'touxiang.jpg',
+            favicon16: 'touxiang.jpg',
+            appleTouchIcon: 'touxiang.jpg',
+            maskIcon: 'touxiang.jpg',
+            msTileImage: 'touxiang.jpg'
+        }
+    },
+
     devServer: {
         port: 8081, // 端口号
         host: 'dev.blog.marcher.xin',

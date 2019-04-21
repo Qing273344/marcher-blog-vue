@@ -8,20 +8,31 @@
       :page-size="pageUtil.pageSize"
       :total="pageUtil.totalRow"
       :page-sizes="[5, 10, 15, 20]"
-      layout="total, sizes, prev, pager, next, jumper">
+      :layout="pageLayout">
     </el-pagination>
   </div>
 </template>
 
 <script lang="ts">
-  import { Component, Emit, Prop, Vue } from 'vue-property-decorator';
+  import { Component, Emit, Prop, Vue, Watch } from "vue-property-decorator";
   import PageUtil from '@/utils/pageUtil';
+  import { PageStyleEnum } from '@/commons/enums/PageStyleEnum';
 
   @Component({
     components: {}
   })
   export default class Pagination extends Vue {
     @Prop() private pageUtil!: PageUtil;
+
+    private fullLayout: string = 'total, sizes, prev, pager, next, jumper';
+    private simplLayout: string = 'prev, pager, next';
+    private pageLayout: string = this.fullLayout;
+
+    created() {
+      if (this.pageUtil.pageStyle === PageStyleEnum.SIMPL_LAYOUT) {
+        this.pageLayout = this.simplLayout;
+      }
+    }
 
     /**
      * 每页条数

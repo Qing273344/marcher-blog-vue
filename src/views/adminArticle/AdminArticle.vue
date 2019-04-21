@@ -23,9 +23,9 @@
                 <el-switch v-model="scope.row.isTop === 1" active-color="#13ce66" @change="changeTop(scope.row)"></el-switch>
               </template>
             </el-table-column>
-            <el-table-column prop="description" label="浏览"></el-table-column>
+            <el-table-column prop="viewsCount" label="浏览"></el-table-column>
             <el-table-column prop="description" label="评论"></el-table-column>
-            <el-table-column prop="description" label="喜欢"></el-table-column>
+            <el-table-column prop="likedCount" label="喜欢"></el-table-column>
             <el-table-column prop="timeStr" label="发布时间" width="160"></el-table-column>
             <el-table-column label="操作" width="220">
               <template slot-scope="scope">
@@ -65,7 +65,7 @@
 
     private responseBean: ResponseBean = new ResponseBean();
 
-    private queryPage: QueryPage = new QueryPage(this.pageUtil.curPage, this.pageUtil.pageSize);
+    private queryPage: QueryPage = new QueryPage();
     private queryData: QueryData = new QueryData();
     private queryArgs: Query<QueryData> = new Query(this.queryData, this.queryPage);
     private adminArticleListBeanList: AdminArticleListBean[] = new Array<AdminArticleListBean>();
@@ -87,7 +87,7 @@
      */
     changePage(pageUtil: PageUtil) {
       this.pageUtil = pageUtil;
-      this.queryPage = new QueryPage(this.pageUtil.curPage, this.pageUtil.pageSize);
+      this.queryPage = QueryPage.change(this.pageUtil);
       this.query();
     }
 

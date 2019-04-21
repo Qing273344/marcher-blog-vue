@@ -6,12 +6,10 @@
 			<div class="article-details-link" @click="handleDetails(article.articleId)">
 				<div class="article-title-info">
 					<span>发布时间：</span>
-					<i class="el-icon-date"></i> {{ article.timeStr }}
+					<i class="el-icon-date">{{ article.timeStr }}</i>
 				</div>
 				<div class="article-title">
-					<span>
-	          {{ article.title }}
-	        </span>
+					<span>{{ article.title }}</span>
 				</div>
 				<div class="_article-action">
 					<ul class="_action-list">
@@ -34,6 +32,10 @@
 			</div>
 		</div>
 
+		<div class="blog-admin-table-footer">
+			<Pagination :pageUtil="pageUtil" @changePage="changePage"></Pagination>
+		</div>
+
 	</div>
 </template>
 
@@ -48,26 +50,30 @@
 	import { ResponseBean } from "@/bean/common/ResponseBean";
 	import { Getter, State } from "vuex-class";
 	import { IMainQueryState, MainQueryModule } from "@/store/modules/mainQuery";
+	import Pagination from '@/components/pagination/pagination.vue';
+	import { PageStyleEnum } from '@/commons/enums/PageStyleEnum';
 
 	@Component({
 		components: {
-			MainQueryModule,
+			MainQueryModule, Pagination,
 		}
 	})
 	export default class ArticleList extends Vue {
 		@State private mainQuery!: IMainQueryState;
 		@Getter private GET_KEYWORD: any;
 
-		private pageUtil: PageUtil = new PageUtil;
-		private queryPage: QueryPage = new QueryPage(this.pageUtil.curPage, this.pageUtil.pageSize);
+		private pageUtil: PageUtil = new PageUtil(PageStyleEnum.SIMPL_LAYOUT);
+		private queryPage: QueryPage = new QueryPage();
 		private queryData: QueryData = new QueryData();
 		private queryArgs: Query < QueryData > = new Query(this.queryData, this.queryPage);
 		private responseBean: ResponseBean = new ResponseBean();
 
 		private articleListBeanList: ArticleListBean[] = new Array < ArticleListBean > ();
 
+
 		@Watch("GET_KEYWORD")
 		queryByKeyword() {
+			console.log(this.pageUtil);
 			this.queryData.keyword = this.mainQuery.keyword;
 			this.query();
 		}
@@ -86,10 +92,9 @@
 			});
 		}
 
-		handleAssemble() {
-			console.log(111);
-		}
-
+		/**
+		 * query
+		 */
 		query() {
 			// 更新query参数
 			this.queryArgs = new Query(this.queryData, this.queryPage);
@@ -97,9 +102,14 @@
 			ArticleApi.query(this.queryArgs).then((response: any) => {
 				this.responseBean = response.data;
 				this.articleListBeanList = this.responseBean.data.list;
+				this.pageUtil = this.responseBean.page;
 			})
 		}
 
+		/**
+		 * 文章详情
+		 * @param articleId		文章id
+		 */
 		handleDetails(articleId: string) {
 			let routeUrl = this.$router.resolve({
 				name: 'articleContentMainLink',
@@ -110,41 +120,41 @@
 			window.open(routeUrl.href, '_blank');
 		}
 
+		changePage(pageUtil: PageUtil) {
+			this.pageUtil = pageUtil;
+			this.queryPage = QueryPage.change(this.pageUtil);
+			this.query();
+		}
+
 	}
 </script>
 
 <style lang="scss" scoped>
+
 	.article-list {
-		/*width: 790px;*/
 		flex: 1;
 		height: 100%;
 	}
 	
 	.article-list-content {
 		width: 100%;
-		/*height: 100px;*/
 		border-bottom: 1px solid rgba(178, 186, 194, .15);
 		box-sizing: border-box;
 		background-color: #fff;
 		text-align: left;
 		cursor: pointer;
-		/*box-sizing: border-box;*/
 		padding: 18px 24px;
-		/*.article-details-link {
-      padding: 18px 24px;
-    }*/
+		margin-bottom: 15px;
 		.article-title {
-			height: 22px;
-			margin: 12px 0;
-			font-size: 18px;
-			font-weight: 600;
+			/*height: 27px;*/
+			margin: 8px 0;
+			font-size: 22px;
+			font-weight: 900;
 			overflow: hidden;
 			text-overflow: ellipsis;
-			color: #2e3135;
-			
+			color: #2ca6cb;
 		}
 		.article-title-info {
-			/*height: 26px;*/
 			color: #B2BAC2;
 			font-size: 12px;
 		}

@@ -26,22 +26,17 @@
 <style lang="scss" scoped>
   .blog-main {
     width: 100%;
-    padding: 0;
     box-sizing: border-box;
-    /*position: absolute;
-    top: 40px;
-    bottom: 0px;*/
     background-color: #f4f5f5;
-    padding-top: 40px;
+    padding: 40px 0 0 0;
     min-height: 100%;
   }
 
   .el-main {
     width: 100%;
-    padding: 0;
     overflow: auto;
-    padding-top: 10px;
-    min-height: calc(100vh - 156px);
+    padding-top: 30px;
+    min-height: calc(100vh - 142px);
     /*position: absolute;
     margin-top: 10px;
     top: 0;

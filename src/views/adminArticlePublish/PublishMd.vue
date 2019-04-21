@@ -31,7 +31,7 @@
                     @imgAdd="$imgAdd" />
     </div>
 
-    <ArticlePublish :articlePublishDialog="articlePublishDialog" :articlePublishFrom="articlePublishFrom"
+    <ArticlePublish ref="article_publish" :articlePublishDialog="articlePublishDialog" :articlePublishFrom="articlePublishFrom"
                     @closeShowDialog="closeShowDialog()"></ArticlePublish>
 
   </div>
@@ -42,14 +42,13 @@
   import { Component, Vue } from 'vue-property-decorator';
   const mavonEditor = require('mavon-editor');
   import 'mavon-editor/dist/css/index.css';
-  import ArticlePublish from '@/views/adminArticlePublish/BrticlePublish.vue';
+  import ArticlePublish from '@/views/adminArticlePublish/ArticlePublish.vue';
   import { ArticlePublishFrom } from '@/from/ArticlePublishFrom';
   import { Message } from 'element-ui';
   import AdminArticleApi from '@/api/adminArticle';
 
   @Component({
     components: {
-      // mavonEditor,
       "mavonEditor": mavonEditor.mavonEditor,
       ArticlePublish,
     }
@@ -61,7 +60,7 @@
     private articleId: any = '';
 
     created() {
-      this.articleId = this.$route.query.articleId;
+      this.articleId = (this.$route.query as any).articleId;
       if (this.articleId) {
         this.init(this.articleId);
       }
@@ -83,7 +82,6 @@
       AdminArticleApi.putImg(formData).then((response: any) => {
         const fileUrl = response.info;
         // 替换url
-        console.log(this.$refs.mavon);
         (this.$refs.mavon as any).$img2Url(pos, fileUrl);
       });
     }
@@ -101,6 +99,10 @@
         return;
       }
       this.articlePublishDialog = true;
+
+      // 调用子组件初始化编辑数据
+      (this.$refs.article_publish as ArticlePublish).init();
+      // (this.$refs.article_publish as ArticlePublish).$emit('init');
     }
 
     closeShowDialog() {

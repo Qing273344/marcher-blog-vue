@@ -2,7 +2,7 @@
 <template>
   <div class="article-content">
     <div class="article-head">
-      <h1>{{ articleDetails.title }}</h1>
+      <span>{{ articleDetails.title }}</span>
     </div>
     <div class="markdown-body" v-highlight v-html="articleContentHtml"></div>
 
@@ -34,7 +34,7 @@
     private articleId: any = '';
 
     created() {
-      this.articleId = this.$route.query.articleId;
+      this.articleId = (this.$route.query as any).articleId;
       this.getArticleContent();
     }
 
@@ -52,17 +52,17 @@
   .article-content {
     width: calc(100vw - 280px);
     min-height: 100%;
-    background-color: #fff;
   }
 
   .article-head {
-    height: 50px;
+    /*height: 50px;*/
     width: 100%;
-    padding: 0 10px;
-    text-align: left;
+    font-size: 32px;
     box-sizing: border-box;
     color: lightslategrey;
-    border-bottom: 1px solid #E6E9ED;
+    /*background-color: lemonchiffon;*/
+    padding: 20px 10px;
+    margin-bottom: 10px;
   }
 
   .markdown-body {
@@ -70,6 +70,7 @@
     margin: 0 auto;
     padding: 10px;
     text-align: left;
+    background-color: #fff;
   }
 
   .markdown-body img {
@@ -77,6 +78,7 @@
     transform: scale(1);
     transition: all ease 0.2s;
   }
+
   .markdown-body img.hover {
     transform: scale(1.5);
   }

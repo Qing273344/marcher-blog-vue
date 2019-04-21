@@ -3,10 +3,10 @@
 
     <el-footer height="100px">
 
-      <p>
-        Github:
-        <a href="https://github.com/Qing273344/marcher-blog-vue" target="_blank">https://github.com/Qing273344/marcher-blog-vue</a>
-      </p>
+      <!--<p>-->
+        <!--Github:-->
+        <!--<a href="https://github.com/Qing273344/marcher-blog-vue" target="_blank">https://github.com/Qing273344/marcher-blog-vue</a>-->
+      <!--</p>-->
 
 
     </el-footer>
@@ -33,12 +33,16 @@
   .blog-footer, .el-footer {
     height: 100px;
     width: 100%;
-    /*padding: 0;
-    position: absolute;
-    bottom: 0;*/
-   background-color: #FFFFFF;
-   /*position: fixed;
-   bottom: 0;*/
+    /*darkgrey*/
+    background: #b5b5b5 url("http://ppikh5m4w.bkt.clouddn.com/title_img.jpeg") no-repeat center center;
+  }
+
+  .blog-footer p {
+    color: aqua;
+  }
+
+  .blog-footer a {
+    color: lemonchiffon;
   }
 
 </style>
