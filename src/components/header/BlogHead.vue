@@ -1,6 +1,10 @@
 <template>
   <!-- 页头菜单 -->
   <div class="blog-head">
+    <div class="blog-head-img">
+
+    </div>
+
     <el-header height="40px">
       <el-menu
         class="blog-head-menu"
@@ -126,14 +130,22 @@
 
 
 <style lang="scss" scoped>
-  .blog-head, .el-header {
+
+  .blog-head-img {
+    width: 100%;
+    height: 230px;
+    background: #b5b5b5 url("http://ppikh5m4w.bkt.clouddn.com/title_img.jpeg") no-repeat center center;
+    background-size: 100%;
+  }
+
+  .el-header {
     height: 40px;
     padding: 0;
     position: fixed;
     top: 0;
    	right: 0;
    	left: 0;
-   	background-color: #FFFFFF;
+   	background-color: #b5b5b5;
    	box-shadow: 0 1px 2px 0 rgba(0,0,0,.05);
    	z-index: 999;
   }
@@ -141,7 +153,10 @@
   .el-menu, .el-menu-item {
     height: 40px;
     line-height: 40px;
-    color: black;
+    /*color: black;*/
+    font-weight: 600;
+    color: #fff;
+    background-color: #b5b5b5;
   }
 
   .el-menu {
@@ -179,10 +194,11 @@
     font-size: inherit;
     border-radius: 4px;
     border: 1px solid #dcdfe6;
+    background-color: #b5b5b5;
   }
 
   .write-blog{
-    font-weight: 400;
+    font-weight: 700;
     color: dodgerblue;
     padding: 0 10px;
   }

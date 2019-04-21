@@ -5,8 +5,8 @@
 		<div class="article-list-content" v-for="article in articleListBeanList">
 			<div class="article-details-link" @click="handleDetails(article.articleId)">
 				<div class="article-title-info">
-					<span>发布时间：</span>
-					<i class="el-icon-date">{{ article.timeStr }}</i>
+					<span>发布于：</span>
+					<i>{{ article.timeStr }}</i>
 				</div>
 				<div class="article-title">
 					<span>{{ article.title }}</span>

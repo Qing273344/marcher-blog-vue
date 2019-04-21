@@ -1,7 +1,7 @@
 <template>
   <div class="blog-footer">
 
-    <el-footer height="100px">
+    <el-footer>
 
       <!--<p>-->
         <!--Github:-->

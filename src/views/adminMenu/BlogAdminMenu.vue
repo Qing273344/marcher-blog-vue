@@ -48,7 +48,7 @@
 
   .el-menu {
     width: 200px;
-    /*margin-top: 100px;*/
+    margin-top: 180px;
   }
 
   .el-submenu {
@@ -59,7 +59,4 @@
     width: 200px;
   }
 
-  .blog-admin-menu a {
-
-  }
 </style>
