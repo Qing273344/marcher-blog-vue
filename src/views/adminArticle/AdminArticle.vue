@@ -14,7 +14,7 @@
           <el-table :data="adminArticleListBeanList" stripe>
             <el-table-column prop="title" label="标题" width="360px">
               <template slot-scope="scope">
-                <div class="article-publish-status" v-if="scope.row.status === 2">
+                <div class="article-publish-status" v-if="isPublish(scope.row)">
                   <span>已发布</span>
                 </div>
                 <div class="article-draft-status" v-else>
@@ -26,6 +26,7 @@
             <el-table-column label="评论">
               <template slot-scope="scope">
                 <el-switch v-model="scope.row.isComment === 1" active-color="#13ce66" @change="changeComment(scope.row)"></el-switch>
+                <!--<el-switch v-model="isTrue(scope.row.isComment)" active-color="#13ce66" @change="changeComment(scope.row)"></el-switch>-->
               </template>
             </el-table-column>
             <el-table-column label="置顶">
@@ -54,15 +55,16 @@
 </template>
 
 <script lang="ts">
-  import { Component, Vue } from 'vue-property-decorator';
-  import QueryPage from '@/utils/queryPage';
-  import QueryData from '@/utils/queryData';
-  import Query from '@/utils/query';
-  import PageUtil from '@/utils/pageUtil';
-  import { AdminArticleListBean } from '@/bean/AdminArticleListBean';
-  import Pagination from '@/components/pagination/pagination.vue';
-  import AdminArticleApi from '@/api/adminArticle';
-  import { ResponseBean } from '@/bean/common/ResponseBean';
+  import { Component, Vue } from "vue-property-decorator";
+  import QueryPage from "@/utils/queryPage";
+  import QueryData from "@/utils/queryData";
+  import Query from "@/utils/query";
+  import PageUtil from "@/utils/pageUtil";
+  import { AdminArticleListBean } from "@/bean/AdminArticleListBean";
+  import Pagination from "@/components/pagination/pagination.vue";
+  import AdminArticleApi from "@/api/adminArticle";
+  import { ResponseBean } from "@/bean/common/ResponseBean";
+  import { ArticleStatusEnum } from "@/commons/enums/ArticleStatusEnum";
 
   @Component({
     components: {
@@ -84,9 +86,12 @@
       this.query();
     }
 
-    // get isPublish() {
-    //   return null;
-    // }
+    /**
+     * 是否发布
+     */
+    isPublish(row: AdminArticleListBean) {
+      return row.status && row.status == ArticleStatusEnum.ARTICLE_STATUS_PUBLISH;
+    }
 
     /**
      * 新窗口打开写文章页面
