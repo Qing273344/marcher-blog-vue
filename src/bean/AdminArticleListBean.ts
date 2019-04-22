@@ -7,6 +7,7 @@ export class AdminArticleListBean {
   public articleId = null;
   public title = '';
   public timeStr = '';
+  public status = 0;
   public isTop = 0;
   public isComment = 0;
   public likedCount = 1;

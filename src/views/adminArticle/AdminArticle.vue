@@ -12,7 +12,17 @@
 
         <div class="blog-admin-table-main">
           <el-table :data="adminArticleListBeanList" stripe>
-            <el-table-column prop="title" label="标题" width="260px"></el-table-column>
+            <el-table-column prop="title" label="标题" width="360px">
+              <template slot-scope="scope">
+                <div class="article-publish-status" v-if="scope.row.status === 2">
+                  <span>已发布</span>
+                </div>
+                <div class="article-draft-status" v-else>
+                  <span>草稿哟</span>
+                </div>
+                <span class="article-title">{{ scope.row.title }}</span>
+              </template>
+            </el-table-column>
             <el-table-column label="评论">
               <template slot-scope="scope">
                 <el-switch v-model="scope.row.isComment === 1" active-color="#13ce66" @change="changeComment(scope.row)"></el-switch>
@@ -73,6 +83,10 @@
     created() {
       this.query();
     }
+
+    // get isPublish() {
+    //   return null;
+    // }
 
     /**
      * 新窗口打开写文章页面
@@ -240,11 +254,35 @@
     height: 50px;
   }
 
+  .article-publish-status {
+    width: 50px;
+    height: 23px;
+    float: left;
+    font-size: 75%;
+    padding-left: 7px;
+    margin-right: 5px;
+    background-color: #5cb85c;
+    color: #fff;
+    display: inline;
+    border-radius:10px;
+  }
+
+  .article-draft-status {
+    width: 50px;
+    height: 23px;
+    float: left;
+    font-size: 75%;
+    padding-left: 7px;
+    margin-right: 5px;
+    background-color: #DCDFE6;
+    color: #fff;
+    display: inline;
+    border-radius:10px;
+  }
+
   .article-title {
-    font-size: 18px;
-    font-weight: bold;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    font-size: 16px;
+    color: #428bca;
   }
 
   .table-operation-button {
