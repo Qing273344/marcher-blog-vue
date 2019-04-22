@@ -2,7 +2,7 @@
 <template>
   <div class="blog-side">
     <div class="side-auth">
-        <div class="title">marcher</div>
+        <div class="title">悠悠的蛋疼</div>
         <div class="slogan">吃, 喝, 玩, 休闲...</div>
     </div>
 

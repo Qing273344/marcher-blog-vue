@@ -3,32 +3,37 @@
 	<div class="article-list">
 
 		<div class="article-list-content" v-for="article in articleListBeanList">
+			<span class="cool-span left"></span>
+			<span class="cool-span top"></span>
+			<span class="cool-span right"></span>
+			<span class="cool-span bottom"></span>
+
 			<div class="article-details-link" @click="handleDetails(article.articleId)">
-				<div class="article-title-info">
-					<span>发布于：</span>
-					<i>{{ article.timeStr }}</i>
-				</div>
 				<div class="article-title">
 					<span>{{ article.title }}</span>
 				</div>
-				<div class="_article-action">
-					<ul class="_action-list">
-						<!-- 点赞 -->
-						<li class="item title-box" @click.stop="handleLiked(article)">
-							<div class="title-box">
-								<img src="https://b-gold-cdn.xitu.io/v3/static/img/zan.e9d7698.svg" class="icon">
-								<span class="count">{{ article.likedCount }}</span>
-							</div>
-						</li>
-						<!-- 评论 -->
+				<div class="article-info">
+					<span>发布于：</span>
+					<i>{{ article.timeStr }}</i>
+				</div>
+				<!--<div class="_article-action">-->
+					<!--<ul class="_action-list">-->
+						<!--&lt;!&ndash; 点赞 &ndash;&gt;-->
+						<!--<li class="item title-box" @click.stop="handleLiked(article)">-->
+							<!--<div class="title-box">-->
+								<!--<img src="https://b-gold-cdn.xitu.io/v3/static/img/zan.e9d7698.svg" class="icon">-->
+								<!--<span class="count">{{ article.likedCount }}</span>-->
+							<!--</div>-->
+						<!--</li>-->
+						<!--&lt;!&ndash; 评论 &ndash;&gt;-->
 						<!--<li class="item comment clickable">-->
 							<!--<div class="title-box" @click.stop="handleComment()">-->
 								<!--<img src="https://b-gold-cdn.xitu.io/v3/static/img/comment.4d5744f.svg" class="icon">-->
 								<!--<span class="count">11</span>-->
 							<!--</div>-->
 						<!--</li>-->
-					</ul>
-				</div>
+					<!--</ul>-->
+				<!--</div>-->
 			</div>
 		</div>
 
@@ -138,25 +143,27 @@
 	
 	.article-list-content {
 		width: 100%;
-		border-bottom: 1px solid rgba(178, 186, 194, .15);
+		/*border-bottom: 1px solid rgba(178, 186, 194, .15);*/
 		box-sizing: border-box;
 		background-color: #fff;
 		text-align: left;
 		cursor: pointer;
 		padding: 18px 24px;
 		margin-bottom: 15px;
+
 		.article-title {
-			/*height: 27px;*/
 			margin: 8px 0;
-			font-size: 22px;
+			font-size: 26px;
 			font-weight: 900;
 			overflow: hidden;
 			text-overflow: ellipsis;
 			color: #2ca6cb;
 		}
-		.article-title-info {
+		.article-info {
 			color: #B2BAC2;
-			font-size: 12px;
+			font-size: 14px;
+			font-style: italic;
+			font-family: Lora,'Times New Roman',serif;
 		}
 		._article-action {
 			height: 26px;
@@ -197,6 +204,97 @@
 					}
 				}
 			}
+		}
+	}
+
+
+	/* div 边宽动画效果 */
+	.article-list-content {
+		width: 820px;
+		height: 114px;
+		position: relative;
+		border: 2px solid #7EBADF;
+	}
+
+	.cool-span {
+		position: absolute;
+		z-index: 111;
+		background: #fff;
+	}
+
+	.article-list-content .left{
+		left: -2px;
+		top: -2px;
+		width: 2px;
+		height: 114px;
+	}
+
+	.article-list-content .top{
+		right: 0;
+		top: -2px;
+		width: 818px;
+		height: 2px;
+	}
+	.article-list-content .right{
+		right: -2px;
+		bottom: -2px;
+		width: 2px;
+		height: 114px;
+	}
+	.article-list-content .bottom{
+		left: 0;
+		top: 110px;
+		width: 818px;
+		height: 2px;
+	}
+
+	.article-list-content:hover .bottom{
+		animation:animateBottom 0.5s linear 0s;
+		animation-fill-mode:forwards;
+	}
+	.article-list-content:hover .left{
+		animation:animateLeft 0.5s linear 0s;
+		animation-fill-mode:forwards;
+	}
+	.article-list-content:hover .top{
+		animation:animateTop 0.5s linear 0s;
+		animation-fill-mode:forwards;
+	}
+	.article-list-content:hover .right{
+		animation:animateRight 0.5s linear 0s;
+		animation-fill-mode:forwards;
+	}
+
+	@keyframes animateLeft{
+		form{
+			height:114px;
+		}
+		to{
+			height:0;
+		}
+	}
+	@keyframes animateTop{
+		form{
+			width:820px;
+		}
+		to{
+			width:0;
+		}
+	}
+	@keyframes animateRight{
+		form{
+			height:114px;
+		}
+		to{
+			height:0;
+		}
+	}
+	@keyframes animateBottom{
+		form{
+			width:820px;
+		}
+		to{
+			width:0;
 		}
 	}
 </style>
