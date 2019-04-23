@@ -61,6 +61,8 @@
      * 显示密码
      */
     showPwd() {
+      console.log('test');
+      
       if (this.passwordType === 'password') {
         this.passwordType = '';
       } else {
