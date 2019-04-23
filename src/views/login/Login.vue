@@ -27,7 +27,7 @@
 
           <div class="login-form-footer">
             <i> 左转 ------------------------------------> </i>
-            <router-link class="go-register" :to="{name:'registerLink'}">注册</router-link>
+            <el-button class="to-register" @click="registerLink()">注册</el-button>
           </div>
         </div>
 
@@ -91,10 +91,13 @@
       LoginApi.userInfo().then((response: any) => {
         const userInfoBean = this.userInfoBean = response.info;
         this.UserInfo(userInfoBean);
-        // this.$store.dispatch('UserInfo', userInfoBean);
         // 登录成功返回上一页
         this.$router.go(-1);
       });
+    }
+
+    registerLink() {
+      this.$router.replace({name: 'registerLink'});
     }
 
 
@@ -193,19 +196,18 @@
     color: #00FFFF;
   }
 
-  .login-form-footer .go-register {
+  .to-register {
     height: 40px;
     width: 100px;
-    text-align: center;
-    text-decoration: none;
-    line-height: 40px;
-    font-size: 14px;
-    color: #00FFFF;
-    margin-right: 25px;
-    border: 1px solid rgb(216, 216, 216);
-    float: right;
     margin-top: 12px;
-    border-radius: 3px;
+    margin-right: 25px;
+    float: right;
+    line-height: 13px;
+    font-size: 14px;
+    background: transparent;
+    color: #00FFFF;
+    border: 1px solid rgb(216, 216, 216);
+    border-radius: 5px;
   }
 
   .login-form-main {

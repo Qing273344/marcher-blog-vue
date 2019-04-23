@@ -15,7 +15,7 @@ Vue.use(Router);
 /**
  * 路由模块化后在此处引入
  */
-export default new Router({
+const router = new Router({
   // 去掉url中的#号 栗子:localhost:8080/#/
   mode: 'history',
   routes: [
@@ -37,3 +37,14 @@ export default new Router({
     },
   ],
 });
+
+router.beforeEach((to, from, next) => {
+  // 若跳转的router为null, 则跳至首页
+  if (!to.name) {
+    router.push({name: '/'});
+  }
+  next();
+});
+
+export default router;
+

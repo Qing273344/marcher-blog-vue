@@ -31,7 +31,7 @@
 
           <div class="register-form-footer">
             <i> 右转 ------------------------------------> </i>
-            <router-link class="go-register" :to="{name:'loginLink'}">登录</router-link>
+            <el-button class="to-login" @click="loginLink()">登录</el-button>
           </div>
         </div>
 
@@ -74,15 +74,25 @@
       // 校验
       (this.$refs.registerForm as ElForm).validate((valid: boolean) => {
         if (valid) {
-          console.log(1);
           RegisterApi.register(this.registerForm).then((response) => {
             // 跳转到登录页
-            this.$router.push({name: 'loginLink'});
+            this.loginLink();
+
+            // this.$router.replace({name: 'loginLink'});
+            // this.$router.push({name: 'loginLink'});
           });
         } else {
           return false;
         }
       });
+    }
+
+    /**
+     * 登录页
+     */
+    loginLink() {
+      // replace: 该方法不会像history添加新的记录, 点击返回, 会跳转到上上个页面
+      this.$router.replace({name: 'loginLink'});
     }
 
 
@@ -92,7 +102,7 @@
         callback(new Error('请填写用户名'));
       }
       callback();
-    }
+    };
 
     // 校验密码
     private validatePwd = (rule: any, value: string, callback: any) => {
@@ -169,7 +179,6 @@
   .register-form {
     width: 400px;
     height: 460px;
-    /*background-color: #FFFFFF;*/
     box-shadow: 0 0 20px rgba(0, 0, 0, .1);
     -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, .1);
     position: absolute;
@@ -184,7 +193,6 @@
     line-height: 65px;
     position: absolute;
     bottom: 0;
-    /*background-color: #f0f0f0;*/
   }
 
   .register-form-footer i {
@@ -192,19 +200,18 @@
     color: #00FFFF;
   }
 
-  .register-form-footer .go-register {
+  .to-login {
     height: 40px;
     width: 100px;
-    text-align: center;
-    text-decoration: none;
-    line-height: 40px;
-    font-size: 14px;
-    color: #00FFFF;
-    margin-right: 25px;
-    border: 1px solid rgb(216, 216, 216);
-    float: right;
     margin-top: 12px;
-    border-radius: 3px;
+    margin-right: 25px;
+    float: right;
+    line-height: 13px;
+    font-size: 14px;
+    background: transparent;
+    color: #00FFFF;
+    border: 1px solid rgb(216, 216, 216);
+    border-radius: 5px;
   }
 
   .register-form-main {

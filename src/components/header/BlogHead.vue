@@ -119,10 +119,10 @@
     }
 
     loginLink() {
-      this.$router.push({name: 'loginLink'});
+      this.$router.replace({name: 'loginLink'});
     }
     registerLink() {
-      this.$router.push({name: 'registerLink'});
+      this.$router.replace({name: 'registerLink'});
     }
 
   }
