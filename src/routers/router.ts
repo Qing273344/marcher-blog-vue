@@ -38,11 +38,15 @@ const router = new Router({
   ],
 });
 
+/**
+ * router前置守卫
+ */
 router.beforeEach((to, from, next) => {
   // 若跳转的router为null, 则跳至首页
   if (!to.name) {
     router.push({name: '/'});
   }
+  // 确保调用next方法, 否则狗子就不会被resolved
   next();
 });
 

@@ -1,9 +1,7 @@
 <template>
   <!-- 页头菜单 -->
   <div class="blog-head">
-    <div class="blog-head-img">
-
-    </div>
+    <div class="blog-head-img"></div>
 
     <el-header height="40px">
       <el-menu
