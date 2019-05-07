@@ -34,7 +34,7 @@
     height: 100px;
     width: 100%;
     /*darkgrey*/
-    background: #b5b5b5 url("http://ppikh5m4w.bkt.clouddn.com/title_img.jpeg") no-repeat center center;
+    background: #b5b5b5 url("https://marcher-blog.oss-cn-shenzhen.aliyuncs.com/project/title_img.jpeg") no-repeat center center;
   }
 
   .blog-footer p {

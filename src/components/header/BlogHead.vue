@@ -68,7 +68,7 @@
     @Action private QueryKeyword!: (keyword: string) => void;
     @State private user!: IUserState;
 
-    private avatar = 'http://ppikh5m4w.bkt.clouddn.com/touxiang.jpg';
+    private avatar = 'https://marcher-blog.oss-cn-shenzhen.aliyuncs.com/project/touxiang.jpg';
 
     private articleKeyword: string = '';
     private activeIndex = '1';
@@ -132,7 +132,7 @@
   .blog-head-img {
     width: 100%;
     height: 230px;
-    background: #b5b5b5 url("http://ppikh5m4w.bkt.clouddn.com/title_img.jpeg") no-repeat center center;
+    background: #b5b5b5 url("https://marcher-blog.oss-cn-shenzhen.aliyuncs.com/project/title_img.jpeg") no-repeat center center;
     background-size: 100%;
   }
 

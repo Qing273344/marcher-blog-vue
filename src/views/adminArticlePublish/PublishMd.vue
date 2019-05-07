@@ -12,7 +12,7 @@
         <!-- 头像 -->
         <div class="article-bar-userinfo">
           <el-dropdown @command="handleLink">
-            <img src="http://ppikh5m4w.bkt.clouddn.com/touxiang.jpg" class="el-dropdown-link"/>
+            <img src="https://marcher-blog.oss-cn-shenzhen.aliyuncs.com/project/touxiang.jpg" class="el-dropdown-link"/>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item command="homeLink">首页</el-dropdown-item>
               <el-dropdown-item>个人中心</el-dropdown-item>

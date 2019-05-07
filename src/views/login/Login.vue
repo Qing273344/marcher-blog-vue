@@ -160,7 +160,7 @@
     min-width: 1200px;
     position: absolute;
     margin: 0 auto;
-    background: url("http://ppikh5m4w.bkt.clouddn.com/login.jpg") no-repeat center center;
+    background: url("https://marcher-blog.oss-cn-shenzhen.aliyuncs.com/project/login.jpg") no-repeat center center;
     background-size: cover;
     z-index: -1;
   }
