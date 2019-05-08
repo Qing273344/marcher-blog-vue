@@ -37,7 +37,7 @@
 			</div>
 		</div>
 
-		<div class="blog-admin-table-footer">
+		<div v-if="isPaging" class="blog-admin-table-footer">
 			<Pagination :pageUtil="pageUtil" @changePage="changePage"></Pagination>
 		</div>
 
@@ -75,10 +75,16 @@
 
 		private articleListBeanList: ArticleListBean[] = new Array < ArticleListBean > ();
 
+		/**
+		 * 是否需要分页
+		 */
+		get isPaging() {
+			return 1 < this.pageUtil.totalRow / this.pageUtil.pageSize;
+
+		}
 
 		@Watch("GET_KEYWORD")
 		queryByKeyword() {
-			console.log(this.pageUtil);
 			this.queryData.keyword = this.mainQuery.keyword;
 			this.query();
 		}
@@ -108,6 +114,7 @@
 				this.responseBean = response.data;
 				this.articleListBeanList = this.responseBean.data.list;
 				this.pageUtil = this.responseBean.page;
+				this.pageUtil.pageStyle = PageStyleEnum.SIMPL_LAYOUT;
 			})
 		}
 
@@ -129,6 +136,7 @@
 			this.pageUtil = pageUtil;
 			this.queryPage = QueryPage.change(this.pageUtil);
 			this.query();
+			(document as any).body.querySelector('.blog-home section').scrollTop = 0;
 		}
 
 	}

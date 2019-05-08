@@ -28,13 +28,13 @@
     width: 100%;
     box-sizing: border-box;
     background-color: #f4f5f5;
-    min-height: 100%;
+    /*min-height: 100%;*/
   }
 
   .el-main {
     width: 100%;
     overflow: auto;
     padding: 30px 20px;
-    min-height: 100%;
+    /*min-height: 100%;*/
   }
 </style>
