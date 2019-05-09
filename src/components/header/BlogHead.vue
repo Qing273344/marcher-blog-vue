@@ -21,6 +21,7 @@
           <input class="blog-search" placeholder="找呀找..." v-model="articleKeyword"/>
           <el-button class="el-button-search info-local" type="primary" icon="el-icon-search"  @click="query()"></el-button>
 
+
           <!-- 未登录 -->
           <div class="blog-head-login" v-if="!isLogin">
           <el-menu-item class="head-login-register info-local" index="7" @click="loginLink()">登录</el-menu-item>
@@ -174,6 +175,7 @@
   .el-menu {
     width: 1100px;
     margin: 0 auto;
+    border-bottom: 0;
   }
 
   .blog-logo {
@@ -222,6 +224,7 @@
     margin: 4px 15px 4px 10px;
     padding: 5px;
     font-size: 22px;
+    float: left;
   }
 
   .head-login-register {
