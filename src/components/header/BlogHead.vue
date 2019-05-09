@@ -67,7 +67,7 @@
     @Action private LoadUserInfo!: () => void;
     @Action private QueryKeyword!: (keyword: string) => void;
     @State private user!: IUserState;
-    @Prop() scrollTop: number;
+    @Prop() scrollTop: number = 0;
 
     private avatar = 'https://marcher-blog.oss-cn-shenzhen.aliyuncs.com/project/touxiang.jpg';
 

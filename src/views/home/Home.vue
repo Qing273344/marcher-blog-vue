@@ -30,7 +30,7 @@
     // 头部下拉到指定位置设置背景色
     mounted() {
       let self = this;
-      document.getElementById('blog-container').onscroll = function () {
+      (document as any).getElementById('blog-container').onscroll = function () {
         self.scrollTop = (this as any).scrollTop;
       }
     }
