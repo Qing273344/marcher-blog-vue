@@ -1,6 +1,6 @@
 <template>
   <!-- 页头菜单 -->
-  <div class="blog-head">
+  <div class="blog-head" :class="{'blog-head-dynamic': isReplaceBackground}">
     <div class="blog-head-img"></div>
 
     <el-header height="40px">
@@ -52,7 +52,7 @@
 </template>
 
 <script lang="ts">
-  import { Component, Vue } from 'vue-property-decorator';
+  import { Component, Prop, Vue } from "vue-property-decorator";
   import { IUserState, UserModule } from "@/store/modules/user";
   import ElHeader from "element-ui/packages/header/src/main.vue";
   import { Action, State } from "vuex-class";
@@ -67,11 +67,17 @@
     @Action private LoadUserInfo!: () => void;
     @Action private QueryKeyword!: (keyword: string) => void;
     @State private user!: IUserState;
+    @Prop() scrollTop: number;
 
     private avatar = 'https://marcher-blog.oss-cn-shenzhen.aliyuncs.com/project/touxiang.jpg';
 
     private articleKeyword: string = '';
     private activeIndex = '1';
+
+    get isReplaceBackground() {
+      return this.scrollTop > 230;
+
+    }
 
     /**
      * get计算属性 登录状态
@@ -123,16 +129,23 @@
       this.$router.replace({name: 'registerLink'});
     }
 
+
+
   }
 </script>
 
 
 <style lang="scss" scoped>
 
+  .blog-head-dynamic .el-header{
+    background: url("https://marcher-blog.oss-cn-shenzhen.aliyuncs.com/project/title_%20strip_img.png") no-repeat center center;
+    background-size: 100%;
+  }
+
   .blog-head-img {
     width: 100%;
     height: 230px;
-    background: #b5b5b5 url("https://marcher-blog.oss-cn-shenzhen.aliyuncs.com/project/title_img.jpeg") no-repeat center center;
+    background: url("https://marcher-blog.oss-cn-shenzhen.aliyuncs.com/project/title_img3.jpeg") no-repeat center center;
     background-size: 100%;
   }
 
@@ -143,7 +156,7 @@
     top: 0;
    	right: 0;
    	left: 0;
-   	background-color: #b5b5b5;
+   	/*background-color: #b5b5b5;*/
    	box-shadow: 0 1px 2px 0 rgba(0,0,0,.05);
    	z-index: 999;
   }
@@ -154,11 +167,12 @@
     /*color: black;*/
     font-weight: 600;
     color: #fff;
-    background-color: #b5b5b5;
+    background: rgba(0,0,0,0.0);
+    /*background-color: #b5b5b5;*/
   }
 
   .el-menu {
-    width: 1200px;
+    width: 1100px;
     margin: 0 auto;
   }
 
@@ -192,7 +206,8 @@
     font-size: inherit;
     border-radius: 4px;
     border: 1px solid #dcdfe6;
-    background-color: #b5b5b5;
+    background: rgba(0,0,0,0.0);
+    color: thistle;
   }
 
   .write-blog{

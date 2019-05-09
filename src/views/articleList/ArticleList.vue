@@ -151,7 +151,6 @@
 	
 	.article-list-content {
 		width: 100%;
-		/*border-bottom: 1px solid rgba(178, 186, 194, .15);*/
 		box-sizing: border-box;
 		background-color: #fff;
 		text-align: left;

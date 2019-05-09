@@ -1,8 +1,8 @@
 <template>
   <div class="blog-home">
-    <el-container direction="vertical">
+    <el-container id="blog-container" direction="vertical">
 
-      <BlogHead></BlogHead>
+      <BlogHead :scrollTop="scrollTop"></BlogHead>
       <BlogMain></BlogMain>
       <!--<Footer></Footer>-->
 
@@ -25,6 +25,16 @@
   })
   export default class Home extends Vue {
 
+    private scrollTop: number = 0;
+
+    // 头部下拉到指定位置设置背景色
+    mounted() {
+      let self = this;
+      document.getElementById('blog-container').onscroll = function () {
+        self.scrollTop = (this as any).scrollTop;
+      }
+    }
+
   }
 
 </script>
@@ -37,4 +47,5 @@
     overflow: auto;
     background-color: #f4f5f5;
   }
+
 </style>
