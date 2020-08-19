@@ -34,45 +34,45 @@
 </template>
 
 <script lang="ts">
-  import { Component, Emit, Prop, Vue, Watch } from 'vue-property-decorator';
-  import AdminTagApi from '@/api/adminTag';
-  import { ArticleTagBean } from '@/bean/ArticleTagBean';
-  import { ArticlePublishFrom } from '@/from/ArticlePublishFrom';
-  import { ArticleTypeBean } from '@/bean/articleTypeBean';
-  import AdminTypeAPi from '@/api/adminType';
-  import { Message } from 'element-ui';
-  import AdminArticleApi from '@/api/adminArticle';
-  import { ArticleStatusEnum } from '@/commons/enums/ArticleStatusEnum';
-  import { IsEnum } from '@/commons/enums/IsEnum';
+  import { Component, Emit, Prop, Vue, Watch } from "vue-property-decorator";
+  import AdminTagApi from "@/api/adminTag";
+  import { ArticleTagBean } from "@/bean/ArticleTagBean";
+  import { ArticlePublishFrom } from "@/from/ArticlePublishFrom";
+  import { ArticleTypeBean } from "@/bean/articleTypeBean";
+  import AdminTypeAPi from "@/api/adminType";
+  import { Message } from "element-ui";
+  import AdminArticleApi from "@/api/adminArticle";
+  import { ArticleStatusEnum } from "@/commons/enums/ArticleStatusEnum";
+  import { IsEnum } from "@/commons/enums/IsEnum";
 
   @Component({
-    components: {}
+    // components: {}
   })
   export default class ArticlePublish extends Vue {
-    @Prop() articlePublishDialog: boolean = false;
-    @Prop() articlePublishFrom!: ArticlePublishFrom;
+    @Prop() private articlePublishDialog: boolean = false;
+    @Prop() private articlePublishFrom!: ArticlePublishFrom;
 
     private articleStatus: boolean = true;
     private articleStatusRemark: string = '公开';
     private articleComment: boolean = true;
     private articleCommentRemark: string = '开启';
 
-    public articleTagBeanList: ArticleTagBean[] = new Array<ArticleTagBean>();
-    public articleTypeBeanList: ArticleTypeBean[] = new Array<ArticleTypeBean>();
+    private articleTagBeanList: ArticleTagBean[] = new Array<ArticleTagBean>();
+    private articleTypeBeanList: ArticleTypeBean[] = new Array<ArticleTypeBean>();
 
     /**
      * 初始化数据
      */
-    init() {
-      if (this.articlePublishFrom.status != ArticleStatusEnum.ARTICLE_STATUS_PUBLISH) {
+    public init() {
+      if (this.articlePublishFrom.status !== ArticleStatusEnum.ARTICLE_STATUS_PUBLISH) {
         this.articleStatus = false;
       }
-      if (this.articlePublishFrom.isComment != IsEnum.TURE) {
+      if (this.articlePublishFrom.isComment !== IsEnum.TRUE) {
         this.articleComment = false;
       }
     }
 
-    checkArticleStatusRemark() {
+    private checkArticleStatusRemark() {
       if (!this.articleStatus) {
         this.articleStatusRemark = '不公开';
       } else {
@@ -80,7 +80,7 @@
       }
     }
 
-    checkArticleCommentRemark() {
+    private checkArticleCommentRemark() {
       if (!this.articleComment) {
         this.articleCommentRemark = '不开启';
       } else {
@@ -92,7 +92,7 @@
      * 监控弹窗
      */
     @Watch('articlePublishDialog')
-    initAttribute() {
+    private initAttribute() {
       if (this.articlePublishDialog) {
         // 获取博客标签
         AdminTagApi.listAll(null).then((response: any) => {
@@ -109,7 +109,7 @@
     /**
      * 存为草稿
      */
-    handleDraft() {
+    private handleDraft() {
       // 校验参数
       this.checkFrom();
       // 存为操作则不发布
@@ -125,11 +125,12 @@
     /**
      * 确定发布
      */
-    handlePublish() {
+    private handlePublish() {
       // 校验参数
       this.checkFrom();
 
-      this.articlePublishFrom.status = this.articleStatus ? ArticleStatusEnum.ARTICLE_STATUS_PUBLISH : ArticleStatusEnum.ARTICLE_STATUS_DRAFT;
+      this.articlePublishFrom.status = this.articleStatus ?
+        ArticleStatusEnum.ARTICLE_STATUS_PUBLISH : ArticleStatusEnum.ARTICLE_STATUS_DRAFT;
       this.articlePublishFrom.isComment = this.articleComment ? 1 : 0;
 
       AdminArticleApi.publishMd(this.articlePublishFrom).then(() => {
@@ -160,7 +161,7 @@
      * 通知父组件关闭弹窗
      */
     @Emit('closeShowDialog')
-    closeDialog() {
+    private closeDialog() {
     }
   }
 </script>

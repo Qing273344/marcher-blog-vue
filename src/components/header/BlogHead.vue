@@ -57,7 +57,7 @@
   import { IUserState, UserModule } from "@/store/modules/user";
   import ElHeader from "element-ui/packages/header/src/main.vue";
   import { Action, State } from "vuex-class";
-  import Logout from '@/api/logout';
+  import Logout from "@/api/logout";
 
   @Component({
     components: {
@@ -68,7 +68,7 @@
     @Action private LoadUserInfo!: () => void;
     @Action private QueryKeyword!: (keyword: string) => void;
     @State private user!: IUserState;
-    @Prop() scrollTop: number = 0;
+    @Prop() private scrollTop: number = 0;
 
     private avatar = 'https://marcher-blog.oss-cn-shenzhen.aliyuncs.com/project/touxiang.jpg';
 
@@ -115,7 +115,7 @@
      * 新窗口打开写博客页面
      */
     publishMdLink() {
-      let routeUrl = this.$router.resolve({name: 'publishMdLink'});
+      const routeUrl = this.$router.resolve({name: 'publishMdLink'});
       window.open(routeUrl.href, '_blank');
     }
 

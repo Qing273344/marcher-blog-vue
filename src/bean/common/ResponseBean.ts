@@ -13,12 +13,4 @@ export class ResponseBean {
   };
   public page = new PageUtil();
 
-  // public page = {
-  //   totalRow: null,
-  //   totalPage: null,
-  //   pageSize: null,
-  //   curPage: null,
-  //   firstPage: true,
-  //   lastPage: true,
-  // };
 }

@@ -41,10 +41,10 @@
 </template>
 
 <script lang="ts">
-  import { Component, Vue } from 'vue-property-decorator';
-  import RegisterApi from '@/api/register';
-  import { ElForm } from 'element-ui/types/form';
-  import ValidateUtil from '@/utils/validateUtil';
+  import { Component, Vue } from "vue-property-decorator";
+  import RegisterApi from "@/api/register";
+  import { ElForm } from "element-ui/types/form";
+  import ValidateUtil from "@/utils/validateUtil";
 
   @Component({
     components: {
@@ -53,7 +53,7 @@
   })
   export default class Register extends Vue {
 
-    public registerForm = {
+    private registerForm = {
       username: '',
       password: '',
       confirmPassword: '',
@@ -67,7 +67,7 @@
       } else {
         this.passwordType = 'password';
       }
-    }
+    };
 
     // 注册
     private handleRegister() {
@@ -85,15 +85,15 @@
           return false;
         }
       });
-    }
+    };
 
     /**
      * 登录页
      */
-    loginLink() {
+    private loginLink() {
       // replace: 该方法不会像history添加新的记录, 点击返回, 会跳转到上上个页面
       this.$router.replace({name: 'loginLink'});
-    }
+    };
 
 
     // 校验用户名
@@ -102,7 +102,7 @@
         callback(new Error('请填写用户名'));
       }
       callback();
-    };
+    }
 
     // 校验密码
     private validatePwd = (rule: any, value: string, callback: any) => {
@@ -116,7 +116,7 @@
     }
 
     // 确认密码
-    public validateConfirmPwd = (rule: any, value: string, callback: any) => {
+    private validateConfirmPwd = (rule: any, value: string, callback: any) => {
       if (!value) {
         callback(new Error('请输入密码'));
       }

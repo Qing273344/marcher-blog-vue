@@ -6,14 +6,14 @@
 
 <script lang="ts">
   import { Component, Vue } from "vue-property-decorator";
-  import { UserModule } from '@/store/modules/user';
+  import { UserModule } from "@/store/modules/user";
 
   @Component ({
 
   })
   export default class App extends Vue {
 
-    // 初始化storeModule
+    // 初始化 storeModule
     create() {
       UserModule;
     }

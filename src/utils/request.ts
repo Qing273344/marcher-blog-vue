@@ -1,82 +1,31 @@
-import * as Axios from 'axios';
-import { AxiosError, AxiosResponse } from 'axios';
+import Axios, { AxiosError, AxiosResponse } from 'axios';
 import qs from 'qs';
 
-import config from '@/config/envConfig';
+import EnvConfig from '@/config/envConfig';
 import { ResponseBean } from '@/bean/common/ResponseBean';
 import { Message } from 'element-ui';
 import { UserModule } from '@/store/modules/user';
+import { ContentTypeEnum } from '@/commons/enums/ContentTypeEnum';
 
 let responseBean = new ResponseBean();
 
-
 /**
- * -------------------------------------------------------------------------------------------------------------------- axios config
+ * ------------------------------------------------------------------------------------------------------- axios config
  */
 // api请求的baseURL
-const baseURL = config.url.basicUrl;
-// json格式请求
-const jsonAxios = Axios.default.create({
+const baseURL = EnvConfig.basicUrl;
+const axios = Axios.create({
   baseURL,
-  timeout: 0,
+  timeout: 6000,
   withCredentials: true, // 允许跨域 cookie
-  headers: {
-    'Content-Type': 'application/json; charset=UTF-8',
-  },
-  maxContentLength: 2000,
-});
-
-// key-value格式请求
-const getAxios = Axios.default.create({
-  baseURL,
-  timeout: 0,
-  withCredentials: true, // 允许跨域 cookie
-  maxContentLength: 2000,
-});
-
-const formAxios = Axios.default.create({
-  baseURL,
-  timeout: 0,
-  withCredentials: true, // 允许跨域 cookie
-  headers: {
-    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-  },
-  maxContentLength: 2000,
-});
-
-const fileAxios = Axios.default.create({
-  baseURL,
-  timeout: 0,
-  withCredentials: true, // 允许跨域 cookie
-  headers: {
-    'Content-Type': 'multipart/form-data',
-  },
   maxContentLength: 2000,
 });
 
 
 /**
- * -------------------------------------------------------------------------------------------------------------------- 响应拦截器
+ * ---------------------------------------------------------------------------------------------------------- 响应拦截器
  */
-jsonAxios.interceptors.response.use((response: AxiosResponse): any => {
-  return responseSuccess(response);
-}, (error: AxiosError): any => {
-  return requestFail(error);
-});
-
-getAxios.interceptors.response.use((response: AxiosResponse): any => {
-  return responseSuccess(response);
-}, (error: AxiosError): any => {
-  return requestFail(error);
-});
-
-formAxios.interceptors.response.use((response: AxiosResponse): any => {
-  return responseSuccess(response);
-}, (error: AxiosError): any => {
-  return requestFail(error);
-});
-
-fileAxios.interceptors.response.use((response: AxiosResponse): any => {
+axios.interceptors.response.use((response: AxiosResponse): any => {
   return responseSuccess(response);
 }, (error: AxiosError): any => {
   return requestFail(error);
@@ -171,29 +120,32 @@ function responseHint(responseBean: ResponseBean) {
 
 
 /**
- * -------------------------------------------------------------------------------------------------------------------- 请求
+ * ---------------------------------------------------------------------------------------------------------------- 请求
  */
-export const _get = (req: any) => {
-  return getAxios.get(req.url, {params: req.data});
+export const get = (req: any) => {
+  return request(req);
 };
 
-export const _fromPost = (req: any) => {
-  const fromData = qs.stringify(req.data);
-  return formAxios({method: 'post', url: `/${req.url}`, data: fromData});
+export const formPost = (req: any) => {
+  return request(req, ContentTypeEnum.FORM);
 };
 
-export const _filePost = (req: any) => {
-  return fileAxios({method: 'post', url: `/${req.url}`, data: req.data});
+export const filePost = (req: any) => {
+  return request(req, ContentTypeEnum.FILE);
 };
 
-export const _post = (req: any) => {
-  return jsonAxios({method: 'post', url: `/${req.url}`, data: req.data});
+export const post = (req: any) => {
+  return request(req, ContentTypeEnum.JSON);
 };
 
-export const _put = (req: any) => {
-  return jsonAxios({method: 'put', url: `/${req.url}`, data: req.data});
-};
 
-export const _delete = (req: any) => {
-  return jsonAxios({method: 'delete', url: `/${req.url}`, data: req.data});
+const request = (req: any, type: ContentTypeEnum | null = null) => {
+  const data = req.data;
+  if (!type) {
+    return axios.get(req.url, {params: req.data});
+  } else if (ContentTypeEnum.FORM === type) {
+    return axios({method: 'post', url: `/${req.url}`, data: qs.stringify(data), headers: {'Content-Type': type}});
+  } else {
+    return axios({method: 'post', url: `/${req.url}`, data: data, headers: {'Content-Type': type}});
+  }
 };

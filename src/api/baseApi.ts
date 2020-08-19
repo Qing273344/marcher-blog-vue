@@ -1,7 +1,9 @@
-import { _get, _post, _put, _delete, _fromPost, _filePost } from '@/utils/request';
+import { filePost, formPost, get, post } from '@/utils/request';
 
 /**
  * base api
+ *
+ * @author marcher
  */
 export default class BaseApi {
 
@@ -12,8 +14,9 @@ export default class BaseApi {
    * @param url   url
    */
   protected static get(data: any, url: string) {
-    const req = this.reqFrom(data, url);
-    return _get(req);
+    const req = this.reqForm(data, url);
+    // return RequestUtil.get(req);
+    return get(req);
   }
 
   /**
@@ -23,8 +26,9 @@ export default class BaseApi {
    * @param url   url
    */
   protected static fromPost(data: any, url: string) {
-    const req = this.reqFrom(data, url);
-    return _fromPost(req);
+    const req = this.reqForm(data, url);
+    // return RequestUtil.form(req);
+    return formPost(req);
   }
 
   /**
@@ -34,8 +38,8 @@ export default class BaseApi {
    * @param url   url
    */
   protected static filePost(data: any, url: string) {
-    const req = this.reqFrom(data, url);
-    return _filePost(req);
+    const req = this.reqForm(data, url);
+    return filePost(req);
   }
 
   /**
@@ -45,30 +49,9 @@ export default class BaseApi {
    * @param url   url
    */
   protected static post(data: any, url: string) {
-    const req = this.reqFrom(data, url);
-    return _post(req);
-  }
-
-  /**
-   * put 请求
-   *
-   * @param data  data
-   * @param url   url
-   */
-  protected static put(data: any, url: string) {
-    const req = this.reqFrom(data, url);
-    return _put(req);
-  }
-
-  /**
-   * deleted 请求
-   *
-   * @param data  data
-   * @param url   url
-   */
-  protected static deleted(data: any, url: string) {
-    const req = this.reqFrom(data, url);
-    return _delete(req);
+    const req = this.reqForm(data, url);
+    // return RequestUtil.json(req);
+    return post(req);
   }
 
   /**
@@ -77,7 +60,7 @@ export default class BaseApi {
    * @param data  数据
    * @param url   url
    */
-  protected static reqFrom(data: any, url: string) {
+  protected static reqForm(data: any, url: string) {
     return {
       data,
       url,

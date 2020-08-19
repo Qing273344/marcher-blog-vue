@@ -37,13 +37,13 @@
 </template>
 
 <script lang="ts">
-  import { Component, Vue } from 'vue-property-decorator';
-  import { UserModule } from '@/store/modules/user';
-  import LoginApi from '@/api/login';
-  import { UserInfoBean } from '@/bean/UserInfoBean';
-  import { Action } from 'vuex-class';
-  import ValidateUtil from '@/utils/validateUtil';
-  import { ElForm } from 'element-ui/types/form';
+  import { Component, Vue } from "vue-property-decorator";
+  import { UserModule } from "@/store/modules/user";
+  import LoginApi from "@/api/login";
+  import { UserInfoBean } from "@/bean/UserInfoBean";
+  import { Action } from "vuex-class";
+  import ValidateUtil from "@/utils/validateUtil";
+  import { ElForm } from "element-ui/types/form";
 
   @Component
   export default class Login extends Vue {
@@ -110,7 +110,7 @@
       } else {
         callback();
       }
-    }
+    };
 
     /**
      * 校验密码
@@ -124,7 +124,7 @@
       } else {
         callback();
       }
-    }
+    };
 
     public loginRules = {
       username: [{required: true, trigger: 'blur', validator: this.validateUsername}],

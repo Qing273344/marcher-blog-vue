@@ -3,7 +3,7 @@
   <div class="blog-side">
     <div class="side-auth">
         <div class="title">悠悠的蛋疼</div>
-        <div class="slogan">吃, 喝, 玩, 休闲...</div>
+        <div class="slogan">吃, 吃, 吃...</div>
     </div>
 
     <div class="blog-tag">
@@ -18,8 +18,8 @@
 </template>
 
 <script lang="ts">
-  import { Component, Vue } from 'vue-property-decorator';
-  import SideApi from '@/api/side';
+  import { Component, Vue } from "vue-property-decorator";
+  import SideApi from "@/api/side";
 
   @Component
   export default class Side extends Vue {

@@ -1,7 +1,7 @@
 <template>
   <div class="blog-admin-menu">
 
-    <el-menu  default-active="2-1">
+    <el-menu default-active="2-1">
 
       <el-menu-item index="1">首页</el-menu-item>
       <el-submenu index="2">
@@ -16,23 +16,25 @@
 </template>
 
 <script lang="ts">
-  import { Component, Vue } from 'vue-property-decorator';
+  import { Component, Vue } from "vue-property-decorator";
 
   @Component({
-    components: {}
+    // components: {}
   })
   export default class BlogAdminMenu extends Vue {
-	private navIndex = '1';
+    private navIndex = '1';
 
 
-   public adminArticleLink() {
-      this.$router.push({name:'adminArticleLink'});
+    public adminArticleLink() {
+      this.$router.push({name: 'adminArticleLink'});
     }
+
     public adminTypeLink() {
-      this.$router.push({name:'adminTypeLink'});
+      this.$router.push({name: 'adminTypeLink'});
     }
+
     public adminTagLink() {
-      this.$router.push({name:'adminTagLink'});
+      this.$router.push({name: 'adminTagLink'});
     }
   }
 </script>

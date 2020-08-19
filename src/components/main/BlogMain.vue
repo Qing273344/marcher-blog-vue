@@ -12,9 +12,10 @@
 
 
 <script lang="ts">
-  import { Component, Vue } from 'vue-property-decorator';
-  import ElMain from 'element-ui/packages/main/src/main.vue';
-	import Footer from '@/components/footer/BlogFooter.vue';
+  import { Component, Vue } from "vue-property-decorator";
+  import ElMain from "element-ui/packages/main/src/main.vue";
+  import Footer from "@/components/footer/BlogFooter.vue";
+
   @Component({
     components: {ElMain,Footer}
   })

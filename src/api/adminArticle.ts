@@ -1,5 +1,7 @@
 /**
  * 文章管理相关Api
+ *
+ * @author marcher
  */
 import BaseApi from '@/api/baseApi';
 

@@ -1,5 +1,7 @@
 /**
  * 文章状态枚举
+ *
+ * @author marcher
  */
 export enum ArticleStatusEnum {
 

@@ -2,6 +2,8 @@ import BaseApi from '@/api/baseApi';
 
 /**
  * 文章Api
+ *
+ * @author marcher
  */
 export default class ArticleApi extends BaseApi {
 

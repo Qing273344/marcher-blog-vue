@@ -37,26 +37,26 @@
 
 
 <script lang="ts">
-  import { Component, Vue } from 'vue-property-decorator';
-  import AdminTypeAorU from '@/views/adminType/AdminTypeAorU.vue';
-  import Pagination from '@/components/pagination/pagination.vue';
-  import PageUtil from '@/utils/pageUtil';
-  import { ResponseBean } from '@/bean/common/ResponseBean';
-  import QueryPage from '@/utils/queryPage';
-  import QueryData from '@/utils/queryData';
-  import Query from '@/utils/query';
-  import { ArticleTypeBean } from '@/bean/articleTypeBean';
-  import AdminTypeAPi from '@/api/adminType';
+  import { Component, Vue } from "vue-property-decorator";
+  import AdminTypeAorU from "@/views/adminType/AdminTypeAorU.vue";
+  import Pagination from "@/components/pagination/pagination.vue";
+  import PageUtil from "@/utils/pageUtil";
+  import { ResponseBean } from "@/bean/common/ResponseBean";
+  import QueryPage from "@/utils/queryPage";
+  import QueryData from "@/utils/queryData";
+  import Query from "@/utils/query";
+  import { ArticleTypeBean } from "@/bean/articleTypeBean";
+  import AdminTypeAPi from "@/api/adminType";
 
   @Component({
     components: {
       AdminTypeAorU, Pagination,
-    }
+    },
   })
   export default class AdminType extends Vue {
     private aORuTypeDialog = false;
     private typeId: string = '';
-    private pageUtil: PageUtil = new PageUtil;
+    private pageUtil: PageUtil = new PageUtil();
 
     private responseBean: ResponseBean = new ResponseBean();
 
@@ -70,7 +70,7 @@
     /**
      * 复选框选择
      */
-    handleSelectionChange(rows: any) {
+    private handleSelectionChange(rows: any) {
       this.ids = [];
       this.selectTypeBeanList = rows;
       for (let i = 0; i < this.selectTypeBeanList.length; i++) {
@@ -78,14 +78,14 @@
       }
     }
 
-    created() {
+    private created() {
       this.query();
     }
 
     /**
      *  分页
      */
-    changePage(pageUtil: PageUtil) {
+    private changePage(pageUtil: PageUtil) {
       this.pageUtil = pageUtil;
       this.queryPage = QueryPage.change(this.pageUtil);
       this.query();
@@ -94,7 +94,7 @@
     /**
      * 打开新增弹框
      */
-    openAddDialog() {
+    private openAddDialog() {
       this.typeId = '';
       this.aORuTypeDialog = true;
     }
@@ -102,7 +102,7 @@
     /**
      * 打开编辑弹框
      */
-    openEditDialog(row: any) {
+    private openEditDialog(row: any) {
       this.typeId = row.typeId;
       this.aORuTypeDialog = true;
     }
@@ -111,14 +111,14 @@
      * 删除指定数据
      * @param id 数据Id
      */
-    handleDelete(id: string) {
+    private handleDelete(id: string) {
       this.$confirm('是否删除该类型?', '提示', {confirmButtonText: '确定', cancelButtonText: '取消', type: 'warning'})
         .then(() => {
           this.ids[0] = id;
           AdminTypeAPi.remove(this.ids).then(() => {
             this.query();
             this.$message({
-              type: 'success', message: '删除成功!'
+              type: 'success', message: '删除成功!',
             });
           });
         });
@@ -127,14 +127,14 @@
     /**
      * 批量删除
      */
-    handleBatchDeleted() {
+    private handleBatchDeleted() {
       this.$confirm('是否删除类型?', '提示', {confirmButtonText: '确定', cancelButtonText: '取消', type: 'warning'})
         .then(() => {
           if (this.ids) {
             AdminTypeAPi.remove(this.ids).then(() => {
               this.query();
               this.$message({
-                type: 'success', message: "'删除成功!"
+                type: 'success', message: "'删除成功!",
               });
             });
           }
@@ -144,7 +144,7 @@
     /**
      * 关闭显示的弹框
      */
-    closeShowDialog() {
+    private closeShowDialog() {
       this.aORuTypeDialog = false;
       this.typeId = '';
       this.query();
@@ -153,7 +153,7 @@
     /**
      * 查询
      */
-    query() {
+    private query() {
       // 更新query参数
       this.queryArgs = new Query(this.queryData, this.queryPage);
 
@@ -168,7 +168,7 @@
     /**
      * 刷新
      */
-    refresh() {
+    private refresh() {
       this.queryData = new QueryData();
       this.queryPage = QueryPage.init();
       this.query();

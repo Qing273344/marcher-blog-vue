@@ -20,7 +20,7 @@
                 <div class="article-draft-status" v-else>
                   <span>草稿哟</span>
                 </div>
-                <span class="article-title">{{ scope.row.title }}</span>
+                <span class="article-title" @click="toDetails()">{{ scope.row.title }}</span>
               </template>
             </el-table-column>
             <el-table-column label="评论">
@@ -69,11 +69,11 @@
   @Component({
     components: {
       Pagination,
-    }
+    },
   })
   export default class AdminArticle extends Vue {
     private articleId: string = '';
-    private pageUtil: PageUtil = new PageUtil;
+    private pageUtil: PageUtil = new PageUtil();
 
     private responseBean: ResponseBean = new ResponseBean();
 
@@ -82,29 +82,33 @@
     private queryArgs: Query<QueryData> = new Query(this.queryData, this.queryPage);
     private adminArticleListBeanList: AdminArticleListBean[] = new Array<AdminArticleListBean>();
 
-    created() {
+    private created() {
       this.query();
+    }
+
+    private toDetails() {
+      console.log(111);
     }
 
     /**
      * 是否发布
      */
-    isPublish(row: AdminArticleListBean) {
+    private isPublish(row: AdminArticleListBean) {
       return row.status && row.status == ArticleStatusEnum.ARTICLE_STATUS_PUBLISH;
     }
 
     /**
      * 新窗口打开写文章页面
      */
-    publishMdLink() {
-      let routeUrl = this.$router.resolve({name: 'publishMdLink'});
+    private publishMdLink() {
+      const routeUrl = this.$router.resolve({name: 'publishMdLink'});
       window.open(routeUrl.href, '_blank');
     }
 
     /**
      * 分页
      */
-    changePage(pageUtil: PageUtil) {
+    private changePage(pageUtil: PageUtil) {
       this.pageUtil = pageUtil;
       this.queryPage = QueryPage.change(this.pageUtil);
       this.query();
@@ -113,15 +117,15 @@
     /**
      * 编辑文章
      */
-    handleEdit(articleId: string) {
-      let routeUrl = this.$router.resolve({name: 'publishMdLink', query: {articleId: articleId}});
+    private handleEdit(articleId: string) {
+      const routeUrl = this.$router.resolve({name: 'publishMdLink', query: {articleId}});
       window.open(routeUrl.href, '_blank');
     }
 
     /**
      * 评论设置
      */
-    changeComment(row: any) {
+    private changeComment(row: any) {
       AdminArticleApi.comment({id: row.articleId}).then(() => {
         this.query();
       });
@@ -130,7 +134,7 @@
     /**
      * 置顶设置
      */
-    changeTop(row: any) {
+    private changeTop(row: any) {
       AdminArticleApi.top({id: row.articleId}).then(() => {
         this.query();
       });
@@ -140,13 +144,13 @@
      * 删除指定数据
      * @param articleId 文章id
      */
-    handleDelete(articleId: string) {
+    private handleDelete(articleId: string) {
       this.$confirm('是否删除该文章?', '提示', {confirmButtonText: '确定', cancelButtonText: '取消', type: 'warning'})
         .then(() => {
           AdminArticleApi.remove({id: articleId}).then(() => {
             this.query();
             this.$message({
-              type: 'success', message: '删除成功!'
+              type: 'success', message: '删除成功!',
             });
           });
         });
@@ -169,7 +173,7 @@
     /**
      * 刷新查询
      */
-    private refresh() {
+    refresh() {
       this.queryData = new QueryData();
       this.queryPage = QueryPage.init();
       this.query();

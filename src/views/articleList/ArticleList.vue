@@ -55,13 +55,13 @@
 	import { ResponseBean } from "@/bean/common/ResponseBean";
 	import { Getter, State } from "vuex-class";
 	import { IMainQueryState, MainQueryModule } from "@/store/modules/mainQuery";
-	import Pagination from '@/components/pagination/pagination.vue';
-	import { PageStyleEnum } from '@/commons/enums/PageStyleEnum';
+	import Pagination from "@/components/pagination/pagination.vue";
+	import { PageStyleEnum } from "@/commons/enums/PageStyleEnum";
 
 	@Component({
 		components: {
 			MainQueryModule, Pagination,
-		}
+		},
 	})
 	export default class ArticleList extends Vue {
 		@State private mainQuery!: IMainQueryState;
@@ -84,19 +84,19 @@
 		}
 
 		@Watch("GET_KEYWORD")
-		queryByKeyword() {
+		private queryByKeyword() {
 			this.queryData.keyword = this.mainQuery.keyword;
 			this.query();
 		}
 
-		created() {
+		private created() {
 			this.query();
 		}
 
 		/**
 		 * 点赞
 		 */
-		handleLiked(article: ArticleListBean) {
+		private handleLiked(article: ArticleListBean) {
 			const articleId = article.articleId;
 			ArticleApi.liked({id: articleId}).then((response: any) => {
 				article.likedCount = response.likedCount;
@@ -106,7 +106,7 @@
 		/**
 		 * query
 		 */
-		query() {
+		private query() {
 			// 更新query参数
 			this.queryArgs = new Query(this.queryData, this.queryPage);
 
@@ -122,8 +122,8 @@
 		 * 文章详情
 		 * @param articleId		文章id
 		 */
-		handleDetails(articleId: string) {
-			let routeUrl = this.$router.resolve({
+		private handleDetails(articleId: string) {
+			const routeUrl = this.$router.resolve({
 				name: 'articleContentMainLink',
 				query: {
 					articleId: articleId
@@ -132,7 +132,7 @@
 			window.open(routeUrl.href, '_blank');
 		}
 
-		changePage(pageUtil: PageUtil) {
+		private changePage(pageUtil: PageUtil) {
 			this.pageUtil = pageUtil;
 			this.queryPage = QueryPage.change(this.pageUtil);
 			this.query();

@@ -1,5 +1,6 @@
 /**
  * 用户信息
+ *
  * @author marcher
  */
 export class UserInfoBean {

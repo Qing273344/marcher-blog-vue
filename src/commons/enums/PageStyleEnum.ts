@@ -1,5 +1,7 @@
 /**
  * 分页工具样式
+ *
+ * @author marcher
  */
 export enum PageStyleEnum {
 

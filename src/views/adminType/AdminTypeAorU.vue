@@ -20,43 +20,43 @@
 </template>
 
 <script lang="ts">
-  import { Component, Vue, Prop, Emit, Watch } from 'vue-property-decorator';
-  import { ArticleTypeBean } from '@/bean/articleTypeBean';
-  import AdminTypeAPi from '@/api/adminType';
+  import { Component, Emit, Prop, Vue, Watch } from "vue-property-decorator";
+  import { ArticleTypeBean } from "@/bean/articleTypeBean";
+  import AdminTypeAPi from "@/api/adminType";
 
   @Component({
-    components: {}
+    // components: {}
   })
   export default class AdminTypeAorU extends Vue {
-    @Prop() aORuTypeDialog: boolean = false;
-    @Prop() typeId: string = '';
+    @Prop() private aORuTypeDialog: boolean = false;
+    @Prop() private typeId: string = '';
 
-    public articleTypeBean: ArticleTypeBean = new ArticleTypeBean();
+    private articleTypeBean: ArticleTypeBean = new ArticleTypeBean();
 
     /**
      * 新增类型
      */
-    handleAdd() {
+    private handleAdd() {
       AdminTypeAPi.add(this.articleTypeBean).then(() => {
         this.closeDialog();
-      })
+      });
     }
 
     /**
      * 编辑类型
      */
-    handleEdit() {
+    private handleEdit() {
       this.articleTypeBean.typeId = this.typeId;
       AdminTypeAPi.update(this.articleTypeBean).then(() => {
         this.closeDialog();
-      })
+      });
     }
 
     /**
      * 编辑回显指定数据(监听typeId值的变化, 有值回显)
      */
     @Watch('typeId')
-    getTypeInfo() {
+    private getTypeInfo() {
       if (this.typeId) {
         AdminTypeAPi.get({id: this.typeId}).then((response: any) => {
           this.articleTypeBean = response.info;
@@ -68,7 +68,7 @@
      * 通知父组件关闭弹窗
      */
     @Emit('closeShowDialog')
-    closeDialog() {
+    private closeDialog() {
       this.articleTypeBean = new ArticleTypeBean();
     }
   }

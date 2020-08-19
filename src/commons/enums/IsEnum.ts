@@ -1,12 +1,14 @@
 /**
  * 是否
+ *
+ * @author marcher
  */
 export enum IsEnum {
 
   /**
    * 是
    */
-  TURE = 1,
+  TRUE = 1,
 
   /**
    * 否

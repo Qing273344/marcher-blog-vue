@@ -39,19 +39,21 @@
 
 
 <script lang="ts">
-  import { Component, Vue } from 'vue-property-decorator';
-  const mavonEditor = require('mavon-editor');
-  import 'mavon-editor/dist/css/index.css';
-  import ArticlePublish from '@/views/adminArticlePublish/ArticlePublish.vue';
-  import { ArticlePublishFrom } from '@/from/ArticlePublishFrom';
-  import { Message } from 'element-ui';
-  import AdminArticleApi from '@/api/adminArticle';
+  import { Component, Vue } from "vue-property-decorator";
+  import "mavon-editor/dist/css/index.css";
+  import ArticlePublish from "@/views/adminArticlePublish/ArticlePublish.vue";
+  import { ArticlePublishFrom } from "@/from/ArticlePublishFrom";
+  import { Message } from "element-ui";
+  import AdminArticleApi from "@/api/adminArticle";
+
+  import mavonEditor from "mavon-editor";
+  // const mavonEditor = require('mavon-editor');
 
   @Component({
     components: {
-      "mavonEditor": mavonEditor.mavonEditor,
+      mavonEditor: mavonEditor.mavonEditor,
       ArticlePublish,
-    }
+    },
   })
   export default class PublishMd extends Vue {
 
@@ -59,17 +61,17 @@
     private articlePublishFrom: ArticlePublishFrom = new ArticlePublishFrom();
     private articleId: any = '';
 
-    created() {
+    private created() {
       this.articleId = (this.$route.query as any).articleId;
       if (this.articleId) {
         this.init(this.articleId);
       }
     }
 
-    init(articleId: string) {
+    private init(articleId: string) {
       AdminArticleApi.getAsEdit({id: articleId}).then((response: any) => {
         this.articlePublishFrom = response.info;
-      })
+      });
     }
 
     /**
@@ -89,7 +91,7 @@
     /**
      * 点击发布打开博客属性弹窗
      */
-    openPublishDialog() {
+    private openPublishDialog() {
       if (!this.articlePublishFrom.title) {
         Message({message: '请填写博客标题', type: 'warning', duration: 2 * 1000});
         return;
@@ -105,7 +107,7 @@
       // (this.$refs.article_publish as ArticlePublish).$emit('init');
     }
 
-    closeShowDialog() {
+    private closeShowDialog() {
       this.articlePublishDialog = false;
     }
 
@@ -113,7 +115,7 @@
      * 下拉菜单路由跳转
      * @param link  点击的下拉菜单项
      */
-    handleLink(link: string) {
+    private handleLink(link: string) {
       this.$router.push({name: link});
     }
   }

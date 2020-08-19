@@ -16,8 +16,8 @@
 </template>
 
 <script lang="ts">
-  import { Component, Vue } from 'vue-property-decorator';
-  import ElFooter from 'element-ui/packages/footer/src/main.vue';
+  import { Component, Vue } from "vue-property-decorator";
+  import ElFooter from "element-ui/packages/footer/src/main.vue";
 
   @Component({
     components: {
