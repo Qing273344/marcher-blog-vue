@@ -39,9 +39,8 @@
     }
 
     getArticleContent() {
-      ArticleApi.details({id: this.articleId}).then((response: any) => {
-        this.articleDetails = response.info;
-        console.error("articleContentMd: " + this.articleDetails);
+      ArticleApi.details({id: this.articleId}).then((data: any) => {
+        this.articleDetails = data;
         this.articleContentHtml = marked(this.articleDetails.articleContentMd);
       })
     }

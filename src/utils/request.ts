@@ -6,6 +6,7 @@ import { ResponseBean } from '@/bean/common/ResponseBean';
 import { Message } from 'element-ui';
 import { UserModule } from '@/store/modules/user';
 import { ContentTypeEnum } from '@/commons/enums/ContentTypeEnum';
+import PageUtil from '@/utils/pageUtil';
 
 let responseBean = new ResponseBean();
 
@@ -38,14 +39,19 @@ axios.interceptors.response.use((response: AxiosResponse): any => {
 function responseSuccess(response: AxiosResponse) {
   responseBean = response.data;
   // 数据正确
-  if (responseBean.status.code === 0) {
-    // 若没有分页则返回data
-    if (!responseBean.page) {
-      return responseBean.data;
+  if (responseBean.code === 0) {
+    // 若没有分页则返回 data
+    if (responseBean.data && responseBean.data.totalRow) {
+      const page = new PageUtil();
+      page.totalRow = Number.parseFloat(responseBean.data.totalRow);
+      page.pageNo = responseBean.data.pageCurrent;
+      page.pageSize = responseBean.data.pageSize;
+      responseBean.page = page;
+      return responseBean;
     }
-    return response;
+    return responseBean.data;
   }
-  response.status = responseBean.status.code;
+  response.status = responseBean.code;
   responseHint(responseBean);
 }
 
@@ -56,8 +62,8 @@ function requestFail(error: AxiosError) {
   if (error && error.response) {
     // 后端提示的异常
     let msg = '';
-    if (error.response.data.status) {
-      msg = error.response.data.status.msg;
+    if (error.response.data.code) {
+      msg = error.response.data.message;
     }
 
     switch (error.response.status) {
@@ -108,14 +114,15 @@ function requestFail(error: AxiosError) {
  */
 function responseHint(responseBean: ResponseBean) {
   // 未登录
-  if (responseBean.status.code === 10 || responseBean.status.code === 401) {
+  if (responseBean.code === 10 || responseBean.code === 401) {
     // 未登录初始化用户信息
     UserModule.INIT_USER_INFO();
-    responseBean.status.msg = '登录后才可以悄悄的干坏事哟!';
+    responseBean.message = '登录后才可以悄悄的干坏事哟!';
   }
 
-  Message({message: responseBean.status.msg, type: 'warning', duration: 2 * 1000});
-  throw new Error();
+  Message({message: responseBean.message, type: 'warning', duration: 2 * 1000});
+  return false;
+  // throw new Error();
 }
 
 

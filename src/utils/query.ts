@@ -3,14 +3,14 @@
  *
  * @author marcher
  */
-import QueryPage from '@/utils/queryPage';
+import pageParam from '@/utils/pageParam';
 
 export default class Query<T> {
   public data: T;
 
-  public page: QueryPage;
+  public page: pageParam;
 
-  constructor(data: T, page: QueryPage) {
+  constructor(data: T, page: pageParam) {
     this.data = data;
     this.page = page;
   }

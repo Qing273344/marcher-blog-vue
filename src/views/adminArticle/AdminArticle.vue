@@ -26,7 +26,6 @@
             <el-table-column label="评论">
               <template slot-scope="scope">
                 <el-switch v-model="scope.row.isComment === 1" active-color="#13ce66" @change="changeComment(scope.row)"></el-switch>
-                <!--<el-switch v-model="isTrue(scope.row.isComment)" active-color="#13ce66" @change="changeComment(scope.row)"></el-switch>-->
               </template>
             </el-table-column>
             <el-table-column label="置顶">
@@ -56,14 +55,11 @@
 
 <script lang="ts">
   import { Component, Vue } from "vue-property-decorator";
-  import QueryPage from "@/utils/queryPage";
   import QueryData from "@/utils/queryData";
-  import Query from "@/utils/query";
   import PageUtil from "@/utils/pageUtil";
   import { AdminArticleListBean } from "@/bean/AdminArticleListBean";
   import Pagination from "@/components/pagination/pagination.vue";
   import AdminArticleApi from "@/api/adminArticle";
-  import { ResponseBean } from "@/bean/common/ResponseBean";
   import { ArticleStatusEnum } from "@/commons/enums/ArticleStatusEnum";
 
   @Component({
@@ -75,11 +71,7 @@
     private articleId: string = '';
     private pageUtil: PageUtil = new PageUtil();
 
-    private responseBean: ResponseBean = new ResponseBean();
-
-    private queryPage: QueryPage = new QueryPage();
     private queryData: QueryData = new QueryData();
-    private queryArgs: Query<QueryData> = new Query(this.queryData, this.queryPage);
     private adminArticleListBeanList: AdminArticleListBean[] = new Array<AdminArticleListBean>();
 
     private created() {
@@ -109,8 +101,7 @@
      * 分页
      */
     private changePage(pageUtil: PageUtil) {
-      this.pageUtil = pageUtil;
-      this.queryPage = QueryPage.change(this.pageUtil);
+      this.queryData.change(pageUtil);
       this.query();
     }
 
@@ -160,13 +151,9 @@
      * query
      */
     private query() {
-      // 更新query参数
-      this.queryArgs = new Query(this.queryData, this.queryPage);
-
-      AdminArticleApi.query(this.queryArgs).then((response) => {
-        this.responseBean = response.data;
-        this.adminArticleListBeanList = this.responseBean.data.list;
-        this.pageUtil = this.responseBean.page;
+      AdminArticleApi.query(this.queryData).then((responseBean : any) => {
+        this.adminArticleListBeanList = responseBean.data.list;
+        this.pageUtil = responseBean.page;
       });
     }
 
@@ -175,7 +162,6 @@
      */
     refresh() {
       this.queryData = new QueryData();
-      this.queryPage = QueryPage.init();
       this.query();
     }
 

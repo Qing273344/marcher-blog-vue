@@ -13,6 +13,6 @@ export enum PageStyleEnum {
   /**
    * 简单样式
    */
-  SIMPL_LAYOUT = 2,
+  SIMPLE_LAYOUT = 2,
 
 }

@@ -95,13 +95,13 @@
     private initAttribute() {
       if (this.articlePublishDialog) {
         // 获取博客标签
-        AdminTagApi.listAll(null).then((response: any) => {
-          this.articleTagBeanList = response.list;
+        AdminTagApi.listAll(null).then((data: any) => {
+          this.articleTagBeanList = data;
         });
 
         // 获取博客类型
-        AdminTypeAPi.listAll(null).then((response: any) => {
-          this.articleTypeBeanList = response.list;
+        AdminTypeAPi.listAll(null).then((data: any) => {
+          this.articleTypeBeanList = data;
         });
       }
     }

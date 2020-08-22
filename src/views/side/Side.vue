@@ -33,8 +33,8 @@
      * get 热门标签
      */
     private getHotTag() {
-      SideApi.getHotTag(null).then((response: any) => {
-        this.tags = response.list;
+      SideApi.getHotTag(null).then((data: any) => {
+        this.tags = data;
       });
     }
 

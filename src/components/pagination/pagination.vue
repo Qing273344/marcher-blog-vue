@@ -4,7 +4,7 @@
     <el-pagination
       @size-change="sizeChangeHandle"
       @current-change="currentChangeHandle"
-      :current-page="pageUtil.curPage"
+      :current-page="pageUtil.pageNo"
       :page-size="pageUtil.pageSize"
       :total="pageUtil.totalRow"
       :page-sizes="[5, 10, 15, 20]"
@@ -25,12 +25,12 @@
     @Prop() private pageUtil!: PageUtil;
 
     private fullLayout: string = 'total, sizes, prev, pager, next, jumper';
-    private simplLayout: string = 'prev, pager, next';
+    private simpleLayout: string = 'prev, pager, next';
     private pageLayout: string = this.fullLayout;
 
     private created() {
-      if (this.pageUtil.pageStyle === PageStyleEnum.SIMPL_LAYOUT) {
-        this.pageLayout = this.simplLayout;
+      if (this.pageUtil.pageStyle === PageStyleEnum.SIMPLE_LAYOUT) {
+        this.pageLayout = this.simpleLayout;
       }
     }
 
@@ -41,17 +41,15 @@
     private sizeChangeHandle(pageSize: number) {
       this.pageUtil.pageSize = pageSize;
       return this.pageUtil;
-      // this.$emit("changePage", this.pageUtil);
     }
 
     /**
      * 翻页
      */
     @Emit('changePage')
-    private currentChangeHandle(curPage: number) {
-      this.pageUtil.curPage = curPage;
+    private currentChangeHandle(pageNo: number) {
+      this.pageUtil.pageNo = pageNo;
       return this.pageUtil;
-      // this.$emit("", this.pageUtil);
     }
 
   }

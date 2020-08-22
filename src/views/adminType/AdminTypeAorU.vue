@@ -58,8 +58,8 @@
     @Watch('typeId')
     private getTypeInfo() {
       if (this.typeId) {
-        AdminTypeAPi.get({id: this.typeId}).then((response: any) => {
-          this.articleTypeBean = response.info;
+        AdminTypeAPi.get({id: this.typeId}).then((data: any) => {
+          this.articleTypeBean = data;
         });
       }
     }

@@ -74,7 +74,7 @@
       // 校验
       (this.$refs.registerForm as ElForm).validate((valid: boolean) => {
         if (valid) {
-          RegisterApi.register(this.registerForm).then((response) => {
+          RegisterApi.register(this.registerForm).then((data: any) => {
             // 跳转到登录页
             this.loginLink();
 

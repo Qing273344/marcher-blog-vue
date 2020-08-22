@@ -58,8 +58,8 @@
     @Watch('tagId')
     private getTagInfo() {
       if (this.tagId) {
-        AdminTagApi.get({id: this.tagId}).then((response: any) => {
-          this.articleTagBean = response.info;
+        AdminTagApi.get({id: this.tagId}).then((data: any) => {
+          this.articleTagBean = data;
         });
       }
     }

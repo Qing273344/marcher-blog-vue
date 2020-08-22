@@ -40,12 +40,9 @@
   import AdminTagAorU from "@/views/adminTag/AdminTagAorU.vue";
   import { ArticleTagBean } from "@/bean/ArticleTagBean";
   import AdminTagApi from "@/api/adminTag";
-  import Query from "@/utils/query";
   import Pagination from "@/components/pagination/pagination.vue";
   import PageUtil from "@/utils/pageUtil";
-  import { ResponseBean } from "@/bean/common/ResponseBean";
   import QueryData from "@/utils/queryData";
-  import QueryPage from "@/utils/queryPage";
 
   @Component({
     components: {
@@ -57,11 +54,7 @@
     private tagId: string = '';
     private pageUtil: PageUtil = new PageUtil();
 
-    private responseBean: ResponseBean = new ResponseBean();
-
-    private queryPage: QueryPage = new QueryPage();
     private queryData: QueryData = new QueryData();
-    private queryArgs: Query<QueryData> = new Query(this.queryData, this.queryPage);
     private ids: string[] = [];
     private selectTagBeanList: ArticleTagBean[] = new Array<ArticleTagBean>();
     private articleTagBeanList: ArticleTagBean[] = new Array<ArticleTagBean>();
@@ -79,8 +72,7 @@
     }
 
     private changePage(pageUtil: PageUtil) {
-      this.pageUtil = pageUtil;
-      this.queryPage = QueryPage.change(this.pageUtil);
+      this.queryData.change(pageUtil);
       this.query();
     }
 
@@ -132,20 +124,14 @@
     }
 
     private query() {
-      // 更新query参数
-      this.queryArgs = new Query(this.queryData, this.queryPage);
-
-      /// query
-      AdminTagApi.query(this.queryArgs).then((response) => {
-        this.responseBean = response.data;
-        this.articleTagBeanList = this.responseBean.data.list;
-        this.pageUtil = this.responseBean.page;
+      AdminTagApi.query(this.queryData).then((responseBean: any) => {
+        this.articleTagBeanList = responseBean.data.list;
+        this.pageUtil = responseBean.page;
       });
     }
 
     private refresh() {
       this.queryData = new QueryData();
-      this.queryPage = QueryPage.init();
       this.query();
     }
   }

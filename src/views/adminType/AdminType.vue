@@ -41,10 +41,7 @@
   import AdminTypeAorU from "@/views/adminType/AdminTypeAorU.vue";
   import Pagination from "@/components/pagination/pagination.vue";
   import PageUtil from "@/utils/pageUtil";
-  import { ResponseBean } from "@/bean/common/ResponseBean";
-  import QueryPage from "@/utils/queryPage";
   import QueryData from "@/utils/queryData";
-  import Query from "@/utils/query";
   import { ArticleTypeBean } from "@/bean/articleTypeBean";
   import AdminTypeAPi from "@/api/adminType";
 
@@ -58,11 +55,7 @@
     private typeId: string = '';
     private pageUtil: PageUtil = new PageUtil();
 
-    private responseBean: ResponseBean = new ResponseBean();
-
-    private queryPage: QueryPage = new QueryPage();
     private queryData: QueryData = new QueryData();
-    private queryArgs: Query<QueryData> = new Query(this.queryData, this.queryPage);
     private ids: string[] = [];
     private selectTypeBeanList: ArticleTypeBean[] = new Array<ArticleTypeBean>();
     private articleTypeBeanList: ArticleTypeBean[] = new Array<ArticleTypeBean>();
@@ -86,8 +79,7 @@
      *  分页
      */
     private changePage(pageUtil: PageUtil) {
-      this.pageUtil = pageUtil;
-      this.queryPage = QueryPage.change(this.pageUtil);
+      this.queryData.change(pageUtil);
       this.query();
     }
 
@@ -154,14 +146,9 @@
      * 查询
      */
     private query() {
-      // 更新query参数
-      this.queryArgs = new Query(this.queryData, this.queryPage);
-
-      /// query
-      AdminTypeAPi.query(this.queryArgs).then((response: any) => {
-        this.responseBean = response.data;
-        this.articleTypeBeanList = this.responseBean.data.list;
-        this.pageUtil = this.responseBean.page;
+      AdminTypeAPi.query(this.queryData).then((responseBean: any) => {
+        this.articleTypeBeanList = responseBean.data.list;
+        this.pageUtil = responseBean.page;
       });
     }
 
@@ -170,7 +157,6 @@
      */
     private refresh() {
       this.queryData = new QueryData();
-      this.queryPage = QueryPage.init();
       this.query();
     }
 

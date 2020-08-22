@@ -77,7 +77,8 @@
           UserModule.Login(this.loginForm).then(() => {
             // 登录成功获取用户信息
             this.getUserInfo();
-          }).catch(() => { });
+          }).catch(() => {
+          });
         } else {
           return false;
         }
@@ -88,8 +89,8 @@
      * 用户信息
      */
     private getUserInfo() {
-      LoginApi.userInfo().then((response: any) => {
-        const userInfoBean = this.userInfoBean = response.info;
+      LoginApi.userInfo().then((data: any) => {
+        const userInfoBean = this.userInfoBean = data;
         this.UserInfo(userInfoBean);
         // 登录成功返回上一页
         this.$router.go(-1);

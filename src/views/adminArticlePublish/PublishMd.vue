@@ -69,8 +69,8 @@
     }
 
     private init(articleId: string) {
-      AdminArticleApi.getAsEdit({id: articleId}).then((response: any) => {
-        this.articlePublishFrom = response.info;
+      AdminArticleApi.getAsEdit({id: articleId}).then((data: any) => {
+        this.articlePublishFrom = data;
       });
     }
 
@@ -81,10 +81,9 @@
       // 图片
       const formData = new FormData();
       formData.append('file', $file);
-      AdminArticleApi.putImg(formData).then((response: any) => {
-        const fileUrl = response.info;
+      AdminArticleApi.putImg(formData).then((data: any) => {
         // 替换url
-        (this.$refs.mavon as any).$img2Url(pos, fileUrl);
+        (this.$refs.mavon as any).$img2Url(pos, data);
       });
     }
 
