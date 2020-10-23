@@ -42,7 +42,7 @@
   import { Component, Vue } from "vue-property-decorator";
   import "mavon-editor/dist/css/index.css";
   import ArticlePublish from "@/views/adminArticlePublish/ArticlePublish.vue";
-  import { ArticlePublishFrom } from "@/from/ArticlePublishFrom";
+  import { ArticlePublishFrom } from "@/bean/from/ArticlePublishFrom";
   import { Message } from "element-ui";
   import AdminArticleApi from "@/api/adminArticle";
 

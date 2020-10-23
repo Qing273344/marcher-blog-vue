@@ -9,7 +9,7 @@ export default class AdminArticleApi extends BaseApi {
 
   public static putImg(data: any) {
     const url = 'admin/upload/uploadFile';
-    return super.filePost(data, url);
+    return super.postFile(data, url);
   }
 
   /**
@@ -52,7 +52,7 @@ export default class AdminArticleApi extends BaseApi {
    */
   public static remove(data: any) {
     const url = 'admin/article/remove';
-    return super.fromPost(data, url);
+    return super.postForm(data, url);
   }
 
   /**
@@ -60,7 +60,7 @@ export default class AdminArticleApi extends BaseApi {
    */
   public static comment(data: any) {
     const url = 'admin/article/comment';
-    return super.fromPost(data, url);
+    return super.postForm(data, url);
   }
 
   /**
@@ -68,6 +68,6 @@ export default class AdminArticleApi extends BaseApi {
    */
   public static top(data: any) {
     const url = 'admin/article/top';
-    return super.fromPost(data, url);
+    return super.postForm(data, url);
   }
 }

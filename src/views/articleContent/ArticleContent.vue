@@ -2,7 +2,7 @@
 <template>
   <div class="article-content">
     <div class="article-head">
-      <span>{{ articleDetails.title }}</span>
+      <span>{{ articleDetail.title }}</span>
     </div>
     <div class="markdown-body" v-highlight v-html="articleContentHtml"></div>
 
@@ -17,7 +17,7 @@
   import "mavon-editor/dist/markdown/github-markdown.min.css";
   import "mavon-editor/src/lib/css/md.css";
   import "highlight.js/styles/googlecode.css";
-  import { ArticleDetailsBean } from "@/bean/ArticleDetailsBean"; //样式文件
+  import { ArticleDetailBean } from "@/bean/ArticleDetailBean"; //样式文件
   const highlight = require('@/components/plugs/highlight.ts');   // markdown高亮插件
 
   @Component({
@@ -28,7 +28,7 @@
   })
   export default class ArticleContent extends Vue {
 
-    private articleDetails: ArticleDetailsBean = new ArticleDetailsBean();
+    private articleDetail: ArticleDetailBean = new ArticleDetailBean();
     private articleContentHtml = '';
 
     private articleId: any = '';
@@ -39,9 +39,9 @@
     }
 
     getArticleContent() {
-      ArticleApi.details({id: this.articleId}).then((data: any) => {
-        this.articleDetails = data;
-        this.articleContentHtml = marked(this.articleDetails.articleContentMd);
+      ArticleApi.detail({id: this.articleId}).then((data: any) => {
+        this.articleDetail = data;
+        this.articleContentHtml = marked(this.articleDetail.articleContentMd);
       })
     }
 

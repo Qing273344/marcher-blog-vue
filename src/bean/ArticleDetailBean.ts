@@ -3,7 +3,7 @@
  *
  * @author marcher
  */
-export class ArticleDetailsBean {
+export class ArticleDetailBean {
   public articleId = null;
   public title = '';
   public isComment = 0;

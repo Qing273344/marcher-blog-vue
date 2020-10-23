@@ -1,4 +1,5 @@
-import { filePost, formPost, get, post } from '@/utils/request';
+import { postFile, postForm, get, post } from '@/utils/request';
+import { ReqsBean } from '@/bean/common/ReqsBean';
 
 /**
  * base api
@@ -8,15 +9,25 @@ import { filePost, formPost, get, post } from '@/utils/request';
 export default class BaseApi {
 
   /**
+   * post 请求
+   *
+   * @param data  data
+   * @param url   url
+   */
+  protected static post(data: any, url: string) {
+    const reqs = this.wrapperReqs(data, url);
+    return post(reqs);
+  }
+
+  /**
    * get 请求
    *
    * @param data  data
    * @param url   url
    */
   protected static get(data: any, url: string) {
-    const req = this.reqForm(data, url);
-    // return RequestUtil.get(req);
-    return get(req);
+    const reqs = this.wrapperReqs(data, url);
+    return get(reqs);
   }
 
   /**
@@ -25,10 +36,9 @@ export default class BaseApi {
    * @param data  data
    * @param url   url
    */
-  protected static fromPost(data: any, url: string) {
-    const req = this.reqForm(data, url);
-    // return RequestUtil.form(req);
-    return formPost(req);
+  protected static postForm(data: any, url: string) {
+    const reqs = this.wrapperReqs(data, url);
+    return postForm(reqs);
   }
 
   /**
@@ -37,21 +47,9 @@ export default class BaseApi {
    * @param data  data
    * @param url   url
    */
-  protected static filePost(data: any, url: string) {
-    const req = this.reqForm(data, url);
-    return filePost(req);
-  }
-
-  /**
-   * post 请求
-   *
-   * @param data  data
-   * @param url   url
-   */
-  protected static post(data: any, url: string) {
-    const req = this.reqForm(data, url);
-    // return RequestUtil.json(req);
-    return post(req);
+  protected static postFile(data: any, url: string) {
+    const reqs = this.wrapperReqs(data, url);
+    return postFile(reqs);
   }
 
   /**
@@ -60,10 +58,12 @@ export default class BaseApi {
    * @param data  数据
    * @param url   url
    */
-  protected static reqForm(data: any, url: string) {
-    return {
-      data,
-      url,
-    };
+  protected static wrapperReqs(data: any, url: string) {
+    return new ReqsBean(url, data);
+
+    // return {
+    //   data,
+    //   url,
+    // };
   }
 }

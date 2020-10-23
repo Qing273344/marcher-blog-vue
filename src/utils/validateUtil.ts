@@ -16,7 +16,7 @@ export default class ValidateUtil {
    * 是否都是字母
    * @param str 待校验字符
    */
-  public static validatAlphabets(str: string) {
+  public static validateAlphabets(str: string) {
     const reg = /^[A-Za-z]+$/;
     return reg.test(str);
   }

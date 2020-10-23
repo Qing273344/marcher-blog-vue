@@ -8,7 +8,7 @@
       <span class="cool-span right"></span>
       <span class="cool-span bottom"></span>
 
-      <div class="article-details-link" @click="handleDetails(article.articleId)">
+      <div class="article-detail-link" @click="handleDetail(article.articleId)">
         <div class="article-title">
           <span>{{ article.title }}</span>
         </div>
@@ -112,7 +112,7 @@
      * 文章详情
      * @param articleId    文章id
      */
-    private handleDetails(articleId: string) {
+    private handleDetail(articleId: string) {
       const routeUrl = this.$router.resolve({
         name: "articleContentMainLink",
         query: {

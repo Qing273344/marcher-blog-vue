@@ -20,7 +20,7 @@
                 <div class="article-draft-status" v-else>
                   <span>草稿哟</span>
                 </div>
-                <span class="article-title" @click="toDetails()">{{ scope.row.title }}</span>
+                <span class="article-title" @click="toDetail()">{{ scope.row.title }}</span>
               </template>
             </el-table-column>
             <el-table-column label="评论">
@@ -78,7 +78,7 @@
       this.query();
     }
 
-    private toDetails() {
+    private toDetail() {
       console.log(111);
     }
 

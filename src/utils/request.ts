@@ -129,21 +129,10 @@ function responseHint(responseBean: ResponseBean) {
 /**
  * ---------------------------------------------------------------------------------------------------------------- 请求
  */
-export const get = (req: any) => {
-  return request(req);
-};
-
-export const formPost = (req: any) => {
-  return request(req, ContentTypeEnum.FORM);
-};
-
-export const filePost = (req: any) => {
-  return request(req, ContentTypeEnum.FILE);
-};
-
-export const post = (req: any) => {
-  return request(req, ContentTypeEnum.JSON);
-};
+export const get = (req: any) => request(req);
+export const post = (req: any) => request(req, ContentTypeEnum.JSON);
+export const postForm = (req: any) => request(req, ContentTypeEnum.FORM);
+export const postFile = (req: any) => request(req, ContentTypeEnum.FILE);
 
 
 const request = (req: any, type: ContentTypeEnum | null = null) => {
@@ -153,6 +142,6 @@ const request = (req: any, type: ContentTypeEnum | null = null) => {
   } else if (ContentTypeEnum.FORM === type) {
     return axios({method: 'post', url: `/${req.url}`, data: qs.stringify(data), headers: {'Content-Type': type}});
   } else {
-    return axios({method: 'post', url: `/${req.url}`, data: data, headers: {'Content-Type': type}});
+    return axios({method: 'post', url: `/${req.url}`, data, headers: {'Content-Type': type}});
   }
 };

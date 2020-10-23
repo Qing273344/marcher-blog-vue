@@ -18,8 +18,8 @@ export default class ArticleApi extends BaseApi {
   /**
    * 文章详情
    */
-  public static details(data: any) {
-    const url = 'blog/article/details';
+  public static detail(data: any) {
+    const url = 'blog/article/detail';
     return super.get(data, url);
   }
 
@@ -28,6 +28,6 @@ export default class ArticleApi extends BaseApi {
    */
   public static liked(data: any) {
     const url = 'blog/article/liked';
-    return super.fromPost(data, url);
+    return super.postForm(data, url);
   }
 }

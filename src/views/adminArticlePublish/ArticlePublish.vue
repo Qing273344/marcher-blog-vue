@@ -37,7 +37,7 @@
   import { Component, Emit, Prop, Vue, Watch } from "vue-property-decorator";
   import AdminTagApi from "@/api/adminTag";
   import { ArticleTagBean } from "@/bean/ArticleTagBean";
-  import { ArticlePublishFrom } from "@/from/ArticlePublishFrom";
+  import { ArticlePublishFrom } from "@/bean/from/ArticlePublishFrom";
   import { ArticleTypeBean } from "@/bean/articleTypeBean";
   import AdminTypeAPi from "@/api/adminType";
   import { Message } from "element-ui";

@@ -19,7 +19,7 @@ export class User extends VuexModule implements IUserState {
 
   @Action
   public async Login(loginForm: { username: string, password: string }) {
-    return await LoginApi.login(loginForm);
+    return LoginApi.login(loginForm);
   }
 
   @Action
@@ -44,7 +44,6 @@ export class User extends VuexModule implements IUserState {
 
   @Mutation
   public async INIT_USER_INFO() {
-    // this.username = '';
     this.userType = 0;
     this.isLogin = false;
     LocalStorageUtil.removeItem(LocalStorageUtil.USER_INFO);
