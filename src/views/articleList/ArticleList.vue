@@ -47,9 +47,9 @@
 <script lang="ts">
   import { Component, Vue, Watch } from "vue-property-decorator";
   import { ArticleListBean } from "@/bean/ArticleListBean";
-  import QueryData from "@/utils/queryData";
+  import BaseQuery from "@/bean/common/BaseQuery";
   import PageUtil from "@/utils/pageUtil";
-  import ArticleApi from "@/api/article";
+  import ArticleApi from "@/api/articleApi";
   import { Getter, State } from "vuex-class";
   import { IMainQueryState, MainQueryModule } from "@/store/modules/mainQuery";
   import Pagination from "@/components/pagination/pagination.vue";
@@ -65,7 +65,7 @@
     @Getter private GET_KEYWORD: any;
 
     private pageUtil: PageUtil = new PageUtil(PageStyleEnum.SIMPLE_LAYOUT);
-    private queryData: QueryData = new QueryData();
+    private queryData: BaseQuery = new BaseQuery();
 
     private articleListBeanList: ArticleListBean[] = new Array<ArticleListBean>();
 

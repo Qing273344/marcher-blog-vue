@@ -42,9 +42,9 @@
 
 <script lang="ts">
   import { Component, Vue } from "vue-property-decorator";
-  import RegisterApi from "@/api/register";
   import { ElForm } from "element-ui/types/form";
   import ValidateUtil from "@/utils/validateUtil";
+  import AdminPassportApi from '@/api/AdminPassportApi';
 
   @Component({
     components: {
@@ -74,7 +74,7 @@
       // 校验
       (this.$refs.registerForm as ElForm).validate((valid: boolean) => {
         if (valid) {
-          RegisterApi.register(this.registerForm).then((data: any) => {
+          AdminPassportApi.register(this.registerForm).then((data: any) => {
             // 跳转到登录页
             this.loginLink();
 

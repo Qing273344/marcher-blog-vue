@@ -11,7 +11,7 @@ export default class ArticleApi extends BaseApi {
    * query 文章列表
    */
   public static query(data: any) {
-    const url = 'blog/article/query';
+    const url = '/article/query';
     return super.post(data, url);
   }
 
@@ -19,7 +19,7 @@ export default class ArticleApi extends BaseApi {
    * 文章详情
    */
   public static detail(data: any) {
-    const url = 'blog/article/detail';
+    const url = '/article/detail';
     return super.get(data, url);
   }
 
@@ -27,7 +27,7 @@ export default class ArticleApi extends BaseApi {
    * 文章点赞
    */
   public static liked(data: any) {
-    const url = 'blog/article/liked';
+    const url = '/article/liked';
     return super.postForm(data, url);
   }
 }

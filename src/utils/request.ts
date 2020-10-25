@@ -7,6 +7,7 @@ import { Message } from 'element-ui';
 import { UserModule } from '@/store/modules/user';
 import { ContentTypeEnum } from '@/commons/enums/ContentTypeEnum';
 import PageUtil from '@/utils/pageUtil';
+import { RequestBean } from '@/bean/common/RequestBean';
 
 let responseBean = new ResponseBean();
 
@@ -129,19 +130,19 @@ function responseHint(responseBean: ResponseBean) {
 /**
  * ---------------------------------------------------------------------------------------------------------------- 请求
  */
-export const get = (req: any) => request(req);
-export const post = (req: any) => request(req, ContentTypeEnum.JSON);
-export const postForm = (req: any) => request(req, ContentTypeEnum.FORM);
-export const postFile = (req: any) => request(req, ContentTypeEnum.FILE);
+export const get = (reqs: RequestBean) => request(reqs);
+export const post = (reqs: RequestBean) => request(reqs, ContentTypeEnum.JSON);
+export const postForm = (reqs: RequestBean) => request(reqs, ContentTypeEnum.FORM);
+export const postFile = (reqs: RequestBean) => request(reqs, ContentTypeEnum.FILE);
 
 
-const request = (req: any, type: ContentTypeEnum | null = null) => {
-  const data = req.data;
-  if (!type) {
-    return axios.get(req.url, {params: req.data});
-  } else if (ContentTypeEnum.FORM === type) {
-    return axios({method: 'post', url: `/${req.url}`, data: qs.stringify(data), headers: {'Content-Type': type}});
+const request = (reqs: RequestBean, contentType: ContentTypeEnum | null = null) => {
+  const data = reqs.data;
+  if (!contentType) {
+    return axios.get(reqs.url, {params: reqs.data});
+  } else if (ContentTypeEnum.FORM === contentType) {
+    return axios({method: 'post', url: `/${reqs.url}`, data: qs.stringify(data), headers: {'Content-Type': contentType}});
   } else {
-    return axios({method: 'post', url: `/${req.url}`, data, headers: {'Content-Type': type}});
+    return axios({method: 'post', url: `/${reqs.url}`, data, headers: {'Content-Type': contentType}});
   }
 };

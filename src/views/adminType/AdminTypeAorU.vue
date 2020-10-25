@@ -22,7 +22,7 @@
 <script lang="ts">
   import { Component, Emit, Prop, Vue, Watch } from "vue-property-decorator";
   import { ArticleTypeBean } from "@/bean/articleTypeBean";
-  import AdminTypeAPi from "@/api/adminType";
+  import AdminTypeAPi from "@/api/adminTypeApi";
 
   @Component({
     // components: {}

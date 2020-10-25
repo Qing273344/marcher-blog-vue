@@ -39,11 +39,11 @@
 <script lang="ts">
   import { Component, Vue } from "vue-property-decorator";
   import { UserModule } from "@/store/modules/user";
-  import LoginApi from "@/api/login";
   import { UserInfoBean } from "@/bean/UserInfoBean";
   import { Action } from "vuex-class";
   import ValidateUtil from "@/utils/validateUtil";
   import { ElForm } from "element-ui/types/form";
+  import AdminUserApi from '@/api/AdminUserApi';
 
   @Component
   export default class Login extends Vue {
@@ -89,7 +89,7 @@
      * 用户信息
      */
     private getUserInfo() {
-      LoginApi.userInfo().then((data: any) => {
+      AdminUserApi.userInfo().then((data: any) => {
         const userInfoBean = this.userInfoBean = data;
         this.UserInfo(userInfoBean);
         // 登录成功返回上一页

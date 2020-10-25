@@ -55,11 +55,11 @@
 
 <script lang="ts">
   import { Component, Vue } from "vue-property-decorator";
-  import QueryData from "@/utils/queryData";
+  import BaseQuery from "@/bean/common/BaseQuery";
   import PageUtil from "@/utils/pageUtil";
   import { AdminArticleListBean } from "@/bean/AdminArticleListBean";
   import Pagination from "@/components/pagination/pagination.vue";
-  import AdminArticleApi from "@/api/adminArticle";
+  import AdminArticleApi from "@/api/adminArticleApi";
   import { ArticleStatusEnum } from "@/commons/enums/ArticleStatusEnum";
 
   @Component({
@@ -71,7 +71,7 @@
     private articleId: string = '';
     private pageUtil: PageUtil = new PageUtil();
 
-    private queryData: QueryData = new QueryData();
+    private queryData: BaseQuery = new BaseQuery();
     private adminArticleListBeanList: AdminArticleListBean[] = new Array<AdminArticleListBean>();
 
     private created() {
@@ -161,7 +161,7 @@
      * 刷新查询
      */
     refresh() {
-      this.queryData = new QueryData();
+      this.queryData = new BaseQuery();
       this.query();
     }
 

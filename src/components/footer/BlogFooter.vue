@@ -33,7 +33,6 @@
   .blog-footer, .el-footer {
     height: 100px;
     width: 100%;
-    /*darkgrey*/
     background: #b5b5b5 url("https://marcher-blog.oss-cn-shenzhen.aliyuncs.com/project/title_img.jpeg") no-repeat center center;
   }
 

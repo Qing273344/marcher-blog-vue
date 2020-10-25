@@ -35,13 +35,13 @@
 
 <script lang="ts">
   import { Component, Emit, Prop, Vue, Watch } from "vue-property-decorator";
-  import AdminTagApi from "@/api/adminTag";
+  import AdminTagApi from "@/api/adminTagApi";
   import { ArticleTagBean } from "@/bean/ArticleTagBean";
   import { ArticlePublishFrom } from "@/bean/from/ArticlePublishFrom";
   import { ArticleTypeBean } from "@/bean/articleTypeBean";
-  import AdminTypeAPi from "@/api/adminType";
+  import AdminTypeAPi from "@/api/adminTypeApi";
   import { Message } from "element-ui";
-  import AdminArticleApi from "@/api/adminArticle";
+  import AdminArticleApi from "@/api/adminArticleApi";
   import { ArticleStatusEnum } from "@/commons/enums/ArticleStatusEnum";
   import { IsEnum } from "@/commons/enums/IsEnum";
 

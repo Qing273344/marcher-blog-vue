@@ -6,7 +6,6 @@
     <router-view/>
 
     </el-main>
-    <!--<Footer></Footer>-->
   </div>
 </template>
 

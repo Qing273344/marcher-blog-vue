@@ -3,7 +3,7 @@
  *
  * @author marcher
  */
-export class ReqsBean {
+export class RequestBean {
   public url: string = '';
   public data: any;
 

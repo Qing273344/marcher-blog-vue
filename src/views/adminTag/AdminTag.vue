@@ -39,10 +39,10 @@
   import { Component, Vue } from "vue-property-decorator";
   import AdminTagAorU from "@/views/adminTag/AdminTagAorU.vue";
   import { ArticleTagBean } from "@/bean/ArticleTagBean";
-  import AdminTagApi from "@/api/adminTag";
+  import AdminTagApi from "@/api/adminTagApi";
   import Pagination from "@/components/pagination/pagination.vue";
   import PageUtil from "@/utils/pageUtil";
-  import QueryData from "@/utils/queryData";
+  import BaseQuery from "@/bean/common/BaseQuery";
 
   @Component({
     components: {
@@ -54,7 +54,7 @@
     private tagId: string = '';
     private pageUtil: PageUtil = new PageUtil();
 
-    private queryData: QueryData = new QueryData();
+    private queryData: BaseQuery = new BaseQuery();
     private ids: string[] = [];
     private selectTagBeanList: ArticleTagBean[] = new Array<ArticleTagBean>();
     private articleTagBeanList: ArticleTagBean[] = new Array<ArticleTagBean>();
@@ -131,7 +131,7 @@
     }
 
     private refresh() {
-      this.queryData = new QueryData();
+      this.queryData = new BaseQuery();
       this.query();
     }
   }

@@ -57,7 +57,7 @@
   import { IUserState, UserModule } from "@/store/modules/user";
   import ElHeader from "element-ui/packages/header/src/main.vue";
   import { Action, State } from "vuex-class";
-  import Logout from "@/api/logout";
+  import AdminPassportApi from '@/api/AdminPassportApi';
 
   @Component({
     components: {
@@ -103,7 +103,7 @@
     }
 
     handleLogout() {
-      Logout.logout(null);
+      AdminPassportApi.logout(null);
       // 初始化用户信息
       UserModule.INIT_USER_INFO();
     }

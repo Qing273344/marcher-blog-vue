@@ -44,7 +44,7 @@
   import ArticlePublish from "@/views/adminArticlePublish/ArticlePublish.vue";
   import { ArticlePublishFrom } from "@/bean/from/ArticlePublishFrom";
   import { Message } from "element-ui";
-  import AdminArticleApi from "@/api/adminArticle";
+  import AdminArticleApi from "@/api/adminArticleApi";
 
   import mavonEditor from "mavon-editor";
   // const mavonEditor = require('mavon-editor');

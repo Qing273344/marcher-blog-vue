@@ -41,9 +41,9 @@
   import AdminTypeAorU from "@/views/adminType/AdminTypeAorU.vue";
   import Pagination from "@/components/pagination/pagination.vue";
   import PageUtil from "@/utils/pageUtil";
-  import QueryData from "@/utils/queryData";
+  import BaseQuery from "@/bean/common/BaseQuery";
   import { ArticleTypeBean } from "@/bean/articleTypeBean";
-  import AdminTypeAPi from "@/api/adminType";
+  import AdminTypeAPi from "@/api/adminTypeApi";
 
   @Component({
     components: {
@@ -55,7 +55,7 @@
     private typeId: string = '';
     private pageUtil: PageUtil = new PageUtil();
 
-    private queryData: QueryData = new QueryData();
+    private queryData: BaseQuery = new BaseQuery();
     private ids: string[] = [];
     private selectTypeBeanList: ArticleTypeBean[] = new Array<ArticleTypeBean>();
     private articleTypeBeanList: ArticleTypeBean[] = new Array<ArticleTypeBean>();
@@ -156,7 +156,7 @@
      * 刷新
      */
     private refresh() {
-      this.queryData = new QueryData();
+      this.queryData = new BaseQuery();
       this.query();
     }
 

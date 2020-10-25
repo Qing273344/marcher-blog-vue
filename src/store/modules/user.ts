@@ -1,9 +1,9 @@
 import { Action, getModule, Module, Mutation, VuexModule } from 'vuex-module-decorators';
 
-import LoginApi from '@/api/login';
 import store from '@/store/store';
 import { UserInfoBean } from '@/bean/UserInfoBean';
 import LocalStorageUtil from '@/utils/localStorageUtil';
+import AdminPassportApi from '@/api/AdminPassportApi';
 
 export interface IUserState {
   username: string;
@@ -19,7 +19,7 @@ export class User extends VuexModule implements IUserState {
 
   @Action
   public async Login(loginForm: { username: string, password: string }) {
-    return LoginApi.login(loginForm);
+    return AdminPassportApi.login(loginForm);
   }
 
   @Action

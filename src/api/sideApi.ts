@@ -6,7 +6,7 @@ export default class SideApi extends BaseApi {
    * get 热门标签
    */
   public static getHotTag(data: any) {
-    const url = 'blog/tag/getHotTag';
+    const url = '/article/tag/getHotTag';
     return super.get(data, url);
   }
 }

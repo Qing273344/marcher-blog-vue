@@ -8,7 +8,7 @@ import BaseApi from '@/api/baseApi';
 export default class AdminArticleApi extends BaseApi {
 
   public static putImg(data: any) {
-    const url = 'admin/upload/uploadFile';
+    const url = '/manage/article/uploadFile';
     return super.postFile(data, url);
   }
 
@@ -16,7 +16,7 @@ export default class AdminArticleApi extends BaseApi {
    * 发布文字 - md编辑器
    */
   public static publishMd(data: any) {
-    const url = 'admin/article/publish';
+    const url = '/manage/article/publish';
     return super.post(data, url);
   }
 
@@ -24,17 +24,8 @@ export default class AdminArticleApi extends BaseApi {
    * get
    * @param data
    */
-  public static get(data: any) {
-    const url = 'admin/article/get';
-    return super.get(data, url);
-  }
-
-  /**
-   * get
-   * @param data
-   */
   public static getAsEdit(data: any) {
-    const url = 'admin/article/getAsEdit';
+    const url = '/manage/article/getAsEdit';
     return super.get(data, url);
   }
 
@@ -43,7 +34,7 @@ export default class AdminArticleApi extends BaseApi {
    * @param data
    */
   public static query(data: any) {
-    const url = 'admin/article/query';
+    const url = '/manage/article/query';
     return super.post(data, url);
   }
 
@@ -51,7 +42,7 @@ export default class AdminArticleApi extends BaseApi {
    * remove
    */
   public static remove(data: any) {
-    const url = 'admin/article/remove';
+    const url = '/manage/article/remove';
     return super.postForm(data, url);
   }
 
@@ -59,7 +50,7 @@ export default class AdminArticleApi extends BaseApi {
    * update 评论设置
    */
   public static comment(data: any) {
-    const url = 'admin/article/comment';
+    const url = '/manage/article/comment';
     return super.postForm(data, url);
   }
 
@@ -67,7 +58,7 @@ export default class AdminArticleApi extends BaseApi {
    * update 置顶设置
    */
   public static top(data: any) {
-    const url = 'admin/article/top';
+    const url = '/manage/article/top';
     return super.postForm(data, url);
   }
 }

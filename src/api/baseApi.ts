@@ -1,5 +1,5 @@
 import { postFile, postForm, get, post } from '@/utils/request';
-import { ReqsBean } from '@/bean/common/ReqsBean';
+import { RequestBean } from '@/bean/common/RequestBean';
 
 /**
  * base api
@@ -59,7 +59,7 @@ export default class BaseApi {
    * @param url   url
    */
   protected static wrapperReqs(data: any, url: string) {
-    return new ReqsBean(url, data);
+    return new RequestBean(url, data);
 
     // return {
     //   data,
