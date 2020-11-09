@@ -47,7 +47,6 @@
   import AdminArticleApi from "@/api/adminArticleApi";
 
   import mavonEditor from "mavon-editor";
-  // const mavonEditor = require('mavon-editor');
 
   @Component({
     components: {
@@ -78,6 +77,8 @@
      * 文章图片上传
      */
     private $imgAdd(pos: any, $file: any) {
+      // 获取OSS签名及相关信息
+
       // 图片
       const formData = new FormData();
       formData.append('file', $file);

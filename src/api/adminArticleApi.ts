@@ -8,7 +8,8 @@ import BaseApi from '@/api/baseApi';
 export default class AdminArticleApi extends BaseApi {
 
   public static putImg(data: any) {
-    const url = '/manage/article/uploadFile';
+    const url = '/manage/common/upload';
+
     return super.postFile(data, url);
   }
 

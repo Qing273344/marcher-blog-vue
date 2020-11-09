@@ -34,7 +34,7 @@
               </template>
             </el-table-column>
             <el-table-column prop="viewsCount" label="浏览"></el-table-column>
-            <el-table-column prop="description" label="评论"></el-table-column>
+            <el-table-column prop="description" label="概要"></el-table-column>
             <el-table-column prop="likedCount" label="喜欢"></el-table-column>
             <el-table-column prop="timeStr" label="发布时间" width="160"></el-table-column>
             <el-table-column label="操作" width="220">
@@ -85,7 +85,7 @@
     /**
      * 是否发布
      */
-    private isPublish(row: AdminArticleListBean) {
+    isPublish(row: AdminArticleListBean) {
       return row.status && row.status == ArticleStatusEnum.ARTICLE_STATUS_PUBLISH;
     }
 

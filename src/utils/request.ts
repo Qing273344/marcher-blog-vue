@@ -18,11 +18,25 @@ let responseBean = new ResponseBean();
 const baseURL = EnvConfig.basicUrl;
 const axios = Axios.create({
   baseURL,
-  timeout: 6000,
+  timeout: 30000,
   withCredentials: true, // 允许跨域 cookie
-  maxContentLength: 2000,
+  maxContentLength: 20000,
 });
 
+
+
+/**
+ * ---------------------------------------------------------------------------------------------------------- 请求拦截器
+ */
+axios.interceptors.request.use((config: any) => {
+  if (config.url.match('http')) {
+    config.baseUrl = '';
+  }
+  return config;
+}, (error: any) => {
+  // 对请求错误做些什么
+  return Promise.reject(error);
+});
 
 /**
  * ---------------------------------------------------------------------------------------------------------- 响应拦截器
@@ -137,12 +151,14 @@ export const postFile = (reqs: RequestBean) => request(reqs, ContentTypeEnum.FIL
 
 
 const request = (reqs: RequestBean, contentType: ContentTypeEnum | null = null) => {
+  const url = reqs.url.concat('http') ? reqs.url : (baseURL + reqs.url);
   const data = reqs.data;
+
   if (!contentType) {
-    return axios.get(reqs.url, {params: reqs.data});
+    return axios.get(url, {params: reqs.data});
   } else if (ContentTypeEnum.FORM === contentType) {
-    return axios({method: 'post', url: `/${reqs.url}`, data: qs.stringify(data), headers: {'Content-Type': contentType}});
+    return axios.post(url, qs.stringify(data), {headers: {'Content-Type': contentType}});
   } else {
-    return axios({method: 'post', url: `/${reqs.url}`, data, headers: {'Content-Type': contentType}});
+    return axios.post(url, data, {headers: {'Content-Type': contentType}});
   }
 };

@@ -56,7 +56,7 @@
      * 编辑回显指定数据(监听typeId值的变化, 有值回显)
      */
     @Watch('typeId')
-    private getTypeInfo() {
+    getTypeInfo() {
       if (this.typeId) {
         AdminTypeAPi.get({id: this.typeId}).then((data: any) => {
           this.articleTypeBean = data;

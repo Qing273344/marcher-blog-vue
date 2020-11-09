@@ -94,7 +94,7 @@
     /**
      * 打开编辑弹框
      */
-    private openEditDialog(row: any) {
+    openEditDialog(row: any) {
       this.typeId = row.typeId;
       this.aORuTypeDialog = true;
     }
@@ -126,7 +126,7 @@
             AdminTypeAPi.remove(this.ids).then(() => {
               this.query();
               this.$message({
-                type: 'success', message: "'删除成功!",
+                type: 'success', message: '删除成功!',
               });
             });
           }

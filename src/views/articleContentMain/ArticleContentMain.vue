@@ -2,7 +2,7 @@
 <template>
   <div class="article-content-main">
     <ArticleContent></ArticleContent>
-    <Side></Side>
+<!--    <Side></Side>-->
   </div>
 </template>
 
@@ -23,7 +23,6 @@
 
 <style lang="scss" scoped>
   .article-content-main {
-    /*width: 85%;*/
    	width: 1280px;
     height: 100%;
     margin: 0 auto;
