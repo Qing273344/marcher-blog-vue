@@ -42,11 +42,22 @@ export class User extends VuexModule implements IUserState {
     this.SET_USER_INFO(userInfo);
   }
 
+  @Action
+  public async setPassport(token: string) {
+    LocalStorageUtil.setItem(LocalStorageUtil.USER_BEARER, token);
+  }
+
+  @Action
+  public async getPassport() {
+    return LocalStorageUtil.getItem(LocalStorageUtil.USER_BEARER);
+  }
+
   @Mutation
   public async INIT_USER_INFO() {
     this.userType = 0;
     this.isLogin = false;
     LocalStorageUtil.removeItem(LocalStorageUtil.USER_INFO);
+    LocalStorageUtil.removeItem(LocalStorageUtil.USER_BEARER);
   }
 
   @Mutation
@@ -55,6 +66,7 @@ export class User extends VuexModule implements IUserState {
     this.userType = userInfoBean.userType;
     this.isLogin = userInfoBean.isLogin;
   }
+
 
 }
 

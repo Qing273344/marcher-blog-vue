@@ -22,7 +22,7 @@
 <script lang="ts">
   import { Component, Emit, Prop, Vue, Watch } from "vue-property-decorator";
   import { ArticleTagBean } from "@/bean/ArticleTagBean";
-  import AdminTagApi from "@/api/adminTagApi";
+  import AdminTagApi from "@/api/AdminTagApi";
 
   @Component({
     // components: {}

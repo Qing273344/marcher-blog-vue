@@ -21,8 +21,8 @@
 
 <script lang="ts">
   import { Component, Emit, Prop, Vue, Watch } from "vue-property-decorator";
-  import { ArticleTypeBean } from "@/bean/articleTypeBean";
-  import AdminTypeAPi from "@/api/adminTypeApi";
+  import { ArticleTypeBean } from "@/bean/ArticleTypeBean";
+  import AdminTypeApi from "@/api/AdminTypeApi";
 
   @Component({
     // components: {}
@@ -37,7 +37,7 @@
      * 新增类型
      */
     private handleAdd() {
-      AdminTypeAPi.add(this.articleTypeBean).then(() => {
+      AdminTypeApi.add(this.articleTypeBean).then(() => {
         this.closeDialog();
       });
     }
@@ -47,7 +47,7 @@
      */
     private handleEdit() {
       this.articleTypeBean.typeId = this.typeId;
-      AdminTypeAPi.update(this.articleTypeBean).then(() => {
+      AdminTypeApi.update(this.articleTypeBean).then(() => {
         this.closeDialog();
       });
     }
@@ -58,7 +58,7 @@
     @Watch('typeId')
     getTypeInfo() {
       if (this.typeId) {
-        AdminTypeAPi.get({id: this.typeId}).then((data: any) => {
+        AdminTypeApi.get({id: this.typeId}).then((data: any) => {
           this.articleTypeBean = data;
         });
       }

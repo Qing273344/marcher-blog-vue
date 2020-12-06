@@ -3,15 +3,15 @@
  *
  * @author marcher
  */
-import BaseApi from '@/api/baseApi';
+import BaseApi from '@/api/BaseApi';
 
-export default class AdminTypeAPi extends BaseApi {
+export default class AdminTagApi extends BaseApi {
 
   /**
    * get
    */
   public static get(data: any) {
-    const url = '/manage/type/get';
+    const url = '/manage/tag/get';
     return super.get(data, url);
   }
 
@@ -19,7 +19,7 @@ export default class AdminTypeAPi extends BaseApi {
    * listAll
    */
   public static listAll(data: any) {
-    const url = '/manage/type/listAll';
+    const url = '/manage/tag/listAll';
     return super.get(data, url);
   }
 
@@ -27,7 +27,7 @@ export default class AdminTypeAPi extends BaseApi {
    * query
    */
   public static query(data: any) {
-    const url = '/manage/type/query';
+    const url = '/manage/tag/query';
     return super.post(data, url);
   }
 
@@ -36,7 +36,7 @@ export default class AdminTypeAPi extends BaseApi {
    * add
    */
   public static add(data: any) {
-    const url = '/manage/type/save';
+    const url = '/manage/tag/save';
     return super.post(data, url);
   }
 
@@ -44,7 +44,7 @@ export default class AdminTypeAPi extends BaseApi {
    * update
    */
   public static update(data: any) {
-    const url = '/manage/type/update';
+    const url = '/manage/tag/update';
     return super.post(data, url);
   }
 
@@ -52,7 +52,7 @@ export default class AdminTypeAPi extends BaseApi {
    * remove
    */
   public static remove(data: any) {
-    const url = '/manage/type/remove';
+    const url = '/manage/tag/remove';
     return super.post(data, url);
   }
 }

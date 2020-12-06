@@ -3,7 +3,7 @@
  *
  * @author marcher
  */
-import pageParam from '@/bean/common/pageParam';
+import pageParam from '@/bean/common/PageParam';
 
 export default class BaseQuery extends pageParam {
   public keyword: string = '';

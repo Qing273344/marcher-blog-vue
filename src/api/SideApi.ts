@@ -1,4 +1,4 @@
-import BaseApi from '@/api/baseApi';
+import BaseApi from '@/api/BaseApi';
 
 export default class SideApi extends BaseApi {
 

@@ -35,13 +35,13 @@
 
 <script lang="ts">
   import { Component, Emit, Prop, Vue, Watch } from "vue-property-decorator";
-  import AdminTagApi from "@/api/adminTagApi";
+  import AdminTagApi from "@/api/AdminTagApi";
   import { ArticleTagBean } from "@/bean/ArticleTagBean";
   import { ArticlePublishFrom } from "@/bean/from/ArticlePublishFrom";
-  import { ArticleTypeBean } from "@/bean/articleTypeBean";
-  import AdminTypeAPi from "@/api/adminTypeApi";
+  import { ArticleTypeBean } from "@/bean/ArticleTypeBean";
+  import AdminTypeApi from "@/api/AdminTypeApi";
   import { Message } from "element-ui";
-  import AdminArticleApi from "@/api/adminArticleApi";
+  import AdminArticleApi from "@/api/AdminArticleApi";
   import { ArticleStatusEnum } from "@/commons/enums/ArticleStatusEnum";
   import { IsEnum } from "@/commons/enums/IsEnum";
 
@@ -100,7 +100,7 @@
         });
 
         // 获取博客类型
-        AdminTypeAPi.listAll(null).then((data: any) => {
+        AdminTypeApi.listAll(null).then((data: any) => {
           this.articleTypeBeanList = data;
         });
       }

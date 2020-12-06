@@ -3,7 +3,8 @@
  */
 export default class LocalStorageUtil {
 
-  public static USER_INFO = 'USER_INFO';
+  public static USER_INFO = 'user_info';
+  public static USER_BEARER = 'user_bearer';
 
   /**
    * get

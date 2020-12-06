@@ -11,4 +11,5 @@ export class RequestBean {
     this.url = url;
     this.data = data;
   }
+
 }

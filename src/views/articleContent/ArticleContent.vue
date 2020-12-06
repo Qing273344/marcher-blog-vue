@@ -11,7 +11,7 @@
 
 <script lang="ts">
   import { Component, Vue } from "vue-property-decorator";
-  import ArticleApi from "@/api/articleApi";
+  import ArticleApi from "@/api/ArticleApi";
   import marked from "marked";
   import markedPlug from "@/components/plugs/markedPlug.ts";
   import "mavon-editor/dist/markdown/github-markdown.min.css";

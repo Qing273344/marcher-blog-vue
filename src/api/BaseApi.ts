@@ -60,10 +60,5 @@ export default class BaseApi {
    */
   protected static wrapperReqs(data: any, url: string) {
     return new RequestBean(url, data);
-
-    // return {
-    //   data,
-    //   url,
-    // };
   }
 }

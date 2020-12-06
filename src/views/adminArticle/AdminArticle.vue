@@ -59,7 +59,7 @@
   import PageUtil from "@/utils/pageUtil";
   import { AdminArticleListBean } from "@/bean/AdminArticleListBean";
   import Pagination from "@/components/pagination/pagination.vue";
-  import AdminArticleApi from "@/api/adminArticleApi";
+  import AdminArticleApi from "@/api/AdminArticleApi";
   import { ArticleStatusEnum } from "@/commons/enums/ArticleStatusEnum";
 
   @Component({

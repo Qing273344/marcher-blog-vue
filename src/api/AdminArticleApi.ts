@@ -3,13 +3,12 @@
  *
  * @author marcher
  */
-import BaseApi from '@/api/baseApi';
+import BaseApi from '@/api/BaseApi';
 
 export default class AdminArticleApi extends BaseApi {
 
-  public static putImg(data: any) {
-    const url = '/manage/common/upload';
-
+  public static putImg(data: any, url: string) {
+    // const url = '/manage/common/upload';
     return super.postFile(data, url);
   }
 

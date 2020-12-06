@@ -44,10 +44,12 @@
   import ValidateUtil from "@/utils/validateUtil";
   import { ElForm } from "element-ui/types/form";
   import AdminUserApi from '@/api/AdminUserApi';
+  import { PassportBean } from '@/bean/PassportBean';
 
   @Component
   export default class Login extends Vue {
     @Action private UserInfo!: (userInfoBean: UserInfoBean) => void;
+    @Action private setPassport!: (token: string) => void
 
     public userInfoBean: UserInfoBean = new UserInfoBean();
 
@@ -74,7 +76,11 @@
     handleLogin() {
       (this.$refs.loginForm as ElForm).validate((valid: boolean) => {
         if (valid) {
-          UserModule.Login(this.loginForm).then(() => {
+          UserModule.Login(this.loginForm).then((data: any) => {
+            // 设置凭证
+            // this.passportBean = data;
+            this.setPassport(data.token);
+
             // 登录成功获取用户信息
             this.getUserInfo();
           }).catch(() => {

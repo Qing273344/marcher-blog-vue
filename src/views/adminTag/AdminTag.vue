@@ -39,7 +39,7 @@
   import { Component, Vue } from "vue-property-decorator";
   import AdminTagAorU from "@/views/adminTag/AdminTagAorU.vue";
   import { ArticleTagBean } from "@/bean/ArticleTagBean";
-  import AdminTagApi from "@/api/adminTagApi";
+  import AdminTagApi from "@/api/AdminTagApi";
   import Pagination from "@/components/pagination/pagination.vue";
   import PageUtil from "@/utils/pageUtil";
   import BaseQuery from "@/bean/common/BaseQuery";

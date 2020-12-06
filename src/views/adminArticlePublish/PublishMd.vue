@@ -44,9 +44,13 @@
   import ArticlePublish from "@/views/adminArticlePublish/ArticlePublish.vue";
   import { ArticlePublishFrom } from "@/bean/from/ArticlePublishFrom";
   import { Message } from "element-ui";
-  import AdminArticleApi from "@/api/adminArticleApi";
+  import AdminArticleApi from "@/api/AdminArticleApi";
 
   import mavonEditor from "mavon-editor";
+  import AdminCommonApi from '@/api/AdminCommonApi';
+  import { OssSignatureBean } from '@/bean/OssSignatureBean';
+  import DateUtil from "@/utils/DateUtil";
+  import RandomUtil from "@/utils/RandomUtil";
 
   @Component({
     components: {
@@ -58,6 +62,7 @@
 
     private articlePublishDialog = false;
     private articlePublishFrom: ArticlePublishFrom = new ArticlePublishFrom();
+    private ossSignatureBean: OssSignatureBean = new OssSignatureBean();
     private articleId: any = '';
 
     private created() {
@@ -71,20 +76,56 @@
       AdminArticleApi.getAsEdit({id: articleId}).then((data: any) => {
         this.articlePublishFrom = data;
       });
+
+      // 获取 OSS 签名及相关信息
+      this.getOssSignature();
     }
 
     /**
      * 文章图片上传
      */
     private $imgAdd(pos: any, $file: any) {
-      // 获取OSS签名及相关信息
+      // 获取 OSS 签名及相关信息
+      // this.getOssSignature();
 
-      // 图片
+      let dir = DateUtil.dateFormat("YYYY-mm-dd", new Date()) + "/";
+      let fileName = RandomUtil.guid();
+      let suffix = this.getSuffix($file.name);
+      const key = dir + fileName + suffix;
+
+      const uploadHost: string = 'http://' + (this.ossSignatureBean.bucket + '.' + this.ossSignatureBean.endpoint);
+      const imgUrl = uploadHost + '/' + key;
+
+      // 图片数据
       const formData = new FormData();
-      formData.append('file', $file);
-      AdminArticleApi.putImg(formData).then((data: any) => {
+      formData.append('key', key);                                            // 存储在oss的文件路径
+      formData.append('OSSAccessKeyId', this.ossSignatureBean.accessKeyId);   // accessKeyId
+      formData.append('policy', this.ossSignatureBean.policy);                // policy
+      formData.append('Signature', this.ossSignatureBean.signature);          // 签名
+      formData.append('success_action_status', '200');                        // 成功后返回的操作码
+      formData.append('file', $file);                                         // 如果是base64文件，那么直接把base64字符串转成blob对象进行上传就可以了
+
+      AdminArticleApi.putImg(formData, uploadHost).then((data: any) => {
         // 替换url
-        (this.$refs.mavon as any).$img2Url(pos, data);
+        (this.$refs.mavon as any).$img2Url(pos, imgUrl);
+      });
+    }
+
+    public getSuffix(fileName: string) {
+      const pos = fileName.lastIndexOf(".");
+      let suffix = "";
+      if (pos != -1) {
+        suffix = fileName.substring(pos);
+      }
+      return suffix;
+    }
+
+    /**
+     * oss 签名
+     */
+    private getOssSignature() {
+      AdminCommonApi.ossSignature(null).then((data: any) => {
+        this.ossSignatureBean = data;
       });
     }
 
@@ -119,6 +160,8 @@
       this.$router.push({name: link});
     }
   }
+
+
 </script>
 
 <style lang="scss" scoped>

@@ -8,6 +8,7 @@ import { UserModule } from '@/store/modules/user';
 import { ContentTypeEnum } from '@/commons/enums/ContentTypeEnum';
 import PageUtil from '@/utils/pageUtil';
 import { RequestBean } from '@/bean/common/RequestBean';
+import LocalStorageUtil from '@/utils/localStorageUtil';
 
 let responseBean = new ResponseBean();
 
@@ -24,13 +25,16 @@ const axios = Axios.create({
 });
 
 
-
 /**
  * ---------------------------------------------------------------------------------------------------------- 请求拦截器
  */
 axios.interceptors.request.use((config: any) => {
   if (config.url.match('http')) {
     config.baseUrl = '';
+  }
+  // 上传阿里云处理
+  if (config.url.match('aliyuncs')) {
+    config.withCredentials = false;
   }
   return config;
 }, (error: any) => {
@@ -129,15 +133,15 @@ function requestFail(error: AxiosError) {
  */
 function responseHint(responseBean: ResponseBean) {
   // 未登录
-  if (responseBean.code === 10 || responseBean.code === 401) {
+  if (responseBean.code === 1080000001 || responseBean.code === 401) {
     // 未登录初始化用户信息
     UserModule.INIT_USER_INFO();
     responseBean.message = '登录后才可以悄悄的干坏事哟!';
   }
-
-  Message({message: responseBean.message, type: 'warning', duration: 2 * 1000});
+  if (responseBean) {
+    Message({message: responseBean.message, type: 'warning', duration: 2 * 1000});
+  }
   return false;
-  // throw new Error();
 }
 
 
@@ -154,11 +158,14 @@ const request = (reqs: RequestBean, contentType: ContentTypeEnum | null = null) 
   const url = reqs.url.concat('http') ? reqs.url : (baseURL + reqs.url);
   const data = reqs.data;
 
+  const bearer = LocalStorageUtil.getItem(LocalStorageUtil.USER_BEARER);
+  const passport = 'Bearer ' + bearer;
+
   if (!contentType) {
-    return axios.get(url, {params: reqs.data});
+    return axios.get(url, {params: reqs.data, headers: {Authorization: passport}});
   } else if (ContentTypeEnum.FORM === contentType) {
-    return axios.post(url, qs.stringify(data), {headers: {'Content-Type': contentType}});
+    return axios.post(url, qs.stringify(data), {headers: {'Authorization': passport, 'Content-Type': contentType}});
   } else {
-    return axios.post(url, data, {headers: {'Content-Type': contentType}});
+    return axios.post(url, data, {headers: {'Content-Type': contentType, 'Authorization': passport}});
   }
 };

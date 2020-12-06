@@ -42,8 +42,8 @@
   import Pagination from "@/components/pagination/pagination.vue";
   import PageUtil from "@/utils/pageUtil";
   import BaseQuery from "@/bean/common/BaseQuery";
-  import { ArticleTypeBean } from "@/bean/articleTypeBean";
-  import AdminTypeAPi from "@/api/adminTypeApi";
+  import { ArticleTypeBean } from "@/bean/ArticleTypeBean";
+  import AdminTypeApi from "@/api/AdminTypeApi";
 
   @Component({
     components: {
@@ -107,7 +107,7 @@
       this.$confirm('是否删除该类型?', '提示', {confirmButtonText: '确定', cancelButtonText: '取消', type: 'warning'})
         .then(() => {
           this.ids[0] = id;
-          AdminTypeAPi.remove(this.ids).then(() => {
+          AdminTypeApi.remove(this.ids).then(() => {
             this.query();
             this.$message({
               type: 'success', message: '删除成功!',
@@ -123,7 +123,7 @@
       this.$confirm('是否删除类型?', '提示', {confirmButtonText: '确定', cancelButtonText: '取消', type: 'warning'})
         .then(() => {
           if (this.ids) {
-            AdminTypeAPi.remove(this.ids).then(() => {
+            AdminTypeApi.remove(this.ids).then(() => {
               this.query();
               this.$message({
                 type: 'success', message: '删除成功!',
@@ -146,7 +146,7 @@
      * 查询
      */
     private query() {
-      AdminTypeAPi.query(this.queryData).then((responseBean: any) => {
+      AdminTypeApi.query(this.queryData).then((responseBean: any) => {
         this.articleTypeBeanList = responseBean.data.list;
         this.pageUtil = responseBean.page;
       });

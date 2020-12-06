@@ -49,7 +49,7 @@
   import { ArticleListBean } from "@/bean/ArticleListBean";
   import BaseQuery from "@/bean/common/BaseQuery";
   import PageUtil from "@/utils/pageUtil";
-  import ArticleApi from "@/api/articleApi";
+  import ArticleApi from "@/api/ArticleApi";
   import { Getter, State } from "vuex-class";
   import { IMainQueryState, MainQueryModule } from "@/store/modules/mainQuery";
   import Pagination from "@/components/pagination/pagination.vue";
