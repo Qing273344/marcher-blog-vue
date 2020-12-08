@@ -10,20 +10,17 @@
 </template>
 
 <script lang="ts">
-  import { Component, Vue } from "vue-property-decorator";
-  import ArticleApi from "@/api/ArticleApi";
-  import marked from "marked";
-  import markedPlug from "@/components/plugs/markedPlug.ts";
-  import "mavon-editor/dist/markdown/github-markdown.min.css";
-  import "mavon-editor/src/lib/css/md.css";
-  import "highlight.js/styles/googlecode.css";
-  import { ArticleDetailBean } from "@/bean/ArticleDetailBean"; //样式文件
-  const highlight = require('@/components/plugs/highlight.ts');   // markdown高亮插件
+  import { Component, Vue } from 'vue-property-decorator';
+  import ArticleApi from '@/api/ArticleApi';
+  import marked from 'marked';
+  import 'mavon-editor/dist/markdown/github-markdown.min.css';
+  import 'mavon-editor/src/lib/css/md.css';
+  import { ArticleDetailBean } from '@/bean/ArticleDetailBean';
+  import Highlight from "@/components/plugs/Highlight";
 
   @Component({
     components: {
-      markedPlug,
-      highlight,
+      Highlight,
     },
   })
   export default class ArticleContent extends Vue {

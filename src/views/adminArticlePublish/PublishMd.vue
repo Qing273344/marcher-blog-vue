@@ -39,18 +39,18 @@
 
 
 <script lang="ts">
-  import { Component, Vue } from "vue-property-decorator";
-  import "mavon-editor/dist/css/index.css";
-  import ArticlePublish from "@/views/adminArticlePublish/ArticlePublish.vue";
-  import { ArticlePublishFrom } from "@/bean/from/ArticlePublishFrom";
-  import { Message } from "element-ui";
-  import AdminArticleApi from "@/api/AdminArticleApi";
+  import { Component, Vue } from 'vue-property-decorator';
+  import 'mavon-editor/dist/css/index.css';
+  import ArticlePublish from '@/views/adminArticlePublish/ArticlePublish.vue';
+  import { ArticlePublishFrom } from '@/bean/from/ArticlePublishFrom';
+  import { Message } from 'element-ui';
+  import AdminArticleApi from '@/api/AdminArticleApi';
 
-  import mavonEditor from "mavon-editor";
+  import mavonEditor from 'mavon-editor';
   import AdminCommonApi from '@/api/AdminCommonApi';
   import { OssSignatureBean } from '@/bean/OssSignatureBean';
-  import DateUtil from "@/utils/DateUtil";
-  import RandomUtil from "@/utils/RandomUtil";
+  import DateUtil from '@/utils/DateUtil';
+  import RandomUtil from '@/utils/RandomUtil';
 
   @Component({
     components: {
@@ -88,7 +88,7 @@
       // 获取 OSS 签名及相关信息
       // this.getOssSignature();
 
-      let dir = DateUtil.dateFormat("YYYY-mm-dd", new Date()) + "/";
+      let dir = DateUtil.dateFormat('YYYY-mm-dd', new Date()) + '/';
       let fileName = RandomUtil.guid();
       let suffix = this.getSuffix($file.name);
       const key = dir + fileName + suffix;
@@ -112,8 +112,8 @@
     }
 
     public getSuffix(fileName: string) {
-      const pos = fileName.lastIndexOf(".");
-      let suffix = "";
+      const pos = fileName.lastIndexOf('.');
+      let suffix = '';
       if (pos != -1) {
         suffix = fileName.substring(pos);
       }

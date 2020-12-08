@@ -3,7 +3,7 @@
  *
  * @author marcher
  */
-import PageUtil from '@/utils/pageUtil';
+import PageUtil from '@/utils/PageUtil';
 
 export class ResponseBean {
   public data: any;

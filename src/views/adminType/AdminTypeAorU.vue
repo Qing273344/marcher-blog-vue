@@ -20,9 +20,9 @@
 </template>
 
 <script lang="ts">
-  import { Component, Emit, Prop, Vue, Watch } from "vue-property-decorator";
-  import { ArticleTypeBean } from "@/bean/ArticleTypeBean";
-  import AdminTypeApi from "@/api/AdminTypeApi";
+  import { Component, Emit, Prop, Vue, Watch } from 'vue-property-decorator';
+  import { ArticleTypeBean } from '@/bean/ArticleTypeBean';
+  import AdminTypeApi from '@/api/AdminTypeApi';
 
   @Component({
     // components: {}

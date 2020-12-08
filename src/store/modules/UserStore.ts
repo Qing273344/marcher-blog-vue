@@ -1,8 +1,8 @@
 import { Action, getModule, Module, Mutation, VuexModule } from 'vuex-module-decorators';
 
-import store from '@/store/store';
+import store from '@/store/RootStore';
 import { UserInfoBean } from '@/bean/UserInfoBean';
-import LocalStorageUtil from '@/utils/localStorageUtil';
+import LocalStorageUtil from '@/utils/LocalStorageUtil';
 import AdminPassportApi from '@/api/AdminPassportApi';
 
 export interface IUserState {
@@ -12,7 +12,7 @@ export interface IUserState {
 }
 
 @Module({dynamic: true, store, name: 'user'})
-export class User extends VuexModule implements IUserState {
+export class UserStore extends VuexModule implements IUserState {
   public username = '';
   public userType = 0;
   public isLogin = false;
@@ -70,4 +70,4 @@ export class User extends VuexModule implements IUserState {
 
 }
 
-export const UserModule = getModule(User);
+export const UserModule = getModule(UserStore);

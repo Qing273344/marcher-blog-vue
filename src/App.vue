@@ -6,7 +6,7 @@
 
 <script lang="ts">
   import { Component, Vue } from "vue-property-decorator";
-  import { UserModule } from "@/store/modules/user";
+  import { UserModule } from "@/store/modules/UserStore";
 
   @Component ({
 

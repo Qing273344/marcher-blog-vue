@@ -37,13 +37,13 @@
 
 
 <script lang="ts">
-  import { Component, Vue } from "vue-property-decorator";
-  import AdminTypeAorU from "@/views/adminType/AdminTypeAorU.vue";
-  import Pagination from "@/components/pagination/pagination.vue";
-  import PageUtil from "@/utils/pageUtil";
-  import BaseQuery from "@/bean/common/BaseQuery";
-  import { ArticleTypeBean } from "@/bean/ArticleTypeBean";
-  import AdminTypeApi from "@/api/AdminTypeApi";
+  import { Component, Vue } from 'vue-property-decorator';
+  import AdminTypeAorU from '@/views/adminType/AdminTypeAorU.vue';
+  import Pagination from '@/components/pagination/pagination.vue';
+  import PageUtil from '@/utils/PageUtil';
+  import BaseQuery from '@/bean/common/BaseQuery';
+  import { ArticleTypeBean } from '@/bean/ArticleTypeBean';
+  import AdminTypeApi from '@/api/AdminTypeApi';
 
   @Component({
     components: {

@@ -3,7 +3,7 @@
  *
  * @author marcher
  */
-import PageUtil from '@/utils/pageUtil';
+import PageUtil from '@/utils/PageUtil';
 
 export default class pageParam {
   public pageNo: number = 1;

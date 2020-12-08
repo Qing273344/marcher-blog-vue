@@ -8,9 +8,9 @@
 </template>
 
 <script lang="ts">
-  import { Component, Vue } from "vue-property-decorator";
-  import BlogAdminMenu from "@/views/adminMenu/BlogAdminMenu.vue";
-  import BlogAdminContent from "@/views/adminContent/BlogAdminContent.vue";
+  import { Component, Vue } from 'vue-property-decorator';
+  import BlogAdminMenu from '@/views/adminMenu/BlogAdminMenu.vue';
+  import BlogAdminContent from '@/views/adminContent/BlogAdminContent.vue';
 
   @Component({
     components: {

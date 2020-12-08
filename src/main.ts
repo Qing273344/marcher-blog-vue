@@ -1,8 +1,8 @@
 import Vue from 'vue';
 // @ts-ignore
 import App from './App.vue';
-import router from './routers/router';
-import store from './store/store';
+import router from './routers/Router';
+import store from './store/RootStore';
 import './registerServiceWorker';
 // 引入elementUi
 import Element from 'element-ui';

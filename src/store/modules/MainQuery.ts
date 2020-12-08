@@ -1,6 +1,6 @@
 import { Action, getModule, Module, Mutation, VuexModule } from 'vuex-module-decorators';
 
-import store from '@/store/store';
+import store from '@/store/RootStore';
 
 export interface IMainQueryState {
   keyword: string;

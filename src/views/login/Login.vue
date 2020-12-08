@@ -37,19 +37,18 @@
 </template>
 
 <script lang="ts">
-  import { Component, Vue } from "vue-property-decorator";
-  import { UserModule } from "@/store/modules/user";
-  import { UserInfoBean } from "@/bean/UserInfoBean";
-  import { Action } from "vuex-class";
-  import ValidateUtil from "@/utils/validateUtil";
-  import { ElForm } from "element-ui/types/form";
+  import { Component, Vue } from 'vue-property-decorator';
+  import { UserModule } from '@/store/modules/UserStore';
+  import { UserInfoBean } from '@/bean/UserInfoBean';
+  import { Action } from 'vuex-class';
+  import ValidateUtil from '@/utils/ValidateUtil';
+  import { ElForm } from 'element-ui/types/form';
   import AdminUserApi from '@/api/AdminUserApi';
-  import { PassportBean } from '@/bean/PassportBean';
 
   @Component
   export default class Login extends Vue {
     @Action private UserInfo!: (userInfoBean: UserInfoBean) => void;
-    @Action private setPassport!: (token: string) => void
+    @Action private setPassport!: (token: string) => void;
 
     public userInfoBean: UserInfoBean = new UserInfoBean();
 

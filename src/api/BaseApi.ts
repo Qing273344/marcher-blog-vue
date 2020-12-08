@@ -1,4 +1,4 @@
-import { postFile, postForm, get, post } from '@/utils/request';
+import { get, post, postFile, postForm } from '@/utils/Request';
 import { RequestBean } from '@/bean/common/RequestBean';
 
 /**

@@ -45,15 +45,15 @@
 </template>
 
 <script lang="ts">
-  import { Component, Vue, Watch } from "vue-property-decorator";
-  import { ArticleListBean } from "@/bean/ArticleListBean";
-  import BaseQuery from "@/bean/common/BaseQuery";
-  import PageUtil from "@/utils/pageUtil";
-  import ArticleApi from "@/api/ArticleApi";
-  import { Getter, State } from "vuex-class";
-  import { IMainQueryState, MainQueryModule } from "@/store/modules/mainQuery";
-  import Pagination from "@/components/pagination/pagination.vue";
-  import { PageStyleEnum } from "@/commons/enums/PageStyleEnum";
+  import { Component, Vue, Watch } from 'vue-property-decorator';
+  import { ArticleListBean } from '@/bean/ArticleListBean';
+  import BaseQuery from '@/bean/common/BaseQuery';
+  import PageUtil from '@/utils/PageUtil';
+  import ArticleApi from '@/api/ArticleApi';
+  import { Getter, State } from 'vuex-class';
+  import { IMainQueryState, MainQueryModule } from '@/store/modules/MainQuery';
+  import Pagination from '@/components/pagination/pagination.vue';
+  import { PageStyleEnum } from '@/commons/enums/PageStyleEnum';
 
   @Component({
     components: {
@@ -114,18 +114,18 @@
      */
     private handleDetail(articleId: string) {
       const routeUrl = this.$router.resolve({
-        name: "articleContentMainLink",
+        name: 'articleContentMainLink',
         query: {
           articleId: articleId
         }
       });
-      window.open(routeUrl.href, "_blank");
+      window.open(routeUrl.href, '_blank');
     }
 
     private changePage(pageUtil: PageUtil) {
       this.queryData.change(pageUtil);
       this.query();
-      (document as any).body.querySelector(".blog-home section").scrollTop = 0;
+      (document as any).body.querySelector('.blog-home section').scrollTop = 0;
     }
 
   }

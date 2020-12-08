@@ -14,12 +14,12 @@
 </template>
 
 <script lang="ts">
-  import { Component, Emit, Prop, Vue } from "vue-property-decorator";
-  import PageUtil from "@/utils/pageUtil";
-  import { PageStyleEnum } from "@/commons/enums/PageStyleEnum";
+  import { Component, Emit, Prop, Vue } from 'vue-property-decorator';
+  import PageUtil from '@/utils/PageUtil';
+  import { PageStyleEnum } from '@/commons/enums/PageStyleEnum';
 
   @Component({
-    // components: {}
+    components: {}
   })
   export default class Pagination extends Vue {
     @Prop() private pageUtil!: PageUtil;

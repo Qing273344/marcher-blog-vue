@@ -7,9 +7,9 @@
 </template>
 
 <script lang="ts">
-  import { Component, Vue } from "vue-property-decorator";
-  import ArticleContent from "@/views/articleContent/ArticleContent.vue";
-  import Side from "@/views/side/Side.vue";
+  import { Component, Vue } from 'vue-property-decorator';
+  import ArticleContent from '@/views/articleContent/ArticleContent.vue';
+  import Side from '@/views/side/Side.vue';
 
   @Component({
     components: {

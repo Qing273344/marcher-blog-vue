@@ -18,8 +18,8 @@
 </template>
 
 <script lang="ts">
-  import { Component, Vue } from "vue-property-decorator";
-  import SideApi from "@/api/SideApi";
+  import { Component, Vue } from 'vue-property-decorator';
+  import SideApi from '@/api/SideApi';
 
   @Component
   export default class Side extends Vue {

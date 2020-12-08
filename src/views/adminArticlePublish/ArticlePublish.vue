@@ -34,16 +34,16 @@
 </template>
 
 <script lang="ts">
-  import { Component, Emit, Prop, Vue, Watch } from "vue-property-decorator";
-  import AdminTagApi from "@/api/AdminTagApi";
-  import { ArticleTagBean } from "@/bean/ArticleTagBean";
-  import { ArticlePublishFrom } from "@/bean/from/ArticlePublishFrom";
-  import { ArticleTypeBean } from "@/bean/ArticleTypeBean";
-  import AdminTypeApi from "@/api/AdminTypeApi";
-  import { Message } from "element-ui";
-  import AdminArticleApi from "@/api/AdminArticleApi";
-  import { ArticleStatusEnum } from "@/commons/enums/ArticleStatusEnum";
-  import { IsEnum } from "@/commons/enums/IsEnum";
+  import { Component, Emit, Prop, Vue, Watch } from 'vue-property-decorator';
+  import AdminTagApi from '@/api/AdminTagApi';
+  import { ArticleTagBean } from '@/bean/ArticleTagBean';
+  import { ArticlePublishFrom } from '@/bean/from/ArticlePublishFrom';
+  import { ArticleTypeBean } from '@/bean/ArticleTypeBean';
+  import AdminTypeApi from '@/api/AdminTypeApi';
+  import { Message } from 'element-ui';
+  import AdminArticleApi from '@/api/AdminArticleApi';
+  import { ArticleStatusEnum } from '@/commons/enums/ArticleStatusEnum';
+  import { IsEnum } from '@/commons/enums/IsEnum';
 
   @Component({
     // components: {}

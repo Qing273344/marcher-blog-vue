@@ -1,14 +1,14 @@
 import Axios, { AxiosError, AxiosResponse } from 'axios';
 import qs from 'qs';
 
-import EnvConfig from '@/config/envConfig';
+import EnvConfig from '@/config/EnvConfig';
 import { ResponseBean } from '@/bean/common/ResponseBean';
 import { Message } from 'element-ui';
-import { UserModule } from '@/store/modules/user';
+import { UserModule } from '@/store/modules/UserStore';
 import { ContentTypeEnum } from '@/commons/enums/ContentTypeEnum';
-import PageUtil from '@/utils/pageUtil';
+import PageUtil from '@/utils/PageUtil';
 import { RequestBean } from '@/bean/common/RequestBean';
-import LocalStorageUtil from '@/utils/localStorageUtil';
+import LocalStorageUtil from '@/utils/LocalStorageUtil';
 
 let responseBean = new ResponseBean();
 
@@ -129,17 +129,17 @@ function requestFail(error: AxiosError) {
 
 /**
  * 服务器返回非success
- * @param responseBean  返回的数据, 其中code!=0
+ * @param data  返回的数据, 其中code!=0
  */
-function responseHint(responseBean: ResponseBean) {
+function responseHint(data: ResponseBean) {
   // 未登录
-  if (responseBean.code === 1080000001 || responseBean.code === 401) {
+  if (data.code === 1080000001 || data.code === 401) {
     // 未登录初始化用户信息
     UserModule.INIT_USER_INFO();
-    responseBean.message = '登录后才可以悄悄的干坏事哟!';
+    data.message = '登录后才可以悄悄的干坏事哟!';
   }
-  if (responseBean) {
-    Message({message: responseBean.message, type: 'warning', duration: 2 * 1000});
+  if (data) {
+    Message({message: data.message, type: 'warning', duration: 2 * 1000});
   }
   return false;
 }

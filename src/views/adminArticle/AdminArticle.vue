@@ -54,13 +54,13 @@
 </template>
 
 <script lang="ts">
-  import { Component, Vue } from "vue-property-decorator";
-  import BaseQuery from "@/bean/common/BaseQuery";
-  import PageUtil from "@/utils/pageUtil";
-  import { AdminArticleListBean } from "@/bean/AdminArticleListBean";
-  import Pagination from "@/components/pagination/pagination.vue";
-  import AdminArticleApi from "@/api/AdminArticleApi";
-  import { ArticleStatusEnum } from "@/commons/enums/ArticleStatusEnum";
+  import { Component, Vue } from 'vue-property-decorator';
+  import BaseQuery from '@/bean/common/BaseQuery';
+  import PageUtil from '@/utils/PageUtil';
+  import { AdminArticleListBean } from '@/bean/AdminArticleListBean';
+  import Pagination from '@/components/pagination/pagination.vue';
+  import AdminArticleApi from '@/api/AdminArticleApi';
+  import { ArticleStatusEnum } from '@/commons/enums/ArticleStatusEnum';
 
   @Component({
     components: {
@@ -85,8 +85,8 @@
     /**
      * 是否发布
      */
-    isPublish(row: AdminArticleListBean) {
-      return row.status && row.status == ArticleStatusEnum.ARTICLE_STATUS_PUBLISH;
+    private isPublish(row: AdminArticleListBean) {
+      return row.status && row.status === ArticleStatusEnum.ARTICLE_STATUS_PUBLISH;
     }
 
     /**
@@ -151,7 +151,7 @@
      * query
      */
     private query() {
-      AdminArticleApi.query(this.queryData).then((responseBean : any) => {
+      AdminArticleApi.query(this.queryData).then((responseBean: any) => {
         this.adminArticleListBeanList = responseBean.data.list;
         this.pageUtil = responseBean.page;
       });

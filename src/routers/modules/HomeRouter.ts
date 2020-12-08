@@ -1,7 +1,7 @@
 /**
- * Home首页路由
+ * Home 首页路由
  */
-import adminRouter from '@/routers/modules/adminRouter';
+import adminRouter from '@/routers/modules/AdminRouter';
 
 const Home = (r: any) => (require as any).ensure([], () => r(require('@/views/home/Home.vue'), 'Home'));
 

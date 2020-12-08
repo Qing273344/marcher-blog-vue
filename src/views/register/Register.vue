@@ -41,9 +41,9 @@
 </template>
 
 <script lang="ts">
-  import { Component, Vue } from "vue-property-decorator";
-  import { ElForm } from "element-ui/types/form";
-  import ValidateUtil from "@/utils/validateUtil";
+  import { Component, Vue } from 'vue-property-decorator';
+  import { ElForm } from 'element-ui/types/form';
+  import ValidateUtil from '@/utils/ValidateUtil';
   import AdminPassportApi from '@/api/AdminPassportApi';
 
   @Component({
@@ -61,7 +61,7 @@
     private passwordType = 'password';
 
     // 显示密码
-    private showPwd() {
+    showPwd() {
       if (this.passwordType === 'password') {
         this.passwordType = '';
       } else {
@@ -102,7 +102,7 @@
         callback(new Error('请填写用户名'));
       }
       callback();
-    }
+    };
 
     // 校验密码
     private validatePwd = (rule: any, value: string, callback: any) => {
@@ -113,7 +113,7 @@
         callback(new Error('密码不符规范'));
       }
       callback();
-    }
+    };
 
     // 确认密码
     private validateConfirmPwd = (rule: any, value: string, callback: any) => {
@@ -127,9 +127,9 @@
         callback(new Error('两次输入的密码不匹配'));
       }
       callback();
-    }
+    };
 
-    public registerRules = {
+    registerRules = {
       username: [{required: true, trigger: 'blur', validator: this.validateUsername}],
       password: [{required: true, trigger: 'blur', validator: this.validatePwd}],
       confirmPassword: [{required: true, trigger: 'blur', validator: this.validateConfirmPwd}],

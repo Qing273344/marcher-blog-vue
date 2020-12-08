@@ -7,8 +7,8 @@
 
 import Vue from 'vue';
 import Router from 'vue-router';
-import homeRouter from '@/routers/modules/homeRouter';
-import globalRouter from '@/routers/modules/globalRouter';
+import homeRouter from '@/routers/modules/HomeRouter';
+import globalRouter from '@/routers/modules/GlobalRouter';
 
 Vue.use(Router);
 

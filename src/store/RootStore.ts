@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import { IUserState } from '@/store/modules/user';
-import { IMainQueryState } from '@/store/modules/mainQuery';
+import { IUserState } from '@/store/modules/UserStore';
+import { IMainQueryState } from '@/store/modules/MainQuery';
 
 Vue.use(Vuex);
 
