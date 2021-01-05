@@ -12,7 +12,7 @@
   "dependencies": {
     "@types/viewerjs": "^0.7.2",
     "ali-oss": "^6.11.2",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "element-ui": "^2.5.2",
     "marked": "^0.6.1",
     "mavon-editor": "^2.7.0",
